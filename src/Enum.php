@@ -29,12 +29,18 @@ abstract class Enum
 
             $docComment = $reflection->getDocComment();
 
-            preg_match_all('/\@method static ([\w]+)\(\)/', $docComment, $enumValues);
+            preg_match_all('/\@method static self ([\w]+)\(\)\s([\w ]+)?/', $docComment, $enumValues);
 
-            $enumValues = $enumValues[1] ?? [];
+            foreach ($enumValues[1] ?? [] as $index => $enumValue) {
+                $valueName = $enumValues[1][$index];
 
-            foreach ($enumValues as $enumValue) {
-                self::$enumValues[$enumValue] = $enumValue;
+                $value = trim($enumValues[2][$index]);
+
+                if (! $value) {
+                    $value = $valueName;
+                }
+
+                self::$enumValues[$valueName] = $value;
             }
         }
 

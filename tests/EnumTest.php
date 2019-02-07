@@ -18,6 +18,15 @@ class EnumTest extends TestCase
     }
 
     /** @test */
+    public function an_enum_can_specify_its_value()
+    {
+        $enumValue = MyEnum::FOO();
+
+        $this->assertInstanceOf(MyEnum::class, $enumValue);
+        $this->assertEquals('foovalue', $enumValue);
+    }
+
+    /** @test */
     public function using_an_invalid_enum_value_throws_a_tyoe_error()
     {
         $this->expectException(TypeError::class);

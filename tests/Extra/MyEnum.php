@@ -5,8 +5,8 @@ namespace Spatie\Enum\Tests\Extra;
 use Spatie\Enum\Enum;
 
 /**
- * @method static FOO()
- * @method static BAR()
+ * @method static self FOO() foovalue
+ * @method static self BAR()
  */
 final class MyEnum extends Enum
 {

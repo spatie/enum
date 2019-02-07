@@ -30,9 +30,9 @@ Here's how you define an enum with this package:
 
 ```php
 /**
- * @method static DRAFT()
- * @method static PUBLISHED()
- * @method static ARCHIVED()
+ * @method static self DRAFT()
+ * @method static self PUBLISHED()
+ * @method static self ARCHIVED()
  */
 final class StatusEnum extends Enum
 {
@@ -55,6 +55,25 @@ public function setStatus(StatusEnum $status): void
 // …
 
 $class->setStatus(StatusEnum::DRAFT());
+```
+
+### Override enum string values
+
+By default, the string value if an enum, for example to store in a database, 
+is simply the name of that method. 
+In the previous example it would be `DRAFT`.
+
+You can override this value, but added a description to the docblock definition:
+
+```php
+/**
+ * @method static self DRAFT() draft
+ * @method static self PUBLISHED() published
+ * @method static self ARCHIVED() archived
+ */
+final class StatusEnum extends Enum
+{
+}
 ```
 
 ### Testing
