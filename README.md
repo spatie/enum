@@ -5,26 +5,9 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/enum.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/:package_name)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
 
-Strongly typed enums in PHP supporting autocompletion and refactoring.
+This package offers strongly typed enums in PHP. We don't use a simple "value" representation, so you're always working with the enum object. This allows for proper autocompletion and refactoring in IDEs.
 
-## Installation
-
-You can install the package via composer:
-
-```bash
-composer require spatie/enum
-```
-
-## Usage
-
-This package aims to provide an enum implementation in PHP that has several benefits for developers:
-
-- Strongly typed enums objects, without a simple "value" representation. In other words:
-you're always working with an enum object, and never with its value directly.
-- Autocompletion support in IDEs.
-- Proper refactor support in IDEs.
-
-Here's how enums are created with this pacakge:
+Here's how enums are created with this package:
 
 ```php
 /**
@@ -41,6 +24,42 @@ And this is how they are used:
 
 ```php
 public function setStatus(StatusEnum $status): void
+{
+    $this->status = $status;
+}
+
+// …
+
+$class->setStatus(StatusEnum::draft());
+```
+
+## Installation
+
+You can install the package via composer:
+
+```bash
+composer require spatie/enum
+```
+
+## Usage
+
+This is how an enum can be defined.
+
+```php
+/**
+ * @method static self draft()
+ * @method static self published()
+ * @method static self archived()
+ */
+class StatusEnum extends Enum
+{
+}
+```
+
+This is how they are used:
+
+```php
+public function setStatus(StatusEnum $status)
 {
     $this->status = $status;
 }
@@ -87,7 +106,7 @@ class StatusEnum extends Enum
 }
 ```
 
-Note that you're not required to map all values.
+Mapping values is optional.
 
 ### Comparing enums
 
