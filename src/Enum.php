@@ -2,8 +2,8 @@
 
 namespace Spatie\Enum;
 
-use ReflectionClass;
 use TypeError;
+use ReflectionClass;
 
 abstract class Enum
 {
@@ -24,7 +24,7 @@ abstract class Enum
     public function __construct(string $value = null)
     {
         if (! in_array($value, self::resolve())) {
-            throw new TypeError("Value {$value} not available in enum " . static::class);
+            throw new TypeError("Value {$value} not available in enum ".static::class);
         }
 
         $this->value = $value;
@@ -35,7 +35,7 @@ abstract class Enum
         $enumValues = self::resolve();
 
         if (! isset($enumValues[$name])) {
-            throw new TypeError("Method {$name} not available in enum " . static::class);
+            throw new TypeError("Method {$name} not available in enum ".static::class);
         }
 
         return new static($enumValues[$name]);

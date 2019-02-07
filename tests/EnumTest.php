@@ -2,10 +2,10 @@
 
 namespace Spatie\Enum\Tests;
 
+use TypeError;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\TestClasses\MyEnum;
 use Spatie\Enum\Tests\TestClasses\RecursiveEnum;
-use TypeError;
 
 class EnumTest extends TestCase
 {
