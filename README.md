@@ -5,8 +5,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/enum.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/:package_name)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
 
-
-This is where your description should go. Try and limit it to a paragraph or two.
+Strongly typed enums in PHP supporting autocompletion and refactoring.
 
 ## Installation
 
@@ -18,9 +17,45 @@ composer require spatie/enum
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+You're probably aware of the excellent [myclabs/php-enum](https://github.com/myclabs/php-enum) package.
+This package adds enum support via constants in PHP. 
+There are three problems with it though:
+
+- There are two ways of using an enum value: `MyEnum::VALUE` or `MyEnum::VALUE()`. 
+- There's no autocompletion on the second method when using static calls.
+- Refactoring the a constant name in your IDE will result on broken code, as the static method calls aren't refactored.
+
+This package solves these three problems. 
+It does so in an unconventional way though.
+Here's how you define an enum with this package:
+
+```php
+/**
+ * @method static DRAFT()
+ * @method static PUBLISHED()
+ * @method static ARCHIVED()
+ */
+final class StatusEnum extends Enum
+{
+}
+```
+
+> Note that the `final` is optional, but it is a good practice.
+
+The docblock approach can be controversial and seen as "magic".
+On the other hand: all enum packages are depending on magic anyways, so this shouldn't be massive problem.
+
+These enum classes can be used like so:
+
+```php
+public function setStatus(StatusEnum $status): void
+{
+    $this->status = $status;
+}
+
+// …
+
+$class->setStatus(StatusEnum::DRAFT());
 ```
 
 ### Testing
