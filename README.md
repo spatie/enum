@@ -76,6 +76,16 @@ final class StatusEnum extends Enum
 }
 ```
 
+### What about creating an enum from a stored value?
+
+As soon as enum values are stored in the database or anywhere else, 
+you cannot be sure anymore that a refactor to them won't break anything.
+
+That's why the package, as of now, makes no decisions on how to rebuild an enum from its values.
+If you want to do this, you'll have to make a factory yourself.
+
+We might add a basic factory soon, but this might not work in all cases.
+
 ### Testing
 
 ``` bash
