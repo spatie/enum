@@ -8,6 +8,9 @@ use TypeError;
 abstract class Enum
 {
     /** @var array */
+    protected static $cache = [];
+
+    /** @var array */
     protected static $map = [];
 
     /** @var string */
@@ -63,6 +66,12 @@ abstract class Enum
 
     protected static function resolve(): array
     {
+        $class = static::class;
+
+        if (isset(self::$cache[$class])) {
+            return self::$cache[$class];
+        }
+
         $reflection = new ReflectionClass(static::class);
 
         $docComment = $reflection->getDocComment();
@@ -75,6 +84,8 @@ abstract class Enum
             $enumValues[$valueName] = static::$map[$valueName] ?? $valueName;
         }
 
-        return $enumValues;
+        self::$cache[$class] = $enumValues;
+
+        return self::$cache[$class];
     }
 }
