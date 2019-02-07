@@ -82,6 +82,14 @@ If you want to do this, you'll have to make a factory yourself.
 
 We might add a basic factory soon, but this might not work in all cases.
 
+### Comparing enums
+
+Enums can be compared using the `equals` method:
+
+```php
+$status->equals($otherStatus);
+```
+
 ### Testing
 
 ``` bash
