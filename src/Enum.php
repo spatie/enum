@@ -40,8 +40,15 @@ abstract class Enum
 
     public function equals(Enum $enum): bool
     {
-        return $enum instanceof $this
-            && $enum->value === $this->value;
+        if (! $enum instanceof $this) {
+            return false;
+        }
+
+        if ($enum->value !== $this->value) {
+            return false;
+        }
+
+        return true;
     }
 
     public function __toString(): string
