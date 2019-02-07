@@ -5,14 +5,14 @@ namespace Spatie\Enum\Tests\Extra;
 use Spatie\Enum\Enum;
 
 /**
- * @method static self FOO() foovalue
+ * @method static self foo() foovalue
  */
 class RecursiveEnum extends Enum
 {
     public function __toString(): string
     {
         $values = [
-            RecursiveEnum::FOO()->value => 'test',
+            RecursiveEnum::foo()->value => 'test',
         ];
 
         return $values[$this->value];

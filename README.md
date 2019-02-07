@@ -28,9 +28,9 @@ Here's how enums are created with this pacakge:
 
 ```php
 /**
- * @method static self DRAFT()
- * @method static self PUBLISHED()
- * @method static self ARCHIVED()
+ * @method static self draft()
+ * @method static self published()
+ * @method static self archived()
  */
 class StatusEnum extends Enum
 {
@@ -47,40 +47,40 @@ public function setStatus(StatusEnum $status): void
 
 // …
 
-$class->setStatus(StatusEnum::DRAFT());
+$class->setStatus(StatusEnum::draft());
 ```
 
 ![](./docs/autocomplete.gif)
 
 ![](./docs/refactor.gif)
 
+### Creating an enum from a value
+
+```php
+$status = StatusEnum::from('draft');
+
+// or
+
+$status = new StatusEnum('published');
+```
+
 ### Override enum string values
 
 By default, the string value of an enum  is simply the name of that method. 
-In the previous example it would be `DRAFT`.
+In the previous example it would be `draft`.
 
 You can override this value, by adding a description to the docblock definition:
 
 ```php
 /**
- * @method static self DRAFT() draft
- * @method static self PUBLISHED() published
- * @method static self ARCHIVED() archived
+ * @method static self draft() 1
+ * @method static self published() 2
+ * @method static self archived() 3
  */
-final class StatusEnum extends Enum
+class StatusEnum extends Enum
 {
 }
 ```
-
-### What about creating an enum from a stored value?
-
-As soon as enum values are stored in the database or anywhere else, 
-you cannot be sure anymore that a refactor to them won't break anything.
-
-That's why the package, as of now, makes no decisions on how to rebuild an enum from its values.
-If you want to do this, you'll have to make a factory yourself.
-
-We might add a basic factory soon, but this might not work in all cases.
 
 ### Comparing enums
 

@@ -12,16 +12,16 @@ class EnumTest extends TestCase
     /** @test */
     public function an_enum_can_be_constructed()
     {
-        $enumValue = MyEnum::BAR();
+        $enumValue = MyEnum::bar();
 
         $this->assertInstanceOf(MyEnum::class, $enumValue);
-        $this->assertEquals('BAR', $enumValue);
+        $this->assertEquals('bar', $enumValue);
     }
 
     /** @test */
     public function an_enum_can_specify_its_value()
     {
-        $enumValue = MyEnum::FOO();
+        $enumValue = MyEnum::foo();
 
         $this->assertInstanceOf(MyEnum::class, $enumValue);
         $this->assertEquals('foovalue', $enumValue);
@@ -32,13 +32,13 @@ class EnumTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        MyEnum::WRONG();
+        MyEnum::wrong();
     }
 
     /** @test */
     public function recursive_enum_test()
     {
-        $enumValue = RecursiveEnum::FOO();
+        $enumValue = RecursiveEnum::foo();
 
         $this->assertEquals('test', $enumValue);
     }
@@ -46,13 +46,13 @@ class EnumTest extends TestCase
     /** @test */
     public function equals_test()
     {
-        $a = MyEnum::BAR();
+        $a = MyEnum::bar();
 
-        $b = MyEnum::BAR();
+        $b = MyEnum::bar();
 
-        $c = MyEnum::FOO();
+        $c = MyEnum::foo();
 
-        $d = RecursiveEnum::FOO();
+        $d = RecursiveEnum::foo();
 
         $this->assertTrue($a->equals($a));
         $this->assertTrue($a->equals($b));
@@ -64,8 +64,16 @@ class EnumTest extends TestCase
     public function to_array_test()
     {
         $this->assertEquals([
-            'FOO' => 'foovalue',
-            'BAR' => 'BAR',
+            'foo' => 'foovalue',
+            'bar' => 'bar',
         ], MyEnum::toArray());
+    }
+
+    /** @test */
+    public function create_from_value_test()
+    {
+        $enum = MyEnum::from('bar');
+
+        $this->assertTrue(MyEnum::bar()->equals($enum));
     }
 }

@@ -12,7 +12,12 @@ abstract class Enum
     /** @var string */
     protected $value;
 
-    protected function __construct(?string $value)
+    public static function from(string $value): Enum
+    {
+        return new static($value);
+    }
+
+    public function __construct(?string $value)
     {
         if (self::$enumValues === null) {
             self::resolveEnumValues();
@@ -25,15 +30,17 @@ abstract class Enum
         $this->value = $value;
     }
 
-    public static function __callStatic($name, $arguments)
+    public static function __callStatic($name, $arguments): Enum
     {
         if (self::$enumValues === null) {
             self::resolveEnumValues();
         }
 
-        $value = self::$enumValues[$name] ?? null;
+        if (! isset(self::$enumValues[$name])) {
+            throw new TypeError("Method {$name} not available in enum " . static::class);
+        }
 
-        return new static($value);
+        return new static(self::$enumValues[$name]);
     }
 
     public function __toString(): string
