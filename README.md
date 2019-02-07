@@ -25,8 +25,7 @@ There are three problems with it though:
 - There's no autocompletion when using static calls.
 - Refactoring a constant name in your IDE will result on broken code, as the static method calls aren't refactored.
 
-This package solves these three problems. 
-It does so in an unconventional way though.
+This package solves those problems. It does so in an unconventional way though.
 Here's how you define an enum with this package:
 
 ```php
