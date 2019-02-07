@@ -21,7 +21,7 @@ You're probably aware of the excellent [myclabs/php-enum](https://github.com/myc
 This package adds enum support via constants in PHP. 
 There are three problems with it though:
 
-- There are two ways of using an enum value: `MyEnum::VALUE` or `MyEnum::VALUE()`. 
+- There are two ways of using an enum value: `MyEnum::VALUE` or `MyEnum::VALUE()`, this often causes inconsistencies throughout the codebase.
 - There's no autocompletion on the second method when using static calls.
 - Refactoring the a constant name in your IDE will result on broken code, as the static method calls aren't refactored.
 
