@@ -24,7 +24,7 @@ you're always working with an enum object, and never with its value directly.
 - Autocompletion support in IDEs.
 - Proper refactor support in IDEs.
 
-Here's how this package does that:
+Here's how enums are created with this pacakge:
 
 ```php
 /**
@@ -37,7 +37,7 @@ class StatusEnum extends Enum
 }
 ```
 
-An enums can be used like so:
+And this is how they are used:
 
 ```php
 public function setStatus(StatusEnum $status): void
@@ -49,6 +49,10 @@ public function setStatus(StatusEnum $status): void
 
 $class->setStatus(StatusEnum::DRAFT());
 ```
+
+![](./docs/autocomplete.gif)
+
+![](./docs/refactor.gif)
 
 ### Override enum string values
 
