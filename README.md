@@ -7,10 +7,6 @@
 
 Strongly typed enums in PHP supporting autocompletion and refactoring.
 
-![Refactor](./docs/refactor.gif)
-
-![Autocomplete](./docs/autocomplete.gif)
-
 ## Installation
 
 You can install the package via composer:
@@ -21,16 +17,14 @@ composer require spatie/enum
 
 ## Usage
 
-You're probably aware of the excellent [myclabs/php-enum](https://github.com/myclabs/php-enum) package.
-This package adds enum support via constants in PHP. 
-There are three problems with it though:
+This package aims to provide an enum implementation in PHP that has several benefits for developers:
 
-- There are two ways of using an enum value: `MyEnum::VALUE` or `MyEnum::VALUE()`, this often causes inconsistencies throughout the codebase.
-- There's no autocompletion when using static calls.
-- Refactoring a constant name in your IDE will result on broken code, as the static method calls aren't refactored.
+- Strongly typed enums objects, without a simple "value" representation. In other words:
+you're always working with an enum object, and never with its value directly.
+- Autocompletion support in IDEs.
+- Proper refactor support in IDEs.
 
-This package solves those problems. It does so in an unconventional way though.
-Here's how you define an enum with this package:
+Here's how this package does that:
 
 ```php
 /**
@@ -38,17 +32,12 @@ Here's how you define an enum with this package:
  * @method static self PUBLISHED()
  * @method static self ARCHIVED()
  */
-final class StatusEnum extends Enum
+class StatusEnum extends Enum
 {
 }
 ```
 
-> Note that the `final` is optional, but it is a good practice.
-
-The docblock approach can be controversial and seen as "magic".
-On the other hand: all enum packages are depending on magic anyways, so this shouldn't be a show stopper.
-
-These enum classes can be used like so:
+An enums can be used like so:
 
 ```php
 public function setStatus(StatusEnum $status): void
@@ -63,11 +52,10 @@ $class->setStatus(StatusEnum::DRAFT());
 
 ### Override enum string values
 
-By default, the string value if an enum, for example to store in a database, 
-is simply the name of that method. 
+By default, the string value of an enum  is simply the name of that method. 
 In the previous example it would be `DRAFT`.
 
-You can override this value, but added a description to the docblock definition:
+You can override this value, by adding a description to the docblock definition:
 
 ```php
 /**
