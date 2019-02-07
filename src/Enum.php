@@ -18,7 +18,7 @@ abstract class Enum
         return new static($value);
     }
 
-    public function __construct(?string $value)
+    public function __construct(string $value = null)
     {
         if (! in_array($value, self::resolve())) {
             throw new TypeError("Value {$value} not available in enum " . static::class);
