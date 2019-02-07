@@ -7,7 +7,8 @@ use TypeError;
 
 abstract class Enum
 {
-    protected static $enumValues = null;
+    /** @var array */
+    protected static $map = [];
 
     /** @var string */
     protected $value;
@@ -19,11 +20,7 @@ abstract class Enum
 
     public function __construct(?string $value)
     {
-        if (self::$enumValues === null) {
-            self::resolveEnumValues();
-        }
-
-        if (! in_array($value, self::$enumValues)) {
+        if (! in_array($value, self::resolve())) {
             throw new TypeError("Value {$value} not available in enum " . static::class);
         }
 
@@ -32,20 +29,13 @@ abstract class Enum
 
     public static function __callStatic($name, $arguments): Enum
     {
-        if (self::$enumValues === null) {
-            self::resolveEnumValues();
-        }
+        $enumValues = self::resolve();
 
-        if (! isset(self::$enumValues[$name])) {
+        if (! isset($enumValues[$name])) {
             throw new TypeError("Method {$name} not available in enum " . static::class);
         }
 
-        return new static(self::$enumValues[$name]);
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
+        return new static($enumValues[$name]);
     }
 
     public function equals(Enum $enum): bool
@@ -54,34 +44,30 @@ abstract class Enum
             && $enum->value === $this->value;
     }
 
+    public function __toString(): string
+    {
+        return $this->value;
+    }
+
     public static function toArray(): array
     {
-        if (self::$enumValues === null) {
-            self::resolveEnumValues();
-        }
-
-        return self::$enumValues;
+        return self::resolve();
     }
 
-    protected static function map(): array
+    protected static function resolve(): array
     {
-        return [];
-    }
-
-    protected static function resolveEnumValues()
-    {
-        $map = static::map();
-
         $reflection = new ReflectionClass(static::class);
 
         $docComment = $reflection->getDocComment();
 
-        preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $enumValues);
+        preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $matches);
 
-        foreach ($enumValues[1] ?? [] as $index => $enumValue) {
-            $valueName = $enumValues[1][$index];
+        $enumValues = [];
 
-            self::$enumValues[$valueName] = $map[$valueName] ?? $valueName;
+        foreach ($matches[1] ?? [] as $valueName) {
+            $enumValues[$valueName] = static::$map[$valueName] ?? $valueName;
         }
+
+        return $enumValues;
     }
 }

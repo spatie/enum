@@ -69,7 +69,7 @@ $status = new StatusEnum('published');
 By default, the string value of an enum  is simply the name of that method. 
 In the previous example it would be `draft`.
 
-You can override this value, by implementing the `map` function:
+You can override this value, by adding the `$map` property:
 
 ```php
 /**
@@ -79,14 +79,11 @@ You can override this value, by implementing the `map` function:
  */
 class StatusEnum extends Enum
 {
-    protected static function map(): array
-    {
-        return [
-            'draft' => 1,
-            'published' => 2,
-            'archived' => 3,
-        ];
-    }
+    protected static $map = [
+        'draft' => 1,
+        'published' => 2,
+        'archived' => 3,
+    ];
 }
 ```
 

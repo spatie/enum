@@ -10,10 +10,7 @@ use Spatie\Enum\Enum;
  */
 class MyEnum extends Enum
 {
-    protected static function map(): array
-    {
-        return [
-            'foo' => 'foovalue'
-        ];
-    }
+    protected static $map = [
+        'foo' => 'foovalue',
+    ];
 }
