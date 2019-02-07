@@ -7,6 +7,10 @@
 
 Strongly typed enums in PHP supporting autocompletion and refactoring.
 
+![Refactor](./docs/refactor.gif)
+
+![Autocomplete](./docs/autocomplete.gif)
+
 ## Installation
 
 You can install the package via composer:
