@@ -10,7 +10,7 @@ abstract class Enum
     private static $enumValues = null;
 
     /** @var string */
-    private $value;
+    protected $value;
 
     private function __construct(string $value)
     {
@@ -25,23 +25,7 @@ abstract class Enum
     public static function __callStatic($name, $arguments)
     {
         if (self::$enumValues === null) {
-            $reflection = new ReflectionClass(static::class);
-
-            $docComment = $reflection->getDocComment();
-
-            preg_match_all('/\@method static self ([\w]+)\(\)\s([\w ]+)?/', $docComment, $enumValues);
-
-            foreach ($enumValues[1] ?? [] as $index => $enumValue) {
-                $valueName = $enumValues[1][$index];
-
-                $value = trim($enumValues[2][$index]);
-
-                if (! $value) {
-                    $value = $valueName;
-                }
-
-                self::$enumValues[$valueName] = $value;
-            }
+            self::resolveEnumValues();
         }
 
         $value = self::$enumValues[$name] ?? null;
@@ -51,5 +35,26 @@ abstract class Enum
         }
 
         return new static($value);
+    }
+
+    private static function resolveEnumValues(): void
+    {
+        $reflection = new ReflectionClass(static::class);
+
+        $docComment = $reflection->getDocComment();
+
+        preg_match_all('/\@method static self ([\w]+)\(\)\s([\w ]+)?/', $docComment, $enumValues);
+
+        foreach ($enumValues[1] ?? [] as $index => $enumValue) {
+            $valueName = $enumValues[1][$index];
+
+            $value = trim($enumValues[2][$index]);
+
+            if (! $value) {
+                $value = $valueName;
+            }
+
+            self::$enumValues[$valueName] = $value;
+        }
     }
 }

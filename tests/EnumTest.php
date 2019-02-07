@@ -4,6 +4,7 @@ namespace Spatie\Enum\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\Extra\MyEnum;
+use Spatie\Enum\Tests\Extra\RecursiveEnum;
 use TypeError;
 
 class EnumTest extends TestCase
@@ -32,5 +33,13 @@ class EnumTest extends TestCase
         $this->expectException(TypeError::class);
 
         MyEnum::WRONG();
+    }
+
+    /** @test */
+    public function recursive_enum_test()
+    {
+        $enumValue = RecursiveEnum::FOO();
+
+        $this->assertEquals('test', $enumValue);
     }
 }
