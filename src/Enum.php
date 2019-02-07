@@ -7,12 +7,12 @@ use TypeError;
 
 abstract class Enum
 {
-    private static $enumValues = null;
+    protected static $enumValues = null;
 
     /** @var string */
     protected $value;
 
-    private function __construct(?string $value)
+    protected function __construct(?string $value)
     {
         if (self::$enumValues === null) {
             self::resolveEnumValues();
@@ -41,7 +41,7 @@ abstract class Enum
         return $this->value;
     }
 
-    private static function resolveEnumValues(): void
+    protected static function resolveEnumValues()
     {
         $reflection = new ReflectionClass(static::class);
 

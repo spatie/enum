@@ -7,7 +7,7 @@ use Spatie\Enum\Enum;
 /**
  * @method static self FOO() foovalue
  */
-final class RecursiveEnum extends Enum
+class RecursiveEnum extends Enum
 {
     public function __toString(): string
     {

@@ -8,6 +8,6 @@ use Spatie\Enum\Enum;
  * @method static self FOO() foovalue
  * @method static self BAR()
  */
-final class MyEnum extends Enum
+class MyEnum extends Enum
 {
 }
