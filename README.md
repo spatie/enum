@@ -23,7 +23,7 @@ There are three problems with it though:
 
 - There are two ways of using an enum value: `MyEnum::VALUE` or `MyEnum::VALUE()`, this often causes inconsistencies throughout the codebase.
 - There's no autocompletion when using static calls.
-- Refactoring the a constant name in your IDE will result on broken code, as the static method calls aren't refactored.
+- Refactoring a constant name in your IDE will result on broken code, as the static method calls aren't refactored.
 
 This package solves these three problems. 
 It does so in an unconventional way though.
