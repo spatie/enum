@@ -41,6 +41,12 @@ abstract class Enum
         return $this->value;
     }
 
+    public function equals(Enum $enum): bool
+    {
+        return $enum instanceof $this
+            && $enum->value === $this->value;
+    }
+
     protected static function resolveEnumValues()
     {
         $reflection = new ReflectionClass(static::class);

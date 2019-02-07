@@ -42,4 +42,21 @@ class EnumTest extends TestCase
 
         $this->assertEquals('test', $enumValue);
     }
+
+    /** @test */
+    public function equals_test()
+    {
+        $a = MyEnum::BAR();
+
+        $b = MyEnum::BAR();
+
+        $c = MyEnum::FOO();
+
+        $d = RecursiveEnum::FOO();
+
+        $this->assertTrue($a->equals($a));
+        $this->assertTrue($a->equals($b));
+        $this->assertFalse($a->equals($c));
+        $this->assertFalse($a->equals($d));
+    }
 }
