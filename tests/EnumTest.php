@@ -59,4 +59,13 @@ class EnumTest extends TestCase
         $this->assertFalse($a->equals($c));
         $this->assertFalse($a->equals($d));
     }
+
+    /** @test */
+    public function to_array_test()
+    {
+        $this->assertEquals([
+            'FOO' => 'foovalue',
+            'BAR' => 'BAR',
+        ], MyEnum::toArray());
+    }
 }

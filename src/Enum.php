@@ -47,6 +47,15 @@ abstract class Enum
             && $enum->value === $this->value;
     }
 
+    public static function toArray(): array
+    {
+        if (self::$enumValues === null) {
+            self::resolveEnumValues();
+        }
+
+        return self::$enumValues;
+    }
+
     protected static function resolveEnumValues()
     {
         $reflection = new ReflectionClass(static::class);
