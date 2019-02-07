@@ -63,24 +63,25 @@ abstract class Enum
         return self::$enumValues;
     }
 
+    protected static function map(): array
+    {
+        return [];
+    }
+
     protected static function resolveEnumValues()
     {
+        $map = static::map();
+
         $reflection = new ReflectionClass(static::class);
 
         $docComment = $reflection->getDocComment();
 
-        preg_match_all('/\@method static self ([\w]+)\(\)\s([\w ]+)?/', $docComment, $enumValues);
+        preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $enumValues);
 
         foreach ($enumValues[1] ?? [] as $index => $enumValue) {
             $valueName = $enumValues[1][$index];
 
-            $value = trim($enumValues[2][$index]);
-
-            if (! $value) {
-                $value = $valueName;
-            }
-
-            self::$enumValues[$valueName] = $value;
+            self::$enumValues[$valueName] = $map[$valueName] ?? $valueName;
         }
     }
 }
