@@ -81,8 +81,8 @@ class StatusEnum extends Enum
 {
     protected static $map = [
         'draft' => 1,
-        'published' => 2,
-        'archived' => 3,
+        'published' => 'other published value',
+        'archived' => -10,
     ];
 }
 ```
