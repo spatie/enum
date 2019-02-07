@@ -44,7 +44,7 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    public function equals_test()
+    public function it_can_compare_itself_to_other_instances()
     {
         $a = MyEnum::bar();
 
@@ -61,7 +61,7 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    public function to_array_test()
+    public function it_can_represent_itself_as_an_array()
     {
         $this->assertEquals([
             'foo' => 'foovalue',
@@ -70,7 +70,7 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    public function create_from_value_test()
+    public function it_can_be_created_from_a_string()
     {
         $enum = MyEnum::from('bar');
 
