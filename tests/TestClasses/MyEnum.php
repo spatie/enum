@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Enum\Tests\Extra;
+namespace Spatie\Enum\Tests\TestClasses;
 
 use Spatie\Enum\Enum;
 
