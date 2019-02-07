@@ -76,30 +76,6 @@ final class StatusEnum extends Enum
 }
 ```
 
-Of course you're also free to override `__toString()` within your enum classes. 
-This gives you all the freedom you want. Here's an example:
-
-```php
-/**
- * @method static self DRAFT()
- * @method static self PUBLISHED()
- * @method static self ARCHIVED()
- */
-final class StatusEnum extends Enum
-{
-    public function __toString(): string
-    {
-        $values = [
-            StatusEnum::DRAFT()->value => 'test',
-            StatusEnum::PUBLISHED()->value => 'Foo',
-            StatusEnum::ARCHIVED()->value => __('translated stuff'),
-        ];
-
-        return $values[$this->value];
-    }
-}
-```
-
 ### Testing
 
 ``` bash

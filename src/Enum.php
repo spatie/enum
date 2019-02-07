@@ -12,14 +12,17 @@ abstract class Enum
     /** @var string */
     protected $value;
 
-    private function __construct(string $value)
+    private function __construct(?string $value)
     {
-        $this->value = $value;
-    }
+        if (self::$enumValues === null) {
+            self::resolveEnumValues();
+        }
 
-    public function __toString(): string
-    {
-        return $this->value;
+        if (! in_array($value, self::$enumValues)) {
+            throw new TypeError("Value {$value} not available in enum " . static::class);
+        }
+
+        $this->value = $value;
     }
 
     public static function __callStatic($name, $arguments)
@@ -30,11 +33,12 @@ abstract class Enum
 
         $value = self::$enumValues[$name] ?? null;
 
-        if ($value === null) {
-            throw new TypeError('Enum ' . static::class . " has no value {$name}");
-        }
-
         return new static($value);
+    }
+
+    public function __toString(): string
+    {
+        return $this->value;
     }
 
     private static function resolveEnumValues(): void
