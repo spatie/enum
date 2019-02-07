@@ -42,7 +42,7 @@ final class StatusEnum extends Enum
 > Note that the `final` is optional, but it is a good practice.
 
 The docblock approach can be controversial and seen as "magic".
-On the other hand: all enum packages are depending on magic anyways, so this shouldn't be massive problem.
+On the other hand: all enum packages are depending on magic anyways, so this shouldn't be a show stopper.
 
 These enum classes can be used like so:
 
