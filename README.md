@@ -76,6 +76,8 @@ final class StatusEnum extends Enum
 }
 ```
 
+Of course you're also free to override `__toString()` within your enum classes.
+
 ### Testing
 
 ``` bash
