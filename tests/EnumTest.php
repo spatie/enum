@@ -76,4 +76,23 @@ class EnumTest extends TestCase
 
         $this->assertTrue(MyEnum::bar()->equals($enum));
     }
+
+    /** @test */
+    public function is_one_of_test()
+    {
+        $array = [
+            MyEnum::foo(),
+            MyEnum::bar(),
+        ];
+
+        $this->assertTrue(MyEnum::foo()->isOneOf($array));
+    }
+
+    /** @test */
+    public function json_encode_test()
+    {
+        $json = json_encode(MyEnum::bar());
+
+        $this->assertEquals('"bar"', $json);
+    }
 }

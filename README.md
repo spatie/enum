@@ -117,6 +117,64 @@ Enums can be compared using the `equals` method:
 $status->equals($otherStatus);
 ```
 
+### Enum specific methods
+
+There might be a case where you want to have functionality depending on the concrete enum value.
+
+There are several ways to do this:
+
+- Add a function in the enum class and using a switch statement or array mapping.
+- Use a separate class which contains this switch logic, something like enum extensions in C#.
+- Use enum specific methods, similar to Java. 
+
+This package also supports these enum specific methods. 
+Here's how you can implement them:
+
+```php
+abstract class MonthEnum extends Enum
+{
+    abstract public function getNumericIndex(): int;
+
+    public static function january(): MonthEnum
+    {
+        return new class('january') extends MonthEnum
+        {
+            public function getNumericIndex(): int
+            {
+                return 1;
+            }
+        };
+    }
+
+    public static function february(): MonthEnum
+    {
+        return new class('february') extends MonthEnum
+        {
+            public function getNumericIndex(): int
+            {
+                return 2;
+            }
+        };
+    }
+    
+    // …
+}
+```
+
+By declaring the enum class itself as abstract, 
+and using static constructors instead of doc comments, 
+you're able to return an anonymous class per enum, each of them implementing the required methods.
+
+You can use this enum the same way as any other:
+
+```php
+MonthEnum::january()->getNumericIndex()
+``` 
+
+Note that one drawback of this approach is that the value given in the constructor 
+`new class('february')` **must** be the same as the static method's name.
+This is something that we can improve on in the future.
+
 ### Testing
 
 ``` bash
