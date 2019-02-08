@@ -2,10 +2,10 @@
 
 namespace Spatie\Enum;
 
-use JsonSerializable;
-use ReflectionMethod;
 use TypeError;
 use ReflectionClass;
+use JsonSerializable;
+use ReflectionMethod;
 
 abstract class Enum implements JsonSerializable
 {
@@ -21,7 +21,7 @@ abstract class Enum implements JsonSerializable
     public static function from(string $value): Enum
     {
         if (method_exists(static::class, $value)) {
-            return forward_static_call(static::class . '::' . $value);
+            return forward_static_call(static::class.'::'.$value);
         }
 
         return new static($value);
