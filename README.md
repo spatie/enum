@@ -137,7 +137,7 @@ abstract class MonthEnum extends Enum
 
     public static function january(): MonthEnum
     {
-        return new class('january') extends MonthEnum
+        return new class() extends MonthEnum
         {
             public function getNumericIndex(): int
             {
@@ -148,7 +148,7 @@ abstract class MonthEnum extends Enum
 
     public static function february(): MonthEnum
     {
-        return new class('february') extends MonthEnum
+        return new class() extends MonthEnum
         {
             public function getNumericIndex(): int
             {
@@ -171,9 +171,8 @@ You can use this enum the same way as any other:
 MonthEnum::january()->getNumericIndex()
 ``` 
 
-Note that one drawback of this approach is that the value given in the constructor 
-`new class('february')` **must** be the same as the static method's name.
-This is something that we can improve on in the future.
+Note that one drawback of this approach is that the value of the enum
+**is always** the name of the static function, there's no way of mapping it.
 
 ### Testing
 

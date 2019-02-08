@@ -29,6 +29,10 @@ abstract class Enum implements JsonSerializable
 
     public function __construct(string $value = null)
     {
+        if ($value === null) {
+            $value = $this->resolveValueFromStaticCall();
+        }
+
         if (! in_array($value, self::resolve())) {
             throw new TypeError("Value {$value} not available in enum ".static::class);
         }
@@ -159,5 +163,16 @@ abstract class Enum implements JsonSerializable
         }
 
         return $enumValues;
+    }
+
+    protected function resolveValueFromStaticCall(): ?string
+    {
+        if (strpos(get_class($this), 'class@anonymous') === 0) {
+            $backtrace = debug_backtrace();
+
+            return $backtrace[2]['function'];
+        }
+
+        return null;
     }
 }
