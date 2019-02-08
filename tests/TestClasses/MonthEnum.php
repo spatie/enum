@@ -10,8 +10,7 @@ abstract class MonthEnum extends Enum
 
     public static function january(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 1;
@@ -21,8 +20,7 @@ abstract class MonthEnum extends Enum
 
     public static function february(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 2;
@@ -32,8 +30,7 @@ abstract class MonthEnum extends Enum
 
     public static function march(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 3;
@@ -43,8 +40,7 @@ abstract class MonthEnum extends Enum
 
     public static function april(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 4;
@@ -54,8 +50,7 @@ abstract class MonthEnum extends Enum
 
     public static function may(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 5;
@@ -65,8 +60,7 @@ abstract class MonthEnum extends Enum
 
     public static function june(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 6;
@@ -76,8 +70,7 @@ abstract class MonthEnum extends Enum
 
     public static function july(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 7;
@@ -87,8 +80,7 @@ abstract class MonthEnum extends Enum
 
     public static function august(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 8;
@@ -98,8 +90,7 @@ abstract class MonthEnum extends Enum
 
     public static function september(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 9;
@@ -109,8 +100,7 @@ abstract class MonthEnum extends Enum
 
     public static function october(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 10;
@@ -120,8 +110,7 @@ abstract class MonthEnum extends Enum
 
     public static function november(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 11;
@@ -131,8 +120,7 @@ abstract class MonthEnum extends Enum
 
     public static function december(): MonthEnum
     {
-        return new class() extends MonthEnum
-        {
+        return new class() extends MonthEnum {
             public function getNumericIndex(): int
             {
                 return 12;
