@@ -95,4 +95,16 @@ class EnumTest extends TestCase
 
         $this->assertEquals('"bar"', $json);
     }
+
+    /** @test */
+    public function it_can_represent_its_keys_as_an_array()
+    {
+        $this->assertEquals(['foo', 'bar'], MyEnum::getKeys());
+    }
+
+    /** @test */
+    public function it_can_represent_its_values_as_an_array()
+    {
+        $this->assertEquals(['foovalue', 'bar'], MyEnum::getValues());
+    }
 }
