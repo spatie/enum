@@ -100,6 +100,16 @@ abstract class Enum implements JsonSerializable
         return self::resolve();
     }
 
+    public static function getKeys(): array
+    {
+        return array_keys(self::resolve());
+    }
+
+    public static function getValues(): array
+    {
+        return array_values(self::resolve());
+    }
+
     protected static function resolve(): array
     {
         $class = static::class;
