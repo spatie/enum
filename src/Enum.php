@@ -18,6 +18,11 @@ abstract class Enum implements JsonSerializable
     /** @var string */
     protected $value;
 
+    /**
+     * @param string $value
+     *
+     * @return static
+     */
     public static function from(string $value): Enum
     {
         if (method_exists(static::class, $value)) {
@@ -35,6 +40,10 @@ abstract class Enum implements JsonSerializable
 
         if (! in_array($value, self::resolve())) {
             throw new TypeError("Value {$value} not available in enum ".static::class);
+        }
+
+        if ($value === null) {
+            throw new TypeError("Value of enum can't be null");
         }
 
         $this->value = $value;
@@ -66,16 +75,16 @@ abstract class Enum implements JsonSerializable
             return false;
         }
 
-        if ($enum->value !== $this->value) {
-            return false;
-        }
-
-        return true;
+        return $enum->value === $this->value;
     }
 
+    /**
+     * @param \Spatie\Enum\Enum[] $enums
+     *
+     * @return bool
+     */
     public function isOneOf(array $enums): bool
     {
-        /** @var \Spatie\Enum\Enum $enum */
         foreach ($enums as $enum) {
             if ($this->equals($enum)) {
                 return true;
@@ -130,15 +139,11 @@ abstract class Enum implements JsonSerializable
             $enumValues[$value] = $name;
         }
 
-        self::$cache[$class] = $enumValues;
-
-        return self::$cache[$class];
+        return self::$cache[$class] = $enumValues;
     }
 
     protected static function resolveValuesFromStaticMethods(ReflectionClass $staticReflection): array
     {
-        $enumValues = [];
-
         $selfReflection = new ReflectionClass(self::class);
 
         $selfStaticMethods = [];
@@ -147,6 +152,7 @@ abstract class Enum implements JsonSerializable
             $selfStaticMethods[$method->name] = $method->name;
         }
 
+        $enumValues = [];
         foreach ($staticReflection->getMethods(ReflectionMethod::IS_STATIC) as $method) {
             $methodName = $method->getName();
 
