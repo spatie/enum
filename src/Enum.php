@@ -75,7 +75,11 @@ abstract class Enum implements JsonSerializable
             return false;
         }
 
-        return $enum->value === $this->value;
+        if ($enum->value !== $this->value) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -121,13 +125,13 @@ abstract class Enum implements JsonSerializable
 
     protected static function resolve(): array
     {
+        $enumValues = [];
+
         $class = static::class;
 
         if (isset(self::$cache[$class])) {
             return self::$cache[$class];
         }
-
-        $enumValues = [];
 
         $staticReflection = new ReflectionClass(static::class);
 
