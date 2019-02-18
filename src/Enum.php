@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Spatie\Enum;
 
 use TypeError;
@@ -34,7 +36,7 @@ abstract class Enum implements JsonSerializable
         }
 
         if (! in_array($value, self::resolve())) {
-            throw new TypeError("Value {$value} not available in enum ".static::class);
+            throw new TypeError("Value {$value} not available in enum " . static::class);
         }
 
         $this->value = $value;
@@ -45,7 +47,7 @@ abstract class Enum implements JsonSerializable
         $enumValues = self::resolve();
 
         if (! isset($enumValues[$name])) {
-            throw new TypeError("Method {$name} not available in enum ".static::class);
+            throw new TypeError("Method {$name} not available in enum " . static::class);
         }
 
         return new static($enumValues[$name]);
@@ -165,6 +167,10 @@ abstract class Enum implements JsonSerializable
         $enumValues = [];
 
         $docComment = $staticReflection->getDocComment();
+
+        if (! $docComment) {
+            return $enumValues;
+        }
 
         preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $matches);
 
