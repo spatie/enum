@@ -30,7 +30,7 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    public function using_an_invalid_enum_value_throws_a_tyoe_error()
+    public function using_an_invalid_enum_value_throws_a_type_error()
     {
         $this->expectException(TypeError::class);
 
