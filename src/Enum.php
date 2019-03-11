@@ -41,7 +41,7 @@ abstract class Enum implements JsonSerializable
         }
 
         if (! in_array($value, self::resolve())) {
-            throw new TypeError("Value {$value} not available in enum " . static::class);
+            throw new TypeError("Value {$value} not available in enum ".static::class);
         }
 
         if ($value === null) {
@@ -56,7 +56,7 @@ abstract class Enum implements JsonSerializable
         $enumValues = self::resolve();
 
         if (! isset($enumValues[$name])) {
-            throw new TypeError("Method {$name} not available in enum " . static::class);
+            throw new TypeError("Method {$name} not available in enum ".static::class);
         }
 
         return new static($enumValues[$name]);
