@@ -85,7 +85,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @param \Spatie\Enum\Enum[] $enums
+     * @param string[]|\Spatie\Enum\Enum[] $enums
      *
      * @return bool
      */
