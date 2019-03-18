@@ -155,7 +155,7 @@ abstract class Enum implements JsonSerializable
         $selfStaticMethods = [];
 
         foreach ($selfReflection->getMethods(ReflectionMethod::IS_STATIC) as $method) {
-            $selfStaticMethods[$method->name] = $method->name;
+            $selfStaticMethods[$method->getName()] = $method->getName();
         }
 
         $enumValues = [];
