@@ -60,7 +60,7 @@ abstract class Enum implements JsonSerializable
     public static function __callStatic($name, $arguments)
     {
         if (strlen($name) > 2 && strpos($name, 'is') === 0) {
-            if(!isset($arguments[0])) {
+            if (! isset($arguments[0])) {
                 throw new \ArgumentCountError(sprintf('Calling %s::%s() in static context requires one argument', static::class, $name));
             }
 
