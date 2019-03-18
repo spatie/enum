@@ -68,6 +68,8 @@ class EnumTest extends TestCase
         $this->assertEquals([
             'foo' => 'foovalue',
             'bar' => 'bar',
+            'hello' => 'hello',
+            'world' => 'worldvalue',
         ], MyEnum::toArray());
     }
 
@@ -101,12 +103,28 @@ class EnumTest extends TestCase
     /** @test */
     public function it_can_represent_its_keys_as_an_array()
     {
-        $this->assertEquals(['foo', 'bar'], MyEnum::getKeys());
+        $this->assertEquals(['foo', 'bar', 'hello', 'world'], MyEnum::getKeys());
     }
 
     /** @test */
     public function it_can_represent_its_values_as_an_array()
     {
-        $this->assertEquals(['foovalue', 'bar'], MyEnum::getValues());
+        $this->assertEquals(['foovalue', 'bar', 'hello', 'worldvalue'], MyEnum::getValues());
+    }
+
+    /** @test */
+    public function value_is_case_insensitive()
+    {
+        $hello = MyEnum::Hello();
+
+        $this->assertInstanceOf(MyEnum::class, $hello);
+        $this->assertEquals('hello', $hello);
+        $this->assertTrue($hello->equals(MyEnum::hello()));
+
+        $world = MyEnum::WoRlD();
+
+        $this->assertInstanceOf(MyEnum::class, $world);
+        $this->assertEquals('worldvalue', $world);
+        $this->assertTrue($world->equals(MyEnum::worLD()));
     }
 }

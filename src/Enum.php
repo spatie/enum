@@ -40,6 +40,8 @@ abstract class Enum implements JsonSerializable
             $value = $this->resolveValueFromStaticCall();
         }
 
+        $value = strtolower($value);
+
         if (! in_array($value, self::resolve())) {
             throw new TypeError("Value {$value} not available in enum ".static::class);
         }
@@ -54,6 +56,8 @@ abstract class Enum implements JsonSerializable
     public static function __callStatic($name, $arguments): Enum
     {
         $enumValues = self::resolve();
+
+        $name = strtolower($name);
 
         if (! isset($enumValues[$name])) {
             throw new TypeError("Method {$name} not available in enum ".static::class);
@@ -156,7 +160,7 @@ abstract class Enum implements JsonSerializable
                 continue;
             }
 
-            $methodName = $method->getName();
+            $methodName = strtolower($method->getName());
             $enumValues[$methodName] = static::$map[$methodName] ?? $methodName;
         }
 
@@ -176,6 +180,7 @@ abstract class Enum implements JsonSerializable
         preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $matches);
 
         foreach ($matches[1] ?? [] as $valueName) {
+            $valueName = strtolower($valueName);
             $enumValues[$valueName] = static::$map[$valueName] ?? $valueName;
         }
 
