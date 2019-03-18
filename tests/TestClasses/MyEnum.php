@@ -11,6 +11,8 @@ use Spatie\Enum\Enum;
  * @method static self bar()
  * @method static self Hello()
  * @method static self WORLD()
+ *
+ * @method static bool isFoo(string|Enum $value = null)
  */
 class MyEnum extends Enum
 {

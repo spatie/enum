@@ -57,15 +57,34 @@ abstract class Enum implements JsonSerializable
         $this->value = $value;
     }
 
-    public static function __callStatic($name, $arguments): Enum
+    public static function __callStatic($name, $arguments)
     {
-        $enumValues = self::resolve();
+        if (strlen($name) > 2 && strpos($name, 'is') === 0) {
+            if (! isset($arguments[0])) {
+                throw new \ArgumentCountError(sprintf('Calling %s::%s() in static context requires one argument', static::class, $name));
+            }
 
-        if (! isset($enumValues[strtolower($name)])) {
+            return static::from($arguments[0])->$name();
+        }
+
+        if (! isset(self::resolve()[strtolower($name)])) {
             throw new TypeError("Method {$name} not available in enum ".static::class);
         }
 
         return new static($name);
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (strlen($name) > 2 && strpos($name, 'is') === 0) {
+            return $this->equals(substr($name, 2));
+        }
+
+        if (isset(self::resolve()[strtolower($name)])) {
+            return static::__callStatic($name, $arguments);
+        }
+
+        throw new \BadMethodCallException(sprintf('Call to undefined method %s->%s()', static::class, $name));
     }
 
     /**
