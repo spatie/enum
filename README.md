@@ -117,6 +117,14 @@ Enums can be compared using the `equals` method:
 $status->equals($otherStatus);
 ```
 
+You can also use dynamic `is` methods:
+
+```php
+$status->isDraft(); // return a boolean
+```
+
+Note that if you want auto completion on these `is` methods, you must add extra doc blocks on you enum classes. 
+
 ### Enum specific methods
 
 There might be a case where you want to have functionality depending on the concrete enum value.
