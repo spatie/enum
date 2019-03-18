@@ -42,7 +42,7 @@ abstract class Enum implements JsonSerializable
 
         $enumValues = self::resolve();
 
-        if(isset($enumValues[strtolower($value)])) {
+        if (isset($enumValues[strtolower($value)])) {
             $value = $enumValues[strtolower($value)];
         }
 
