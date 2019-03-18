@@ -40,9 +40,13 @@ abstract class Enum implements JsonSerializable
             $value = $this->resolveValueFromStaticCall();
         }
 
-        $value = strtolower($value);
+        $enumValues = self::resolve();
 
-        if (! in_array($value, self::resolve())) {
+        if(isset($enumValues[strtolower($value)])) {
+            $value = $enumValues[strtolower($value)];
+        }
+
+        if (! in_array($value, $enumValues)) {
             throw new TypeError("Value {$value} not available in enum ".static::class);
         }
 
@@ -57,13 +61,11 @@ abstract class Enum implements JsonSerializable
     {
         $enumValues = self::resolve();
 
-        $name = strtolower($name);
-
-        if (! isset($enumValues[$name])) {
+        if (! isset($enumValues[strtolower($name)])) {
             throw new TypeError("Method {$name} not available in enum ".static::class);
         }
 
-        return new static($enumValues[$name]);
+        return new static($name);
     }
 
     /**
@@ -160,8 +162,8 @@ abstract class Enum implements JsonSerializable
                 continue;
             }
 
-            $methodName = strtolower($method->getName());
-            $enumValues[$methodName] = static::$map[$methodName] ?? $methodName;
+            $methodName = $method->getName();
+            $enumValues[strtolower($methodName)] = static::$map[$methodName] ?? $methodName;
         }
 
         return $enumValues;
@@ -180,8 +182,7 @@ abstract class Enum implements JsonSerializable
         preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $matches);
 
         foreach ($matches[1] ?? [] as $valueName) {
-            $valueName = strtolower($valueName);
-            $enumValues[$valueName] = static::$map[$valueName] ?? $valueName;
+            $enumValues[strtolower($valueName)] = static::$map[$valueName] ?? $valueName;
         }
 
         return $enumValues;

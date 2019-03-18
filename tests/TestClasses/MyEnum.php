@@ -16,6 +16,6 @@ class MyEnum extends Enum
 {
     protected static $map = [
         'foo' => 'foovalue',
-        'world' => 'worldvalue',
+        'WORLD' => 'worldvalue',
     ];
 }

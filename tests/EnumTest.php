@@ -68,7 +68,7 @@ class EnumTest extends TestCase
         $this->assertEquals([
             'foo' => 'foovalue',
             'bar' => 'bar',
-            'hello' => 'hello',
+            'hello' => 'Hello',
             'world' => 'worldvalue',
         ], MyEnum::toArray());
     }
@@ -109,7 +109,7 @@ class EnumTest extends TestCase
     /** @test */
     public function it_can_represent_its_values_as_an_array()
     {
-        $this->assertEquals(['foovalue', 'bar', 'hello', 'worldvalue'], MyEnum::getValues());
+        $this->assertEquals(['foovalue', 'bar', 'Hello', 'worldvalue'], MyEnum::getValues());
     }
 
     /** @test */
@@ -118,7 +118,7 @@ class EnumTest extends TestCase
         $hello = MyEnum::Hello();
 
         $this->assertInstanceOf(MyEnum::class, $hello);
-        $this->assertEquals('hello', $hello);
+        $this->assertEquals('Hello', $hello);
         $this->assertTrue($hello->equals(MyEnum::hello()));
 
         $world = MyEnum::WoRlD();
