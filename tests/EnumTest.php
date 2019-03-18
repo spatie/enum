@@ -127,4 +127,14 @@ class EnumTest extends TestCase
         $this->assertEquals('worldvalue', $world);
         $this->assertTrue($world->equals(MyEnum::worLD()));
     }
+
+    /** @test */
+    public function can_call_magic_is_methods()
+    {
+        $this->assertTrue(MyEnum::from('foo')->isFoo());
+        $this->assertFalse(MyEnum::from('bar')->isFoo());
+
+        $this->assertTrue(MyEnum::isFoo('foo'));
+        $this->assertFalse(MyEnum::isFoo('bar'));
+    }
 }
