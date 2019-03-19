@@ -38,7 +38,7 @@ interface Enumerable
      *
      * @return bool
      */
-    public static function isIndex(int $index): bool;
+    public static function isValidIndex(int $index): bool;
 
     /**
      * Check if the given value exists on this enum.
@@ -47,7 +47,7 @@ interface Enumerable
      *
      * @return bool
      */
-    public static function isValue(string $value): bool;
+    public static function isValidValue(string $value): bool;
 
     /**
      * Get the current index.

@@ -30,11 +30,11 @@ abstract class Enum implements Enumerable, JsonSerializable
             $index = static::toArray()[$value];
         }
 
-        if (! static::isValue($value)) {
+        if (! static::isValidValue($value)) {
             throw new InvalidValueException($value, static::class);
         }
 
-        if (! static::isIndex($index)) {
+        if (! static::isValidIndex($index)) {
             throw new InvalidIndexException($value, static::class);
         }
 
@@ -50,7 +50,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return $this->isEqual(substr($name, 2));
         }
 
-        if (static::isValue($name)) {
+        if (static::isValidValue($name)) {
             return static::__callStatic($name, $arguments);
         }
 
@@ -69,7 +69,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return static::make($arguments[0])->$name();
         }
 
-        if (static::isValue($name)) {
+        if (static::isValidValue($name)) {
             return static::make($name);
         }
 
@@ -81,7 +81,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         if (is_int($value)) {
             $index = $value;
 
-            if (! static::isIndex($index)) {
+            if (! static::isValidIndex($index)) {
                 throw new InvalidIndexException($value, static::class);
             }
 
@@ -89,7 +89,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         } elseif (is_string($value)) {
             $value = strtolower($value);
 
-            if (! static::isValue($value)) {
+            if (! static::isValidValue($value)) {
                 throw new InvalidValueException($value, static::class);
             }
 
@@ -103,12 +103,12 @@ abstract class Enum implements Enumerable, JsonSerializable
         throw new TypeError(sprintf('%s::make() expects string|int as argument but %s given', static::class, gettype($value)));
     }
 
-    public static function isIndex(int $index): bool
+    public static function isValidIndex(int $index): bool
     {
         return in_array($index, static::getIndices());
     }
 
-    public static function isValue(string $value): bool
+    public static function isValidValue(string $value): bool
     {
         return in_array($value, static::getValues());
     }
@@ -243,7 +243,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
             $value = $backtrace[2]['function'];
 
-            if (static::isValue($value)) {
+            if (static::isValidValue($value)) {
                 return $value;
             }
         }
