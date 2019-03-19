@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Spatie\Enum\Tests;
 
-use TypeError;
 use PHPUnit\Framework\TestCase;
+use Spatie\Enum\Exceptions\InvalidIndexException;
+use Spatie\Enum\Exceptions\InvalidValueException;
 use Spatie\Enum\Tests\TestClasses\MyEnum;
 use Spatie\Enum\Tests\TestClasses\RecursiveEnum;
 
@@ -21,18 +22,28 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    public function an_enum_can_specify_its_value()
+    public function an_enum_can_be_made_by_value()
     {
-        $enumValue = MyEnum::foo();
+        $enumValue = MyEnum::make('foo');
 
         $this->assertInstanceOf(MyEnum::class, $enumValue);
-        $this->assertEquals('foovalue', $enumValue);
+        $this->assertEquals('foo', $enumValue);
+    }
+
+    /** @test */
+    public function an_enum_can_be_made_by_index()
+    {
+        $enumValue = MyEnum::make(0);
+
+        $this->assertInstanceOf(MyEnum::class, $enumValue);
+        $this->assertEquals('foo', $enumValue);
+        $this->assertEquals(0, $enumValue->getIndex());
     }
 
     /** @test */
     public function using_an_invalid_enum_value_throws_a_type_error()
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(\BadMethodCallException::class);
 
         MyEnum::wrong();
     }
@@ -56,29 +67,29 @@ class EnumTest extends TestCase
 
         $d = RecursiveEnum::foo();
 
-        $this->assertTrue($a->equals($a));
-        $this->assertTrue($a->equals($b));
-        $this->assertFalse($a->equals($c));
-        $this->assertFalse($a->equals($d));
+        $this->assertTrue($a->isEqual($a));
+        $this->assertTrue($a->isEqual($b));
+        $this->assertFalse($a->isEqual($c));
+        $this->assertFalse($a->isEqual($d));
     }
 
     /** @test */
     public function it_can_represent_itself_as_an_array()
     {
         $this->assertEquals([
-            'foo' => 'foovalue',
-            'bar' => 'bar',
-            'hello' => 'Hello',
-            'world' => 'worldvalue',
+            'foo' => 0,
+            'bar' => 1,
+            'hello' => 2,
+            'world' => 3,
         ], MyEnum::toArray());
     }
 
     /** @test */
     public function it_can_be_created_from_a_string()
     {
-        $enum = MyEnum::from('bar');
+        $enum = MyEnum::make('bar');
 
-        $this->assertTrue(MyEnum::bar()->equals($enum));
+        $this->assertTrue(MyEnum::bar()->isEqual($enum));
     }
 
     /** @test */
@@ -89,7 +100,8 @@ class EnumTest extends TestCase
             MyEnum::bar(),
         ];
 
-        $this->assertTrue(MyEnum::foo()->isOneOf($array));
+        $this->assertTrue(MyEnum::foo()->isAny($array));
+        $this->assertFalse(MyEnum::Hello()->isAny($array));
     }
 
     /** @test */
@@ -101,15 +113,15 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    public function it_can_represent_its_keys_as_an_array()
+    public function it_can_represent_its_indices_as_an_array()
     {
-        $this->assertEquals(['foo', 'bar', 'hello', 'world'], MyEnum::getKeys());
+        $this->assertEquals([0, 1, 2, 3], MyEnum::getIndices());
     }
 
     /** @test */
     public function it_can_represent_its_values_as_an_array()
     {
-        $this->assertEquals(['foovalue', 'bar', 'Hello', 'worldvalue'], MyEnum::getValues());
+        $this->assertEquals(['foo', 'bar', 'hello', 'world'], MyEnum::getValues());
     }
 
     /** @test */
@@ -118,23 +130,87 @@ class EnumTest extends TestCase
         $hello = MyEnum::Hello();
 
         $this->assertInstanceOf(MyEnum::class, $hello);
-        $this->assertEquals('Hello', $hello);
-        $this->assertTrue($hello->equals(MyEnum::hello()));
+        $this->assertEquals('hello', $hello);
+        $this->assertTrue($hello->isEqual(MyEnum::hello()));
 
         $world = MyEnum::WoRlD();
 
         $this->assertInstanceOf(MyEnum::class, $world);
-        $this->assertEquals('worldvalue', $world);
-        $this->assertTrue($world->equals(MyEnum::worLD()));
+        $this->assertEquals('world', $world);
+        $this->assertTrue($world->isEqual(MyEnum::worLD()));
     }
 
     /** @test */
     public function can_call_magic_is_methods()
     {
-        $this->assertTrue(MyEnum::from('foo')->isFoo());
-        $this->assertFalse(MyEnum::from('bar')->isFoo());
+        $this->assertTrue(MyEnum::make('foo')->isFoo());
+        $this->assertFalse(MyEnum::make('bar')->isFoo());
 
         $this->assertTrue(MyEnum::isFoo('foo'));
         $this->assertFalse(MyEnum::isFoo('bar'));
+    }
+
+    /** @test */
+    public function throws_exception_if_made_with_invalid_value()
+    {
+        $this->expectException(InvalidValueException::class);
+
+        MyEnum::make('foobar');
+    }
+
+    /** @test */
+    public function throws_exception_if_made_with_invalid_index()
+    {
+        $this->expectException(InvalidIndexException::class);
+
+        MyEnum::make(-1);
+    }
+
+    /** @test */
+    public function throws_exception_if_made_with_invalid_argument_type()
+    {
+        $this->expectException(\TypeError::class);
+
+        MyEnum::make([]);
+    }
+
+    /** @test */
+    public function throws_exception_if_constructed_with_invalid_value()
+    {
+        $this->expectException(InvalidValueException::class);
+
+        new MyEnum('foobar', 0);
+    }
+
+    /** @test */
+    public function throws_exception_if_constructed_with_invalid_index()
+    {
+        $this->expectException(InvalidIndexException::class);
+
+        new MyEnum('foo', -1);
+    }
+
+    /** @test */
+    public function throws_exception_if_call_to_undefined_method()
+    {
+        $this->expectException(\BadMethodCallException::class);
+
+        MyEnum::foo()->foobar();
+    }
+
+    /** @test */
+    public function throws_exception_if_call_to_static_is_method_without_argument()
+    {
+        $this->expectException(\ArgumentCountError::class);
+
+        MyEnum::isFoo();
+    }
+
+    /** @test */
+    public function throws_exception_if_constructed_without_arguments()
+    {
+        $this->expectException(InvalidValueException::class);
+
+        new MyEnum();
     }
 }

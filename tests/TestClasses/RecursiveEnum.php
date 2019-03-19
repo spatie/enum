@@ -7,16 +7,16 @@ namespace Spatie\Enum\Tests\TestClasses;
 use Spatie\Enum\Enum;
 
 /**
- * @method static self foo() foovalue
+ * @method static self foo()
  */
 class RecursiveEnum extends Enum
 {
     public function __toString(): string
     {
         $values = [
-            RecursiveEnum::foo()->value => 'test',
+            RecursiveEnum::foo()->getValue() => 'test',
         ];
 
-        return $values[$this->value];
+        return $values[$this->getValue()];
     }
 }

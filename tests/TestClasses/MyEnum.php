@@ -16,8 +16,4 @@ use Spatie\Enum\Enum;
  */
 class MyEnum extends Enum
 {
-    protected static $map = [
-        'foo' => 'foovalue',
-        'WORLD' => 'worldvalue',
-    ];
 }
