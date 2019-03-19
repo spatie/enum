@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Spatie\Enum;
 
-use Spatie\Enum\Exceptions\InvalidIndexException;
-use Spatie\Enum\Exceptions\InvalidValueException;
 use TypeError;
-use JsonSerializable;
 use ReflectionClass;
+use JsonSerializable;
 use ReflectionMethod;
 use BadMethodCallException;
+use Spatie\Enum\Exceptions\InvalidIndexException;
+use Spatie\Enum\Exceptions\InvalidValueException;
 
 abstract class Enum implements Enumerable, JsonSerializable
 {
@@ -30,11 +30,11 @@ abstract class Enum implements Enumerable, JsonSerializable
             $index = static::toArray()[$value];
         }
 
-        if (!static::isValue($value)) {
+        if (! static::isValue($value)) {
             throw new InvalidValueException($value, static::class);
         }
 
-        if (!static::isIndex($index)) {
+        if (! static::isIndex($index)) {
             throw new InvalidIndexException($value, static::class);
         }
 
@@ -62,7 +62,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         $name = strtolower($name);
 
         if (strlen($name) > 2 && strpos($name, 'is') === 0) {
-            if (!isset($arguments[0])) {
+            if (! isset($arguments[0])) {
                 throw new \ArgumentCountError(sprintf('Calling %s::%s() in static context requires one argument', static::class, $name));
             }
 
@@ -81,7 +81,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         if (is_int($value)) {
             $index = $value;
 
-            if (!static::isIndex($index)) {
+            if (! static::isIndex($index)) {
                 throw new InvalidIndexException($value, static::class);
             }
 
@@ -89,12 +89,12 @@ abstract class Enum implements Enumerable, JsonSerializable
         } elseif (is_string($value)) {
             $value = strtolower($value);
 
-            if (!static::isValue($value)) {
+            if (! static::isValue($value)) {
                 throw new InvalidValueException($value, static::class);
             }
 
             if (method_exists(static::class, $value)) {
-                return forward_static_call(static::class . '::' . $value);
+                return forward_static_call(static::class.'::'.$value);
             }
 
             return new static($value, static::toArray()[$value]);
@@ -221,7 +221,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         $docComment = $reflection->getDocComment();
 
-        if (!$docComment) {
+        if (! $docComment) {
             return $values;
         }
 

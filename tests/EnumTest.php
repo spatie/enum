@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Spatie\Enum\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Enum\Exceptions\InvalidIndexException;
-use Spatie\Enum\Exceptions\InvalidValueException;
 use Spatie\Enum\Tests\TestClasses\MyEnum;
 use Spatie\Enum\Tests\TestClasses\RecursiveEnum;
+use Spatie\Enum\Exceptions\InvalidIndexException;
+use Spatie\Enum\Exceptions\InvalidValueException;
 
 class EnumTest extends TestCase
 {

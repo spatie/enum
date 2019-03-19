@@ -65,7 +65,7 @@ interface Enumerable
 
     /**
      * Get the whole enum as array.
-     * value => index
+     * value => index.
      *
      * @return array
      */
