@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spatie\Enum\Tests;
 
+use Spatie\Enum\Tests\TestClasses\NumericValuesEnum;
 use TypeError;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\TestClasses\MyEnum;
@@ -136,5 +137,14 @@ class EnumTest extends TestCase
 
         $this->assertTrue(MyEnum::isFoo('foo'));
         $this->assertFalse(MyEnum::isFoo('bar'));
+    }
+
+    /** @test */
+    public function numeric_value_enums()
+    {
+        $draft = NumericValuesEnum::draft();
+
+        $this->assertTrue($draft->equals(NumericValuesEnum::draft()));
+        $this->assertTrue($draft->equals(new NumericValuesEnum('1')));
     }
 }
