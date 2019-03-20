@@ -14,6 +14,8 @@ class EnumSpecificMethodsTest extends TestCase
     {
         $this->assertEquals(1, MonthEnum::january()->getIndex());
         $this->assertEquals(12, MonthEnum::december()->getIndex());
+        $this->assertEquals('january', MonthEnum::make(1));
+        $this->assertEquals('december', MonthEnum::make(12));
     }
 
     /** @test */

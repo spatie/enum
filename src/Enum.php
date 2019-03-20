@@ -232,6 +232,11 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         self::$resolved[$class] = true;
 
+        foreach(self::$cache[$class] as $name => $enum) {
+            self::$cache[$class][$name]['value'] = static::make($name)->getValue();
+            self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
+        }
+
         return self::$cache[$class];
     }
 
