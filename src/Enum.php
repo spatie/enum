@@ -70,7 +70,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function make($value): Enumerable
     {
-        if(!(is_int($value) || is_string($value))) {
+        if (! (is_int($value) || is_string($value))) {
             throw new TypeError(sprintf('%s::make() expects string|int as argument but %s given', static::class, gettype($value)));
         }
 
@@ -101,7 +101,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         if (is_string($name) && method_exists(static::class, $name)) {
             return forward_static_call(static::class.'::'.$name);
-        } elseif(is_int($index) && is_string($value)) {
+        } elseif (is_int($index) && is_string($value)) {
             return new static($value, $index);
         }
 

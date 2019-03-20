@@ -9,9 +9,9 @@ use TypeError;
 use ArgumentCountError;
 use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
+use Spatie\Enum\Tests\Enums\BoolEnum;
 use Spatie\Enum\Exceptions\InvalidIndexException;
 use Spatie\Enum\Exceptions\InvalidValueException;
-use Spatie\Enum\Tests\Enums\BoolEnum;
 
 class BoolEnumTest extends TestCase
 {
