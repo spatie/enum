@@ -20,7 +20,6 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "larapack/dd": "^1.0",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
