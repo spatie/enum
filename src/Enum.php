@@ -17,6 +17,9 @@ abstract class Enum implements Enumerable, JsonSerializable
     /** @var array[] */
     protected static $cache = [];
 
+    /** @var bool[] */
+    protected static $resolved = [];
+
     /** @var string */
     protected $value;
 
@@ -25,6 +28,10 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public function __construct(?string $value = null, ?int $index = null)
     {
+        if(!static::isResolved()) {
+            return;
+        }
+
         if (is_null($value) && is_null($index)) {
             $value = $this->resolveValueFromStaticCall();
             $index = static::toArray()[$value];
@@ -44,8 +51,6 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public function __call($name, $arguments)
     {
-        $name = strtolower($name);
-
         if (strlen($name) > 2 && strpos($name, 'is') === 0) {
             return $this->isEqual(substr($name, 2));
         }
@@ -59,8 +64,6 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function __callStatic($name, $arguments)
     {
-        $name = strtolower($name);
-
         if (strlen($name) > 2 && strpos($name, 'is') === 0) {
             if (! isset($arguments[0])) {
                 throw new \ArgumentCountError(sprintf('Calling %s::%s() in static context requires one argument', static::class, $name));
@@ -69,7 +72,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return static::make($arguments[0])->$name();
         }
 
-        if (static::isValidValue($name)) {
+        if (static::isValidName($name) || static::isValidValue($name)) {
             return static::make($name);
         }
 
@@ -87,17 +90,20 @@ abstract class Enum implements Enumerable, JsonSerializable
 
             return new static(array_search($index, static::toArray()), $index);
         } elseif (is_string($value)) {
-            $value = strtolower($value);
-
-            if (! static::isValidValue($value)) {
-                throw new InvalidValueException($value, static::class);
-            }
-
             if (method_exists(static::class, $value)) {
                 return forward_static_call(static::class.'::'.$value);
             }
 
-            return new static($value, static::toArray()[$value]);
+            if (static::isValidValue($value)) {
+                return new static($value, static::toArray()[$value]);
+            }
+
+            if (static::isValidName($value)) {
+                $value = strtoupper($value);
+                return new static(static::resolve()[$value]['value'], static::resolve()[$value]['index']);
+            }
+
+            throw new InvalidValueException($value, static::class);
         }
 
         throw new TypeError(sprintf('%s::make() expects string|int as argument but %s given', static::class, gettype($value)));
@@ -105,12 +111,17 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function isValidIndex(int $index): bool
     {
-        return in_array($index, static::getIndices());
+        return in_array($index, static::getIndices(), true);
+    }
+
+    public static function isValidName(string $value): bool
+    {
+        return in_array(strtoupper($value), array_keys(static::resolve()), true);
     }
 
     public static function isValidValue(string $value): bool
     {
-        return in_array($value, static::getValues());
+        return in_array($value, static::getValues(), true);
     }
 
     public static function getIndices(): array
@@ -125,7 +136,9 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function toArray(): array
     {
-        return static::resolve();
+        $resolved = static::resolve();
+
+        return array_combine(array_column($resolved, 'value'), array_column($resolved, 'index'));
     }
 
     public function getValue(): string
@@ -178,6 +191,15 @@ abstract class Enum implements Enumerable, JsonSerializable
         return $this->getValue();
     }
 
+    protected static function isResolved(): bool
+    {
+        if(!isset(self::$resolved[static::class])) {
+            static::resolve();
+        }
+
+        return self::$resolved[static::class] ?: false;
+    }
+
     protected static function resolve(): array
     {
         $values = [];
@@ -188,17 +210,29 @@ abstract class Enum implements Enumerable, JsonSerializable
             return self::$cache[$class];
         }
 
+        self::$resolved[static::class] = false;
+        self::$cache[$class] = [];
+
         $reflection = new ReflectionClass(static::class);
 
-        foreach (self::resolveFromStaticMethods($reflection) as $value) {
-            $values[] = strtolower($value);
-        }
-
         foreach (self::resolveFromDocBlocks($reflection) as $value) {
-            $values[] = strtolower($value);
+            $values[] = $value;
         }
 
-        return self::$cache[$class] = array_combine(array_values($values), array_keys($values));
+        foreach (self::resolveFromStaticMethods($reflection) as $value) {
+            $values[] = $value;
+        }
+
+        foreach($values as $index => $value) {
+            self::$cache[$class][strtoupper($value)] = [
+                'index' => $index,
+                'value' => $value,
+            ];
+        }
+
+        self::$resolved[$class] = true;
+
+        return self::$cache[$class];
     }
 
     protected static function resolveFromStaticMethods(ReflectionClass $reflection): array
