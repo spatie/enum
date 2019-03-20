@@ -96,6 +96,33 @@ class BoolEnumTest extends TestCase
     }
 
     /** @test */
+    public function can_represent_itself_as_array()
+    {
+        $this->assertEquals([
+            'false' => 0,
+            'true' => 1,
+        ], BoolEnum::toArray());
+    }
+
+    /** @test */
+    public function can_represent_its_values_as_array()
+    {
+        $this->assertEquals([
+            'false',
+            'true',
+        ], BoolEnum::getValues());
+    }
+
+    /** @test */
+    public function can_represent_its_indices_as_array()
+    {
+        $this->assertEquals([
+            0,
+            1,
+        ], BoolEnum::getIndices());
+    }
+
+    /** @test */
     public function can_not_create_new_instance_without_arguments()
     {
         $this->expectException(InvalidValueException::class);

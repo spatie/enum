@@ -48,4 +48,46 @@ class WeekDayEnumTest extends TestCase
         $this->assertSame(4, $thursday->getIndex());
         $this->assertSame('Donnerstag', $thursday->getValue());
     }
+
+    /** @test */
+    public function can_represent_itself_as_array()
+    {
+        $this->assertEquals([
+            'Montag' => 1,
+            'Dienstag' => 2,
+            'Mittwoch' => 3,
+            'Donnerstag' => 4,
+            'Freitag' => 5,
+            'Samstag' => 6,
+            'Sonntag' => 7,
+        ], WeekDayEnum::toArray());
+    }
+
+    /** @test */
+    public function can_represent_its_values_as_array()
+    {
+        $this->assertEquals([
+            'Montag',
+            'Dienstag',
+            'Mittwoch',
+            'Donnerstag',
+            'Freitag',
+            'Samstag',
+            'Sonntag',
+        ], WeekDayEnum::getValues());
+    }
+
+    /** @test */
+    public function can_represent_its_indices_as_array()
+    {
+        $this->assertEquals([
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+        ], WeekDayEnum::getIndices());
+    }
 }
