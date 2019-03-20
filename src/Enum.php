@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Spatie\Enum;
 
+use Spatie\Enum\Exceptions\DuplicatedIndexException;
+use Spatie\Enum\Exceptions\DuplicatedValueException;
 use TypeError;
 use ReflectionClass;
 use JsonSerializable;
@@ -222,6 +224,21 @@ abstract class Enum implements Enumerable, JsonSerializable
         foreach (self::$cache[$class] as $name => $enum) {
             self::$cache[$class][$name]['value'] = static::make($name)->getValue();
             self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
+        }
+
+        $duplicatedValues = array_filter(array_count_values(static::getValues()), function(int $count) {
+            return $count > 1;
+        });
+        $duplicatedIndices = array_filter(array_count_values(static::getIndices()), function(int $count) {
+            return $count > 1;
+        });
+
+        if (! empty($duplicatedValues)) {
+            throw new DuplicatedValueException(array_keys($duplicatedValues), static::class);
+        }
+
+        if (! empty($duplicatedIndices)) {
+            throw new DuplicatedIndexException(array_keys($duplicatedIndices), static::class);
         }
 
         return self::$cache[$class];
