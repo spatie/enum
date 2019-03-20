@@ -125,12 +125,12 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function getIndices(): array
     {
-        return array_values(static::toArray());
+        return array_column(static::resolve(), 'index');
     }
 
     public static function getValues(): array
     {
-        return array_keys(static::toArray());
+        return array_column(static::resolve(), 'value');
     }
 
     public static function toArray(): array
