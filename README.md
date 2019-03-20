@@ -100,14 +100,16 @@ You can override this value, by adding the `$map` property:
 class StatusEnum extends Enum
 {
     protected static $map = [
-        'draft' => 1,
+        'draft' => '1',
         'published' => 'other published value',
-        'archived' => -10,
+        'archived' => '-10',
     ];
 }
 ```
 
 Mapping values is optional.
+
+> Note that mapped values should always be strings.
 
 ### Comparing enums
 

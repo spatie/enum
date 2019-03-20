@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Spatie\Enum\Tests;
 
+use BadMethodCallException;
+use ArgumentCountError;
+use TypeError;
+use Spatie\Enum\Tests\TestClasses\NumericValuesEnum;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\TestClasses\MyEnum;
 use Spatie\Enum\Tests\TestClasses\RecursiveEnum;
@@ -43,7 +47,7 @@ class EnumTest extends TestCase
     /** @test */
     public function using_an_invalid_enum_value_throws_a_type_error()
     {
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
 
         MyEnum::wrong();
     }
@@ -169,7 +173,7 @@ class EnumTest extends TestCase
     /** @test */
     public function throws_exception_if_made_with_invalid_argument_type()
     {
-        $this->expectException(\TypeError::class);
+        $this->expectException(TypeError::class);
 
         MyEnum::make([]);
     }
@@ -193,7 +197,7 @@ class EnumTest extends TestCase
     /** @test */
     public function throws_exception_if_call_to_undefined_method()
     {
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
 
         MyEnum::foo()->foobar();
     }
@@ -201,7 +205,7 @@ class EnumTest extends TestCase
     /** @test */
     public function throws_exception_if_call_to_static_is_method_without_argument()
     {
-        $this->expectException(\ArgumentCountError::class);
+        $this->expectException(ArgumentCountError::class);
 
         MyEnum::isFoo();
     }

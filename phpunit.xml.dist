@@ -8,7 +8,8 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="false">
+         stopOnFailure="false"
+         cacheResult="false">
     <testsuites>
         <testsuite name="Spatie Test Suite">
             <directory>tests</directory>
