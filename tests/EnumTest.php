@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Spatie\Enum\Tests;
 
-use BadMethodCallException;
-use ArgumentCountError;
 use TypeError;
-use Spatie\Enum\Tests\TestClasses\NumericValuesEnum;
+use ArgumentCountError;
+use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\TestClasses\MyEnum;
 use Spatie\Enum\Tests\TestClasses\RecursiveEnum;

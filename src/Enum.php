@@ -28,7 +28,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public function __construct(?string $value = null, ?int $index = null)
     {
-        if(!static::isResolved()) {
+        if (! static::isResolved()) {
             return;
         }
 
@@ -100,6 +100,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
             if (static::isValidName($value)) {
                 $value = strtoupper($value);
+
                 return new static(static::resolve()[$value]['value'], static::resolve()[$value]['index']);
             }
 
@@ -193,7 +194,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function isResolved(): bool
     {
-        if(!isset(self::$resolved[static::class])) {
+        if (! isset(self::$resolved[static::class])) {
             static::resolve();
         }
 
@@ -223,7 +224,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             $values[] = $value;
         }
 
-        foreach($values as $index => $value) {
+        foreach ($values as $index => $value) {
             self::$cache[$class][strtoupper($value)] = [
                 'index' => $index,
                 'value' => $value,
@@ -232,7 +233,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         self::$resolved[$class] = true;
 
-        foreach(self::$cache[$class] as $name => $enum) {
+        foreach (self::$cache[$class] as $name => $enum) {
             self::$cache[$class][$name]['value'] = static::make($name)->getValue();
             self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
         }
