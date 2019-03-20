@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Spatie\Enum\Tests\TestClasses;
+namespace Spatie\Enum\Tests\Enums;
 
 use Spatie\Enum\Enum;
 
-class MonthEnum extends Enum
+abstract class MonthEnum extends Enum
 {
     public static function january(): MonthEnum
     {

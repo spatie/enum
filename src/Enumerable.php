@@ -16,7 +16,7 @@ interface Enumerable
     /**
      * Check if the current instance and the given value are equal.
      *
-     * @param string|\Spatie\Enum\Enumerable $value
+     * @param string|int|\Spatie\Enum\Enumerable $value
      *
      * @return bool
      */
@@ -25,7 +25,7 @@ interface Enumerable
     /**
      * Check if the current instance is equal with one of the given values.
      *
-     * @param string[]|\Spatie\Enum\Enumerable[] $values
+     * @param string[]|int[]|\Spatie\Enum\Enumerable[] $values
      *
      * @return bool
      */

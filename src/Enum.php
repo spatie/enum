@@ -30,12 +30,12 @@ abstract class Enum implements Enumerable, JsonSerializable
             $index = static::toArray()[$value];
         }
 
-        if (! static::isValidValue($value)) {
+        if (is_null($value) || ! static::isValidValue($value)) {
             throw new InvalidValueException($value, static::class);
         }
 
-        if (! static::isValidIndex($index)) {
-            throw new InvalidIndexException($value, static::class);
+        if (is_null($index) || ! static::isValidIndex($index)) {
+            throw new InvalidIndexException($index, static::class);
         }
 
         $this->value = $value;
@@ -46,10 +46,6 @@ abstract class Enum implements Enumerable, JsonSerializable
     {
         if (strlen($name) > 2 && strpos($name, 'is') === 0) {
             return $this->isEqual(substr($name, 2));
-        }
-
-        if (static::isValidValue($name)) {
-            return static::__callStatic($name, $arguments);
         }
 
         throw new BadMethodCallException(sprintf('Call to undefined method %s->%s()', static::class, $name));
@@ -74,33 +70,42 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function make($value): Enumerable
     {
-        if (is_int($value)) {
-            $index = $value;
+        if(!(is_int($value) || is_string($value))) {
+            throw new TypeError(sprintf('%s::make() expects string|int as argument but %s given', static::class, gettype($value)));
+        }
 
-            if (! static::isValidIndex($index)) {
+        $name = null;
+        $index = null;
+
+        if (is_int($value)) {
+            if (! static::isValidIndex($value)) {
                 throw new InvalidIndexException($value, static::class);
             }
 
-            return new static(array_search($index, static::toArray()), $index);
+            $name = array_combine(static::getIndices(), array_keys(static::resolve()))[$value];
+            $index = $value;
+            $value = array_search($index, static::toArray());
         } elseif (is_string($value)) {
             if (method_exists(static::class, $value)) {
                 return forward_static_call(static::class.'::'.$value);
             }
 
             if (static::isValidValue($value)) {
-                return new static($value, static::toArray()[$value]);
+                $index = static::toArray()[$value];
+                $name = array_combine(static::getValues(), array_keys(static::resolve()))[$value];
+            } elseif (static::isValidName($value)) {
+                $name = $value;
+                list('value' => $value, 'index' => $index) = static::resolve()[strtoupper($name)];
             }
-
-            if (static::isValidName($value)) {
-                $value = strtoupper($value);
-
-                return new static(static::resolve()[$value]['value'], static::resolve()[$value]['index']);
-            }
-
-            throw new InvalidValueException($value, static::class);
         }
 
-        throw new TypeError(sprintf('%s::make() expects string|int as argument but %s given', static::class, gettype($value)));
+        if (is_string($name) && method_exists(static::class, $name)) {
+            return forward_static_call(static::class.'::'.$name);
+        } elseif(is_int($index) && is_string($value)) {
+            return new static($value, $index);
+        }
+
+        throw new InvalidValueException($value, static::class);
     }
 
     public static function isValidIndex(int $index): bool
@@ -147,7 +152,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public function isEqual($value): bool
     {
-        if (is_string($value)) {
+        if (is_int($value) || is_string($value)) {
             $enum = static::make($value);
         } elseif ($value instanceof $this) {
             $enum = $value;
@@ -257,18 +262,18 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected function resolveValueFromStaticCall(): string
     {
-        $value = null;
+        $name = null;
 
         if (strpos(get_class($this), 'class@anonymous') === 0) {
             $backtrace = debug_backtrace();
 
-            $value = $backtrace[2]['function'];
+            $name = $backtrace[2]['function'];
 
-            if (static::isValidValue($value)) {
-                return $value;
+            if (static::isValidName($name)) {
+                return static::resolve()[strtoupper($name)]['value'];
             }
         }
 
-        throw new InvalidValueException($value, static::class);
+        throw new InvalidValueException($name, static::class);
     }
 }
