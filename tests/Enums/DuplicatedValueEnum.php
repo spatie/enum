@@ -17,7 +17,7 @@ final class DuplicatedValueEnum extends Enum
 {
     public function getValue(): string
     {
-        switch($this->value) {
+        switch ($this->value) {
             case 'foo':
             case 'bar':
                 return 'foobar';

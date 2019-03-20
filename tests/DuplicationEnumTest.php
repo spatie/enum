@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Spatie\Enum\OldTests;
 
-use Spatie\Enum\Exceptions\DuplicatedIndexException;
-use Spatie\Enum\Exceptions\DuplicatedValueException;
+use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\Enums\DuplicatedIndexEnum;
 use Spatie\Enum\Tests\Enums\DuplicatedValueEnum;
-use PHPUnit\Framework\TestCase;
+use Spatie\Enum\Exceptions\DuplicatedIndexException;
+use Spatie\Enum\Exceptions\DuplicatedValueException;
 
 class DuplicationEnumTest extends TestCase
 {

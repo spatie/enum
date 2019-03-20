@@ -17,7 +17,7 @@ final class DuplicatedIndexEnum extends Enum
 {
     public function getIndex(): int
     {
-        switch($this->value) {
+        switch ($this->value) {
             case 'foo':
             case 'bar':
                 return 1000;

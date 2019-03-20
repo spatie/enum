@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Spatie\Enum;
 
-use Spatie\Enum\Exceptions\DuplicatedIndexException;
-use Spatie\Enum\Exceptions\DuplicatedValueException;
 use TypeError;
 use ReflectionClass;
 use JsonSerializable;
@@ -13,6 +11,8 @@ use ReflectionMethod;
 use BadMethodCallException;
 use Spatie\Enum\Exceptions\InvalidIndexException;
 use Spatie\Enum\Exceptions\InvalidValueException;
+use Spatie\Enum\Exceptions\DuplicatedIndexException;
+use Spatie\Enum\Exceptions\DuplicatedValueException;
 
 abstract class Enum implements Enumerable, JsonSerializable
 {
@@ -226,10 +226,10 @@ abstract class Enum implements Enumerable, JsonSerializable
             self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
         }
 
-        $duplicatedValues = array_filter(array_count_values(static::getValues()), function(int $count) {
+        $duplicatedValues = array_filter(array_count_values(static::getValues()), function (int $count) {
             return $count > 1;
         });
-        $duplicatedIndices = array_filter(array_count_values(static::getIndices()), function(int $count) {
+        $duplicatedIndices = array_filter(array_count_values(static::getIndices()), function (int $count) {
             return $count > 1;
         });
 
