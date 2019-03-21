@@ -32,24 +32,6 @@ interface Enumerable
     public function isAny(array $values): bool;
 
     /**
-     * Check if the given index exists on this enum.
-     *
-     * @param int $index
-     *
-     * @return bool
-     */
-    public static function isValidIndex(int $index): bool;
-
-    /**
-     * Check if the given value exists on this enum.
-     *
-     * @param string $value
-     *
-     * @return bool
-     */
-    public static function isValidValue(string $value): bool;
-
-    /**
      * Get the current index.
      *
      * @return int
