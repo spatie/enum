@@ -56,6 +56,7 @@ interface Enumerable
      * @return bool
      */
     public function isEqual($value): bool;
+
     /**
      * Create a valued instance of the Enum by it's value or index.
      *
