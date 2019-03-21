@@ -4,7 +4,6 @@ namespace Spatie\Enum;
 
 interface Enumerable
 {
-
     /**
      * Cast the current instance to string and get the value.
      *
