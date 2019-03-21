@@ -19,11 +19,11 @@ abstract class Enum implements Enumerable, JsonSerializable
     /** @var array[] */
     protected static $cache = [];
 
-    /** @var string */
-    protected $value;
-
     /** @var int */
     protected $index;
+
+    /** @var string */
+    protected $value;
 
     public function __construct(?string $value = null, ?int $index = null)
     {
@@ -70,6 +70,66 @@ abstract class Enum implements Enumerable, JsonSerializable
         throw new BadMethodCallException(sprintf('Call to undefined method %s::%s()', static::class, $name));
     }
 
+    public function __toString(): string
+    {
+        return $this->getValue();
+    }
+
+    public function getIndex(): int
+    {
+        return $this->index;
+    }
+
+    public static function getIndices(): array
+    {
+        return array_column(static::resolve(), 'index');
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public static function getValues(): array
+    {
+        return array_column(static::resolve(), 'value');
+    }
+
+    public function isAny(array $values): bool
+    {
+        foreach ($values as $value) {
+            if ($this->isEqual($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isEqual($value): bool
+    {
+        if (is_int($value) || is_string($value)) {
+            $enum = static::make($value);
+        } elseif ($value instanceof $this) {
+            $enum = $value;
+        }
+
+        if (
+            isset($enum)
+            && $enum instanceof $this
+            && $enum->getValue() === $this->getValue()
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->getValue();
+    }
+
     public static function make($value): Enumerable
     {
         if (! (is_int($value) || is_string($value))) {
@@ -110,31 +170,6 @@ abstract class Enum implements Enumerable, JsonSerializable
         throw new InvalidValueException($value, static::class);
     }
 
-    public static function isValidIndex(int $index): bool
-    {
-        return in_array($index, static::getIndices(), true);
-    }
-
-    public static function isValidName(string $value): bool
-    {
-        return in_array(strtoupper($value), array_keys(static::resolve()), true);
-    }
-
-    public static function isValidValue(string $value): bool
-    {
-        return in_array($value, static::getValues(), true);
-    }
-
-    public static function getIndices(): array
-    {
-        return array_column(static::resolve(), 'index');
-    }
-
-    public static function getValues(): array
-    {
-        return array_column(static::resolve(), 'value');
-    }
-
     public static function toArray(): array
     {
         $resolved = static::resolve();
@@ -142,54 +177,19 @@ abstract class Enum implements Enumerable, JsonSerializable
         return array_combine(array_column($resolved, 'value'), array_column($resolved, 'index'));
     }
 
-    public function getValue(): string
+    protected static function isValidIndex(int $index): bool
     {
-        return $this->value;
+        return in_array($index, static::getIndices(), true);
     }
 
-    public function getIndex(): int
+    protected static function isValidName(string $value): bool
     {
-        return $this->index;
+        return in_array(strtoupper($value), array_keys(static::resolve()), true);
     }
 
-    public function isEqual($value): bool
+    protected static function isValidValue(string $value): bool
     {
-        if (is_int($value) || is_string($value)) {
-            $enum = static::make($value);
-        } elseif ($value instanceof $this) {
-            $enum = $value;
-        }
-
-        if (
-            isset($enum)
-            && $enum instanceof $this
-            && $enum->getValue() === $this->getValue()
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isAny(array $values): bool
-    {
-        foreach ($values as $value) {
-            if ($this->isEqual($value)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function __toString(): string
-    {
-        return $this->getValue();
-    }
-
-    public function jsonSerialize()
-    {
-        return $this->getValue();
+        return in_array($value, static::getValues(), true);
     }
 
     protected static function resolve(): array
@@ -244,20 +244,6 @@ abstract class Enum implements Enumerable, JsonSerializable
         return self::$cache[$class];
     }
 
-    protected static function resolveFromStaticMethods(ReflectionClass $reflection): array
-    {
-        $values = [];
-        foreach ($reflection->getMethods(ReflectionMethod::IS_STATIC) as $method) {
-            if ($method->getDeclaringClass()->getName() === self::class) {
-                continue;
-            }
-
-            $values[] = $method->getName();
-        }
-
-        return $values;
-    }
-
     protected static function resolveFromDocBlocks(ReflectionClass $reflection): array
     {
         $values = [];
@@ -272,6 +258,20 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         foreach ($matches[1] ?? [] as $value) {
             $values[] = $value;
+        }
+
+        return $values;
+    }
+
+    protected static function resolveFromStaticMethods(ReflectionClass $reflection): array
+    {
+        $values = [];
+        foreach ($reflection->getMethods(ReflectionMethod::IS_STATIC) as $method) {
+            if ($method->getDeclaringClass()->getName() === self::class) {
+                continue;
+            }
+
+            $values[] = $method->getName();
         }
 
         return $values;

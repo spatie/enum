@@ -4,23 +4,41 @@ namespace Spatie\Enum;
 
 interface Enumerable
 {
-    /**
-     * Create a valued instance of the Enum by it's value or index.
-     *
-     * @param string|int $value
-     *
-     * @return \Spatie\Enum\Enumerable
-     */
-    public static function make($value): Enumerable;
 
     /**
-     * Check if the current instance and the given value are equal.
+     * Cast the current instance to string and get the value.
      *
-     * @param string|int|\Spatie\Enum\Enumerable $value
-     *
-     * @return bool
+     * @return string
      */
-    public function isEqual($value): bool;
+    public function __toString(): string;
+
+    /**
+     * Get the current index.
+     *
+     * @return int
+     */
+    public function getIndex(): int;
+
+    /**
+     * Get all indices as array.
+     *
+     * @return int[]
+     */
+    public static function getIndices(): array;
+
+    /**
+     * Get the current value.
+     *
+     * @return string
+     */
+    public function getValue(): string;
+
+    /**
+     * Get all values as array.
+     *
+     * @return string[]
+     */
+    public static function getValues(): array;
 
     /**
      * Check if the current instance is equal with one of the given values.
@@ -32,18 +50,21 @@ interface Enumerable
     public function isAny(array $values): bool;
 
     /**
-     * Get the current index.
+     * Check if the current instance and the given value are equal.
      *
-     * @return int
+     * @param string|int|\Spatie\Enum\Enumerable $value
+     *
+     * @return bool
      */
-    public function getIndex(): int;
-
+    public function isEqual($value): bool;
     /**
-     * Get the current value.
+     * Create a valued instance of the Enum by it's value or index.
      *
-     * @return string
+     * @param string|int $value
+     *
+     * @return \Spatie\Enum\Enumerable
      */
-    public function getValue(): string;
+    public static function make($value): Enumerable;
 
     /**
      * Get the whole enum as array.
@@ -52,25 +73,4 @@ interface Enumerable
      * @return array
      */
     public static function toArray(): array;
-
-    /**
-     * Get all values as array.
-     *
-     * @return string[]
-     */
-    public static function getValues(): array;
-
-    /**
-     * Get all indices as array.
-     *
-     * @return int[]
-     */
-    public static function getIndices(): array;
-
-    /**
-     * Cast the current instance to string and get the value.
-     *
-     * @return string
-     */
-    public function __toString(): string;
 }
