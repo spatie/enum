@@ -60,7 +60,7 @@ class WeekDayEnumSpeedTest extends TestCase
         $min = $average / 2;
         $max = $average * 2;
 
-        foreach($cached->getPeriods() as $period) {
+        foreach ($cached->getPeriods() as $period) {
             $this->assertGreaterThan($min, $period->getDuration());
             $this->assertLessThan($max, $period->getDuration());
         }
