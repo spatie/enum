@@ -13,6 +13,12 @@
             "email": "brent@spatie.be",
             "homepage": "https://spatie.be",
             "role": "Developer"
+        },
+        {
+            "name": "Tom Witkowski",
+            "email": "dev.gummibeer@gmail.com",
+            "homepage": "https://gummibeer.de",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -20,8 +26,8 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "larapack/dd": "^1.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "symfony/stopwatch": "^4.2"
     },
     "autoload": {
         "psr-4": {

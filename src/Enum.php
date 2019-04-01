@@ -8,53 +8,49 @@ use TypeError;
 use ReflectionClass;
 use JsonSerializable;
 use ReflectionMethod;
+use BadMethodCallException;
+use Spatie\Enum\Exceptions\InvalidIndexException;
+use Spatie\Enum\Exceptions\InvalidValueException;
+use Spatie\Enum\Exceptions\DuplicatedIndexException;
+use Spatie\Enum\Exceptions\DuplicatedValueException;
 
-abstract class Enum implements JsonSerializable
+abstract class Enum implements Enumerable, JsonSerializable
 {
-    /** @var array */
+    /** @var array[] */
     protected static $cache = [];
 
-    /** @var array */
-    protected static $map = [];
+    /** @var int */
+    protected $index;
 
     /** @var string */
     protected $value;
 
-    /**
-     * @param string $value
-     *
-     * @return static
-     */
-    public static function from(string $value): Enum
+    public function __construct(?string $value = null, ?int $index = null)
     {
-        if (method_exists(static::class, $value)) {
-            return forward_static_call(static::class.'::'.$value);
-        }
-
-        return new static($value);
-    }
-
-    public function __construct(string $value = null)
-    {
-        if ($value === null) {
+        if (is_null($value) && is_null($index)) {
             $value = $this->resolveValueFromStaticCall();
+            $index = static::toArray()[$value];
         }
 
-        $enumValues = self::resolve();
-
-        if (isset($enumValues[strtolower($value)])) {
-            $value = $enumValues[strtolower($value)];
+        if (is_null($value) || ! static::isValidValue($value)) {
+            throw new InvalidValueException($value, static::class);
         }
 
-        if (! in_array($value, $enumValues)) {
-            throw new TypeError("Value {$value} not available in enum ".static::class);
-        }
-
-        if ($value === null) {
-            throw new TypeError("Value of enum can't be null");
+        if (is_null($index) || ! static::isValidIndex($index)) {
+            throw new InvalidIndexException($index, static::class);
         }
 
         $this->value = $value;
+        $this->index = $index;
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (strlen($name) > 2 && strpos($name, 'is') === 0) {
+            return $this->isEqual(substr($name, 2));
+        }
+
+        throw new BadMethodCallException(sprintf('Call to undefined method %s->%s()', static::class, $name));
     }
 
     public static function __callStatic($name, $arguments)
@@ -64,60 +60,45 @@ abstract class Enum implements JsonSerializable
                 throw new \ArgumentCountError(sprintf('Calling %s::%s() in static context requires one argument', static::class, $name));
             }
 
-            return static::from($arguments[0])->$name();
+            return static::make($arguments[0])->$name();
         }
 
-        if (! isset(self::resolve()[strtolower($name)])) {
-            throw new TypeError("Method {$name} not available in enum ".static::class);
+        if (static::isValidName($name) || static::isValidValue($name)) {
+            return static::make($name);
         }
 
-        return new static($name);
+        throw new BadMethodCallException(sprintf('Call to undefined method %s::%s()', static::class, $name));
     }
 
-    public function __call($name, $arguments)
+    public function __toString(): string
     {
-        if (strlen($name) > 2 && strpos($name, 'is') === 0) {
-            return $this->equals(substr($name, 2));
-        }
-
-        if (isset(self::resolve()[strtolower($name)])) {
-            return static::__callStatic($name, $arguments);
-        }
-
-        throw new \BadMethodCallException(sprintf('Call to undefined method %s->%s()', static::class, $name));
+        return $this->getValue();
     }
 
-    /**
-     * @param string|\Spatie\Enum\Enum $enum
-     *
-     * @return bool
-     */
-    public function equals($enum): bool
+    public function getIndex(): int
     {
-        if (is_string($enum)) {
-            $enum = static::from($enum);
-        }
-
-        if (! $enum instanceof $this) {
-            return false;
-        }
-
-        if ($enum->value !== $this->value) {
-            return false;
-        }
-
-        return true;
+        return $this->index;
     }
 
-    /**
-     * @param string[]|\Spatie\Enum\Enum[] $enums
-     *
-     * @return bool
-     */
-    public function isOneOf(array $enums): bool
+    public static function getIndices(): array
     {
-        foreach ($enums as $enum) {
-            if ($this->equals($enum)) {
+        return array_column(static::resolve(), 'index');
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public static function getValues(): array
+    {
+        return array_column(static::resolve(), 'value');
+    }
+
+    public function isAny(array $values): bool
+    {
+        foreach ($values as $value) {
+            if ($this->isEqual($value)) {
                 return true;
             }
         }
@@ -125,34 +106,95 @@ abstract class Enum implements JsonSerializable
         return false;
     }
 
-    public function __toString(): string
+    public function isEqual($value): bool
     {
-        return $this->value;
+        if (is_int($value) || is_string($value)) {
+            $enum = static::make($value);
+        } elseif ($value instanceof $this) {
+            $enum = $value;
+        }
+
+        if (
+            isset($enum)
+            && $enum instanceof $this
+            && $enum->getValue() === $this->getValue()
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     public function jsonSerialize()
     {
-        return $this->value;
+        return $this->getValue();
+    }
+
+    public static function make($value): Enumerable
+    {
+        if (! (is_int($value) || is_string($value))) {
+            throw new TypeError(sprintf('%s::make() expects string|int as argument but %s given', static::class, gettype($value)));
+        }
+
+        $name = null;
+        $index = null;
+
+        if (is_int($value)) {
+            if (! static::isValidIndex($value)) {
+                throw new InvalidIndexException($value, static::class);
+            }
+
+            $name = array_combine(static::getIndices(), array_keys(static::resolve()))[$value];
+            $index = $value;
+            $value = array_search($index, static::toArray());
+        } elseif (is_string($value)) {
+            if (method_exists(static::class, $value)) {
+                return forward_static_call(static::class.'::'.$value);
+            }
+
+            if (static::isValidValue($value)) {
+                $index = static::toArray()[$value];
+                $name = array_combine(static::getValues(), array_keys(static::resolve()))[$value];
+            } elseif (static::isValidName($value)) {
+                $name = $value;
+                list('value' => $value, 'index' => $index) = static::resolve()[strtoupper($name)];
+            }
+        }
+
+        if (is_string($name) && method_exists(static::class, $name)) {
+            return forward_static_call(static::class.'::'.$name);
+        } elseif (is_int($index) && is_string($value)) {
+            return new static($value, $index);
+        }
+
+        throw new InvalidValueException($value, static::class);
     }
 
     public static function toArray(): array
     {
-        return self::resolve();
+        $resolved = static::resolve();
+
+        return array_combine(array_column($resolved, 'value'), array_column($resolved, 'index'));
     }
 
-    public static function getKeys(): array
+    protected static function isValidIndex(int $index): bool
     {
-        return array_keys(self::resolve());
+        return in_array($index, static::getIndices(), true);
     }
 
-    public static function getValues(): array
+    protected static function isValidName(string $value): bool
     {
-        return array_values(self::resolve());
+        return in_array(strtoupper($value), array_keys(static::resolve()), true);
+    }
+
+    protected static function isValidValue(string $value): bool
+    {
+        return in_array($value, static::getValues(), true);
     }
 
     protected static function resolve(): array
     {
-        $enumValues = [];
+        $values = [];
 
         $class = static::class;
 
@@ -160,61 +202,95 @@ abstract class Enum implements JsonSerializable
             return self::$cache[$class];
         }
 
-        $staticReflection = new ReflectionClass(static::class);
+        self::$cache[$class] = [];
 
-        foreach (self::resolveValuesFromStaticMethods($staticReflection) as $value => $name) {
-            $enumValues[$value] = $name;
+        $reflection = new ReflectionClass(static::class);
+
+        foreach (self::resolveFromDocBlocks($reflection) as $value) {
+            $values[] = $value;
         }
 
-        foreach (self::resolveFromDocblocks($staticReflection) as $value => $name) {
-            $enumValues[$value] = $name;
+        foreach (self::resolveFromStaticMethods($reflection) as $value) {
+            $values[] = $value;
         }
 
-        return self::$cache[$class] = $enumValues;
+        foreach ($values as $index => $value) {
+            self::$cache[$class][strtoupper($value)] = [
+                'index' => $index,
+                'value' => $value,
+            ];
+        }
+
+        foreach (self::$cache[$class] as $name => $enum) {
+            self::$cache[$class][$name]['value'] = static::make($name)->getValue();
+            self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
+        }
+
+        $duplicatedValues = array_filter(array_count_values(static::getValues()), function (int $count) {
+            return $count > 1;
+        });
+        $duplicatedIndices = array_filter(array_count_values(static::getIndices()), function (int $count) {
+            return $count > 1;
+        });
+
+        if (! empty($duplicatedValues)) {
+            throw new DuplicatedValueException(array_keys($duplicatedValues), static::class);
+        }
+
+        if (! empty($duplicatedIndices)) {
+            throw new DuplicatedIndexException(array_keys($duplicatedIndices), static::class);
+        }
+
+        return self::$cache[$class];
     }
 
-    protected static function resolveValuesFromStaticMethods(ReflectionClass $staticReflection): array
+    protected static function resolveFromDocBlocks(ReflectionClass $reflection): array
     {
-        $enumValues = [];
-        foreach ($staticReflection->getMethods(ReflectionMethod::IS_STATIC) as $method) {
-            if ($method->getDeclaringClass()->getName() === self::class) {
-                continue;
-            }
+        $values = [];
 
-            $methodName = $method->getName();
-            $enumValues[strtolower($methodName)] = static::$map[$methodName] ?? $methodName;
-        }
-
-        return $enumValues;
-    }
-
-    protected static function resolveFromDocblocks(ReflectionClass $staticReflection): array
-    {
-        $enumValues = [];
-
-        $docComment = $staticReflection->getDocComment();
+        $docComment = $reflection->getDocComment();
 
         if (! $docComment) {
-            return $enumValues;
+            return $values;
         }
 
         preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $matches);
 
-        foreach ($matches[1] ?? [] as $valueName) {
-            $enumValues[strtolower($valueName)] = static::$map[$valueName] ?? $valueName;
+        foreach ($matches[1] ?? [] as $value) {
+            $values[] = $value;
         }
 
-        return $enumValues;
+        return $values;
     }
 
-    protected function resolveValueFromStaticCall(): ?string
+    protected static function resolveFromStaticMethods(ReflectionClass $reflection): array
     {
+        $values = [];
+        foreach ($reflection->getMethods(ReflectionMethod::IS_STATIC) as $method) {
+            if ($method->getDeclaringClass()->getName() === self::class) {
+                continue;
+            }
+
+            $values[] = $method->getName();
+        }
+
+        return $values;
+    }
+
+    protected function resolveValueFromStaticCall(): string
+    {
+        $name = null;
+
         if (strpos(get_class($this), 'class@anonymous') === 0) {
             $backtrace = debug_backtrace();
 
-            return $backtrace[2]['function'];
+            $name = $backtrace[2]['function'];
+
+            if (static::isValidName($name)) {
+                return static::resolve()[strtoupper($name)]['value'];
+            }
         }
 
-        return null;
+        throw new InvalidValueException($name, static::class);
     }
 }

@@ -1,0 +1,76 @@
+<?php
+
+namespace Spatie\Enum;
+
+interface Enumerable
+{
+    /**
+     * Cast the current instance to string and get the value.
+     *
+     * @return string
+     */
+    public function __toString(): string;
+
+    /**
+     * Get the current index.
+     *
+     * @return int
+     */
+    public function getIndex(): int;
+
+    /**
+     * Get all indices as array.
+     *
+     * @return int[]
+     */
+    public static function getIndices(): array;
+
+    /**
+     * Get the current value.
+     *
+     * @return string
+     */
+    public function getValue(): string;
+
+    /**
+     * Get all values as array.
+     *
+     * @return string[]
+     */
+    public static function getValues(): array;
+
+    /**
+     * Check if the current instance is equal with one of the given values.
+     *
+     * @param string[]|int[]|\Spatie\Enum\Enumerable[] $values
+     *
+     * @return bool
+     */
+    public function isAny(array $values): bool;
+
+    /**
+     * Check if the current instance and the given value are equal.
+     *
+     * @param string|int|\Spatie\Enum\Enumerable $value
+     *
+     * @return bool
+     */
+    public function isEqual($value): bool;
+
+    /**
+     * Create a valued instance of the Enum by it's value or index.
+     *
+     * @param string|int $value
+     *
+     * @return \Spatie\Enum\Enumerable
+     */
+    public static function make($value): Enumerable;
+
+    /**
+     * Get the whole enum as array.
+     * value => index.
+     *
+     * @return array
+     */
+    public static function toArray(): array;
+}

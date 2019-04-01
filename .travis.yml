@@ -12,9 +12,12 @@ env:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - composer require --dev scrutinizer/ocular --no-interaction
+  - composer require --dev php-coveralls/php-coveralls --no-interaction
 
 script:
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - vendor/bin/phpunit
 
 after_script:
-  - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
+  - php vendor/bin/ocular code-coverage:upload --format=php-clover build/coverage.clover
+  - php vendor/bin/php-coveralls
