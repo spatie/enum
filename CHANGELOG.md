@@ -2,7 +2,7 @@
 
 All notable changes to `enum` will be documented in this file
 
-## 2.0.0 - 2019-xx-xx
+## 2.0.0 - 2019-04-01
 
 A full major rework of the `Enum` class - we try to list all changes, for more details you can check out the [PR](https://github.com/spatie/enum/pull/18) and the [Issue](https://github.com/spatie/enum/issues/10).
 
