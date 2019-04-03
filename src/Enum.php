@@ -217,7 +217,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         });
 
         if (! empty($duplicatedValues)) {
-            unset(self::$cache[$class]);
+            self::clearCache();
             throw new DuplicatedValueException(array_keys($duplicatedValues), static::class);
         }
 
@@ -226,7 +226,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         });
 
         if (! empty($duplicatedIndices)) {
-            unset(self::$cache[$class]);
+            self::clearCache();
             throw new DuplicatedIndexException(array_keys($duplicatedIndices), static::class);
         }
 
@@ -309,5 +309,10 @@ abstract class Enum implements Enumerable, JsonSerializable
     protected static function startsWith(string $haystack, string $needle)
     {
         return strlen($haystack) > 2 && strpos($haystack, $needle) === 0;
+    }
+
+    protected static function clearCache()
+    {
+        unset(self::$cache[static::class]);
     }
 }
