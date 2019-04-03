@@ -214,15 +214,18 @@ abstract class Enum implements Enumerable, JsonSerializable
         $duplicatedValues = array_filter(array_count_values(static::getValues()), function (int $count) {
             return $count > 1;
         });
+
+        if (! empty($duplicatedValues)) {
+            unset(self::$cache[$class]);
+            throw new DuplicatedValueException(array_keys($duplicatedValues), static::class);
+        }
+
         $duplicatedIndices = array_filter(array_count_values(static::getIndices()), function (int $count) {
             return $count > 1;
         });
 
-        if (! empty($duplicatedValues)) {
-            throw new DuplicatedValueException(array_keys($duplicatedValues), static::class);
-        }
-
         if (! empty($duplicatedIndices)) {
+            unset(self::$cache[$class]);
             throw new DuplicatedIndexException(array_keys($duplicatedIndices), static::class);
         }
 
