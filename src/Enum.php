@@ -138,11 +138,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
             [$name, $index, $value] = static::resolveByIndex($value);
         } elseif (is_string($value)) {
-            if (static::isValidValue($value)) {
-                [$name, $index, $value] = static::resolveByValue($value);
-            } elseif (static::isValidName($value)) {
-                [$name, $index, $value] = static::resolveByName($value);
-            }
+            [$name, $index, $value] = static::resolveByString($value);
         }
 
         if (is_string($name) && method_exists(static::class, $name)) {
@@ -289,6 +285,17 @@ abstract class Enum implements Enumerable, JsonSerializable
         $value = array_search($index, static::toArray());
 
         return [$name, $index, $value];
+    }
+
+    protected static function resolveByString(string $string): array
+    {
+        if (static::isValidValue($string)) {
+            return static::resolveByValue($string);
+        }
+
+        if (static::isValidName($string)) {
+            return static::resolveByName($string);
+        }
     }
 
     protected static function resolveByValue(string $value): array
