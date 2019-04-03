@@ -44,7 +44,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public function __call($name, $arguments)
     {
-        if (strlen($name) > 2 && strpos($name, 'is') === 0) {
+        if (static::startsWith($name, 'is')) {
             return $this->isEqual(substr($name, 2));
         }
 
@@ -53,7 +53,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function __callStatic($name, $arguments)
     {
-        if (strlen($name) > 2 && strpos($name, 'is') === 0) {
+        if (static::startsWith($name, 'is')) {
             if (! isset($arguments[0])) {
                 throw new ArgumentCountError('Calling '.static::class.'::'.$name.'() in static context requires one argument');
             }
@@ -304,5 +304,10 @@ abstract class Enum implements Enumerable, JsonSerializable
         ['value' => $value, 'index' => $index] = static::resolve()[strtoupper($name)];
 
         return [$name, $index, $value];
+    }
+
+    protected static function startsWith(string $haystack, string $needle)
+    {
+        return strlen($haystack) > 2 && strpos($haystack, $needle) === 0;
     }
 }
