@@ -48,14 +48,14 @@ abstract class Enum implements Enumerable, JsonSerializable
             return $this->isEqual(substr($name, 2));
         }
 
-        throw new BadMethodCallException(sprintf('Call to undefined method %s->%s()', static::class, $name));
+        throw new BadMethodCallException('Call to undefined method '.static::class.'->'.$name.'()');
     }
 
     public static function __callStatic($name, $arguments)
     {
         if (strlen($name) > 2 && strpos($name, 'is') === 0) {
             if (! isset($arguments[0])) {
-                throw new \ArgumentCountError(sprintf('Calling %s::%s() in static context requires one argument', static::class, $name));
+                throw new \ArgumentCountError('Calling '.static::class.'::'.$name.'() in static context requires one argument');
             }
 
             return static::make($arguments[0])->$name();
@@ -65,7 +65,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return static::make($name);
         }
 
-        throw new BadMethodCallException(sprintf('Call to undefined method %s::%s()', static::class, $name));
+        throw new BadMethodCallException('Call to undefined method '.static::class.'::'.$name.'()');
     }
 
     public function __toString(): string
@@ -131,7 +131,7 @@ abstract class Enum implements Enumerable, JsonSerializable
     public static function make($value): Enumerable
     {
         if (! (is_int($value) || is_string($value))) {
-            throw new TypeError(sprintf('%s::make() expects string|int as argument but %s given', static::class, gettype($value)));
+            throw new TypeError(static::class.'::make() expects string|int as argument but '.gettype($value).' given');
         }
 
         $name = null;
