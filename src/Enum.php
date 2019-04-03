@@ -6,6 +6,7 @@ use TypeError;
 use ReflectionClass;
 use JsonSerializable;
 use ReflectionMethod;
+use ArgumentCountError;
 use BadMethodCallException;
 use Spatie\Enum\Exceptions\InvalidIndexException;
 use Spatie\Enum\Exceptions\InvalidValueException;
@@ -54,7 +55,7 @@ abstract class Enum implements Enumerable, JsonSerializable
     {
         if (strlen($name) > 2 && strpos($name, 'is') === 0) {
             if (! isset($arguments[0])) {
-                throw new \ArgumentCountError('Calling '.static::class.'::'.$name.'() in static context requires one argument');
+                throw new ArgumentCountError('Calling '.static::class.'::'.$name.'() in static context requires one argument');
             }
 
             return static::make($arguments[0])->$name();
