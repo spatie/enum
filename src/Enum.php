@@ -26,7 +26,7 @@ abstract class Enum implements Enumerable, JsonSerializable
     public function __construct(?string $value = null, ?int $index = null)
     {
         if (is_null($value) && is_null($index)) {
-            list('value' => $value, 'index' => $index) = $this->resolveByStaticCall();
+            ['value' => $value, 'index' => $index] = $this->resolveByStaticCall();
         }
 
         if (is_null($value) || ! static::isValidValue($value)) {
@@ -135,12 +135,12 @@ abstract class Enum implements Enumerable, JsonSerializable
                 throw new InvalidIndexException($value, static::class);
             }
 
-            list($name, $index, $value) = static::resolveByIndex($value);
+            [$name, $index, $value] = static::resolveByIndex($value);
         } elseif (is_string($value)) {
             if (static::isValidValue($value)) {
-                list($name, $index, $value) = static::resolveByValue($value);
+                [$name, $index, $value] = static::resolveByValue($value);
             } elseif (static::isValidName($value)) {
-                list($name, $index, $value) = static::resolveByName($value);
+                [$name, $index, $value] = static::resolveByName($value);
             }
         }
 
@@ -300,7 +300,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function resolveByName(string $name): array
     {
-        list('value' => $value, 'index' => $index) = static::resolve()[strtoupper($name)];
+        ['value' => $value, 'index' => $index] = static::resolve()[strtoupper($name)];
 
         return [$name, $index, $value];
     }
