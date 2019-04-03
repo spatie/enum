@@ -296,6 +296,8 @@ abstract class Enum implements Enumerable, JsonSerializable
         if (static::isValidName($string)) {
             return static::resolveByName($string);
         }
+
+        throw new InvalidValueException($string, static::class);
     }
 
     protected static function resolveByValue(string $value): array
