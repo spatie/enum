@@ -123,7 +123,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function make($value): Enumerable
     {
-        if (!is_int($value) && !is_string($value)) {
+        if (! is_int($value) && ! is_string($value)) {
             throw new TypeError(static::class.'::make() expects string|int as argument but '.gettype($value).' given');
         }
 
@@ -272,7 +272,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         $name = $backtrace[2]['function'];
 
-        if (!static::isValidName($name)) {
+        if (! static::isValidName($name)) {
             throw new InvalidValueException($name, static::class);
         }
 
