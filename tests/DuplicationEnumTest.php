@@ -27,7 +27,7 @@ class DuplicationEnumTest extends TestCase
 
         try {
             DuplicatedValueEnum::toArray();
-        } catch(DuplicatedValueException $exception) {
+        } catch (DuplicatedValueException $exception) {
             // ignore
         }
 
@@ -51,7 +51,7 @@ class DuplicationEnumTest extends TestCase
 
         try {
             DuplicatedIndexEnum::toArray();
-        } catch(DuplicatedIndexException $exception) {
+        } catch (DuplicatedIndexException $exception) {
             // ignore
         }
 
