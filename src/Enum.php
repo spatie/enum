@@ -145,11 +145,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return forward_static_call(static::class.'::'.$name);
         }
 
-        if (is_int($index) && is_string($value)) {
-            return new static($value, $index);
-        }
-
-        throw new InvalidValueException($value, static::class);
+        return new static($value, $index);
     }
 
     public static function toArray(): array
