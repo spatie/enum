@@ -166,6 +166,70 @@ This package also supports these enum specific methods.
 
 By declaring the enum class itself as abstract, and using static constructors instead of doc comments, you're able to return an anonymous class per enum, each of them implementing the required methods.
 
+### Laravel support
+
+Chances are that if you're working in a Laravel project, you'll want to use enums within your models.
+This package provides a trait you can use in these models, 
+to allow allow automatic casting between stored enum values and enum objects. 
+
+```php
+use Spatie\Enum\HasEnums;
+
+final class TestModel extends Model
+{
+    use HasEnums;
+
+    protected $enums = [
+        'status' => TestModelStatus::class,
+    ];
+}
+```
+
+By using the `HasEnums` trait, you'll be able to work with the `status` field like so:
+
+```php
+$model = TestModel::create([
+    'status' => StatusEnum::DRAFT(),
+]);
+
+// …
+
+$model->status = StatusEnum::PUBLISHED();
+
+// …
+
+$model->status->isEqual(StatusEnum::ARCHIVED());
+``` 
+
+In some cases, enums can be stored differently in the database. 
+Take for example a legacy application.
+
+By using the `HasEnums` trait, you can provide a mapping on your enum classes:
+
+```php
+/**
+ * @method static self DRAFT()
+ * @method static self PUBLISHED()
+ * @method static self ARCHIVED()
+ */
+final class StatusEnum extends Enum
+{
+    public static $map = [
+        'archived' => 'legacy archived value',
+    ];
+}
+```
+
+Once a mapping is provided and the trait is used in your model, 
+the package will automatically handle it for you.
+
+#### Further Laravel integration:
+
+There are some more Laravel things we'll be adding in the future.
+
+- [ ] Allow the mapping to also be defined as a function, resulting in even more flexibility.
+- [ ] Add `whereEnum('field', Enum $enum)` scope, which will also take the mapping into account.
+
 ### Testing
 
 ``` bash
