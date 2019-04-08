@@ -2,8 +2,8 @@
 
 namespace Spatie\Enum\Tests\Laravel;
 
-use Spatie\Enum\Exceptions\InvalidEnumError;
 use stdClass;
+use Spatie\Enum\Exceptions\InvalidEnumError;
 
 final class ModelEnumTest extends LaravelTestCase
 {

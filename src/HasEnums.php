@@ -51,7 +51,7 @@ trait HasEnums
 
         try {
             $enumObject = forward_static_call_array(
-                $enumClass . '::make',
+                $enumClass.'::make',
                 [$storedEnumValue]
             );
         } catch (InvalidValueException $exception) {
@@ -62,7 +62,7 @@ trait HasEnums
             }
 
             $enumObject = forward_static_call_array(
-                $enumClass . '::make',
+                $enumClass.'::make',
                 [$mappedEnumValue]
             );
         }
