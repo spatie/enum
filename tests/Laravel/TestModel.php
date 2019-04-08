@@ -2,8 +2,8 @@
 
 namespace Spatie\Enum\Tests\Laravel;
 
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Enum\HasEnums;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property \Spatie\Enum\Tests\Laravel\TestModelStatus status
