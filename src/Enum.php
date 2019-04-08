@@ -122,6 +122,11 @@ abstract class Enum implements Enumerable, JsonSerializable
         return $this->getValue();
     }
 
+    /**
+     * @param int|string $value
+     *
+     * @return static
+     */
     public static function make($value): Enumerable
     {
         if (! is_int($value) && ! is_string($value)) {
