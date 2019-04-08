@@ -1,11 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Spatie\Enum\OldTests;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\Enums\WeekDayEnum;
+use Spatie\Enum\Exceptions\InvalidValueException;
 
 class WeekDayEnumTest extends TestCase
 {
@@ -89,5 +88,21 @@ class WeekDayEnumTest extends TestCase
             6,
             7,
         ], WeekDayEnum::getIndices());
+    }
+
+    /** @test */
+    public function can_not_resolve_from_anonymous_class_without_surrounding_method()
+    {
+        $this->expectException(InvalidValueException::class);
+
+        canNotResolveFromAnonymousClassWithoutSurroundingMethod();
+    }
+}
+
+if (! function_exists('canNotResolveFromAnonymousClassWithoutSurroundingMethod')) {
+    function canNotResolveFromAnonymousClassWithoutSurroundingMethod()
+    {
+        return new class() extends WeekDayEnum {
+        };
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Spatie\Enum\Tests\Enums;
 
 use Spatie\Enum\Enum;
