@@ -2,13 +2,13 @@
 
 namespace Spatie\Enum;
 
-use Spatie\Enum\Exceptions\InvalidNameException;
 use TypeError;
 use ReflectionClass;
 use JsonSerializable;
 use ReflectionMethod;
 use ArgumentCountError;
 use BadMethodCallException;
+use Spatie\Enum\Exceptions\InvalidNameException;
 use Spatie\Enum\Exceptions\InvalidIndexException;
 use Spatie\Enum\Exceptions\InvalidValueException;
 use Spatie\Enum\Exceptions\DuplicatedIndexException;
@@ -350,7 +350,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function getIndexMap(): array
     {
-        if(!defined(static::class.'::MAP_INDEX')) {
+        if (! defined(static::class.'::MAP_INDEX')) {
             return [];
         }
 
@@ -359,7 +359,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function getValueMap(): array
     {
-        if(!defined(static::class.'::MAP_VALUE')) {
+        if (! defined(static::class.'::MAP_VALUE')) {
             return [];
         }
 

@@ -4,7 +4,6 @@ namespace Spatie\Enum\OldTests;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\Enums\WeekDaySimpleEnum;
-use Spatie\Enum\Exceptions\InvalidValueException;
 
 class WeekDaySimpleEnumTest extends TestCase
 {
