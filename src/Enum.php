@@ -224,8 +224,8 @@ abstract class Enum implements Enumerable, JsonSerializable
         }
 
         foreach (self::$cache[$class] as $name => $enum) {
-            self::$cache[$class][$name]['value'] = static::make($name)->getValue();
-            self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
+            self::$cache[$class][$name]['value'] = strval(static::getValueMap()[$name] ?? static::make($name)->getValue());
+            self::$cache[$class][$name]['index'] = intval(static::getIndexMap()[$name] ?? static::make($name)->getIndex());
         }
 
         $duplicatedValues = array_filter(array_count_values(static::getValues()), function (int $count) {
@@ -346,5 +346,23 @@ abstract class Enum implements Enumerable, JsonSerializable
     protected static function clearCache()
     {
         unset(self::$cache[static::class]);
+    }
+
+    protected static function getIndexMap(): array
+    {
+        if(!defined(static::class.'::MAP_INDEX')) {
+            return [];
+        }
+
+        return constant(static::class.'::MAP_INDEX');
+    }
+
+    protected static function getValueMap(): array
+    {
+        if(!defined(static::class.'::MAP_VALUE')) {
+            return [];
+        }
+
+        return constant(static::class.'::MAP_VALUE');
     }
 }
