@@ -15,6 +15,7 @@ class MonthEnumTest extends TestCase
         $this->assertInstanceOf(MonthEnum::class, $january);
         $this->assertSame(1, $january->getIndex());
         $this->assertSame('january', $january->getValue());
+        $this->assertSame('JANUARY', $january->getName());
     }
 
     /** @test */
@@ -25,6 +26,7 @@ class MonthEnumTest extends TestCase
         $this->assertInstanceOf(MonthEnum::class, $february);
         $this->assertSame(2, $february->getIndex());
         $this->assertSame('february', $february->getValue());
+        $this->assertSame('FEBRUARY', $february->getName());
     }
 
     /** @test */
@@ -35,6 +37,7 @@ class MonthEnumTest extends TestCase
         $this->assertInstanceOf(MonthEnum::class, $march);
         $this->assertSame(3, $march->getIndex());
         $this->assertSame('march', $march->getValue());
+        $this->assertSame('MARCH', $march->getName());
     }
 
     /** @test */

@@ -16,6 +16,7 @@ class WeekDayEnumTest extends TestCase
         $this->assertInstanceOf(WeekDayEnum::class, $monday);
         $this->assertSame(1, $monday->getIndex());
         $this->assertSame('Montag', $monday->getValue());
+        $this->assertSame('MONDAY', $monday->getName());
     }
 
     /** @test */
@@ -26,6 +27,7 @@ class WeekDayEnumTest extends TestCase
         $this->assertInstanceOf(WeekDayEnum::class, $tuesday);
         $this->assertSame(2, $tuesday->getIndex());
         $this->assertSame('Dienstag', $tuesday->getValue());
+        $this->assertSame('TUESDAY', $tuesday->getName());
     }
 
     /** @test */
@@ -36,6 +38,7 @@ class WeekDayEnumTest extends TestCase
         $this->assertInstanceOf(WeekDayEnum::class, $wednesday);
         $this->assertSame(3, $wednesday->getIndex());
         $this->assertSame('Mittwoch', $wednesday->getValue());
+        $this->assertSame('WEDNESDAY', $wednesday->getName());
     }
 
     /** @test */
@@ -46,6 +49,7 @@ class WeekDayEnumTest extends TestCase
         $this->assertInstanceOf(WeekDayEnum::class, $thursday);
         $this->assertSame(4, $thursday->getIndex());
         $this->assertSame('Donnerstag', $thursday->getValue());
+        $this->assertSame('THURSDAY', $thursday->getName());
     }
 
     /** @test */
