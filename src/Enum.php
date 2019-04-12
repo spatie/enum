@@ -357,7 +357,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return null;
         }
 
-        if(! isset(self::$maps[static::class]['index'])) {
+        if (! isset(self::$maps[static::class]['index'])) {
             $map = [];
 
             foreach (constant(static::class.'::MAP_INDEX') as $key => $index) {
@@ -376,7 +376,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return null;
         }
 
-        if(! isset(self::$maps[static::class]['value'])) {
+        if (! isset(self::$maps[static::class]['value'])) {
             $map = [];
 
             foreach (constant(static::class.'::MAP_VALUE') as $key => $index) {
