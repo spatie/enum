@@ -62,6 +62,20 @@ class WeekDaySimpleEnumTest extends TestCase
     }
 
     /** @test */
+    public function can_represent_its_names_as_array()
+    {
+        $this->assertEquals([
+            'MONDAY',
+            'TUESDAY',
+            'WEDNESDAY',
+            'THURSDAY',
+            'FRIDAY',
+            'SATURDAY',
+            'SUNDAY',
+        ], WeekDaySimpleEnum::getNames());
+    }
+
+    /** @test */
     public function can_represent_its_values_as_array()
     {
         $this->assertEquals([

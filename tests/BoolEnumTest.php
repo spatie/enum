@@ -108,6 +108,15 @@ class BoolEnumTest extends TestCase
     }
 
     /** @test */
+    public function can_represent_its_names_as_array()
+    {
+        $this->assertEquals([
+            'FALSE',
+            'TRUE',
+        ], BoolEnum::getNames());
+    }
+
+    /** @test */
     public function can_represent_its_values_as_array()
     {
         $this->assertEquals([
