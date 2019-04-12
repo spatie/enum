@@ -217,15 +217,17 @@ abstract class Enum implements Enumerable, JsonSerializable
         }
 
         foreach ($values as $index => $value) {
-            self::$cache[$class][strtoupper($value)] = [
-                'index' => $index,
-                'value' => $value,
+            $name = strtoupper($value);
+
+            self::$cache[$class][$name] = [
+                'index' => static::getMappedIndex($name) ?? $index,
+                'value' => static::getMappedValue($name) ?? $value,
             ];
         }
 
         foreach (self::$cache[$class] as $name => $enum) {
-            self::$cache[$class][$name]['value'] = static::getMappedValue($name) ?? static::make($name)->getValue();
-            self::$cache[$class][$name]['index'] = static::getMappedIndex($name) ?? static::make($name)->getIndex();
+            self::$cache[$class][$name]['value'] = static::make($name)->getValue();
+            self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
         }
 
         $duplicatedValues = array_filter(array_count_values(static::getValues()), function (int $count) {
