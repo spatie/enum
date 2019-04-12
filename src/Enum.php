@@ -220,6 +220,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             $name = strtoupper($value);
 
             self::$cache[$class][$name] = [
+                'name' => $name,
                 'index' => static::getMappedIndex($name) ?? $index,
                 'value' => static::getMappedValue($name) ?? $value,
             ];
@@ -298,10 +299,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             throw new InvalidValueException($name, static::class);
         }
 
-        $resolved = static::resolve()[strtoupper($name)];
-        $resolved['name'] = strtoupper($name);
-
-        return $resolved;
+        return static::resolve()[strtoupper($name)];
     }
 
     protected static function resolveByIndex(int $index): array
