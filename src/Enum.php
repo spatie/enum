@@ -2,6 +2,7 @@
 
 namespace Spatie\Enum;
 
+use Spatie\Enum\Exceptions\InvalidNameException;
 use TypeError;
 use ReflectionClass;
 use JsonSerializable;
@@ -24,10 +25,17 @@ abstract class Enum implements Enumerable, JsonSerializable
     /** @var string */
     protected $value;
 
-    public function __construct(?string $value = null, ?int $index = null)
+    /** @var string */
+    protected $name;
+
+    public function __construct(?string $name = null, ?string $value = null, ?int $index = null)
     {
-        if (is_null($value) && is_null($index)) {
-            ['value' => $value, 'index' => $index] = $this->resolveByStaticCall();
+        if (is_null($name) && is_null($value) && is_null($index)) {
+            ['name' => $name, 'value' => $value, 'index' => $index] = $this->resolveByStaticCall();
+        }
+
+        if (is_null($name) || ! static::isValidName($name)) {
+            throw new InvalidNameException($name, static::class);
         }
 
         if (is_null($value) || ! static::isValidValue($value)) {
@@ -38,6 +46,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             throw new InvalidIndexException($index, static::class);
         }
 
+        $this->name = $name;
         $this->value = $value;
         $this->index = $index;
     }
@@ -91,6 +100,16 @@ abstract class Enum implements Enumerable, JsonSerializable
     public static function getValues(): array
     {
         return array_column(static::resolve(), 'value');
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public static function getNames(): array
+    {
+        return array_keys(static::resolve());
     }
 
     public function isAny(array $values): bool
@@ -150,7 +169,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             return forward_static_call(static::class.'::'.$name);
         }
 
-        return new static($value, $index);
+        return new static($name, $value, $index);
     }
 
     public static function toArray(): array
@@ -167,7 +186,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function isValidName(string $value): bool
     {
-        return in_array(strtoupper($value), array_keys(static::resolve()), true);
+        return in_array(strtoupper($value), static::getNames(), true);
     }
 
     protected static function isValidValue(string $value): bool
@@ -277,12 +296,15 @@ abstract class Enum implements Enumerable, JsonSerializable
             throw new InvalidValueException($name, static::class);
         }
 
-        return static::resolve()[strtoupper($name)];
+        $resolved = static::resolve()[strtoupper($name)];
+        $resolved['name'] = strtoupper($name);
+
+        return $resolved;
     }
 
     protected static function resolveByIndex(int $index): array
     {
-        $name = array_combine(static::getIndices(), array_keys(static::resolve()))[$index];
+        $name = array_combine(static::getIndices(), static::getNames())[$index];
         $value = array_search($index, static::toArray());
 
         return [$name, $index, $value];
@@ -304,7 +326,7 @@ abstract class Enum implements Enumerable, JsonSerializable
     protected static function resolveByValue(string $value): array
     {
         $index = static::toArray()[$value];
-        $name = array_combine(static::getValues(), array_keys(static::resolve()))[$value];
+        $name = array_combine(static::getValues(), static::getNames())[$value];
 
         return [$name, $index, $value];
     }
