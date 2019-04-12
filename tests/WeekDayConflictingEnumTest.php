@@ -43,11 +43,11 @@ class WeekDayConflictingEnumTest extends TestCase
     /** @test */
     public function can_make_instance_from_index()
     {
-        $thursday = WeekDayConflictingEnum::make(40);
+        $thursday = WeekDayConflictingEnum::make(4);
 
         $this->assertInstanceOf(WeekDayConflictingEnum::class, $thursday);
-        $this->assertSame(40, $thursday->getIndex());
-        $this->assertSame('jeudi', $thursday->getValue());
+        $this->assertSame(4, $thursday->getIndex());
+        $this->assertSame('Donnerstag', $thursday->getValue());
         $this->assertSame('THURSDAY', $thursday->getName());
     }
 
@@ -55,10 +55,10 @@ class WeekDayConflictingEnumTest extends TestCase
     public function can_represent_itself_as_array()
     {
         $this->assertEquals([
+            'Donnerstag' => 4,
             'lundi' => 10,
             'mardi' => 20,
             'mercredi' => 30,
-            'jeudi' => 40,
             'vendredi' => 50,
             'samedi' => 60,
             'dimanche' => 70,
@@ -69,10 +69,10 @@ class WeekDayConflictingEnumTest extends TestCase
     public function can_represent_its_values_as_array()
     {
         $this->assertEquals([
+            'Donnerstag',
             'lundi',
             'mardi',
             'mercredi',
-            'jeudi',
             'vendredi',
             'samedi',
             'dimanche',
@@ -83,10 +83,10 @@ class WeekDayConflictingEnumTest extends TestCase
     public function can_represent_its_names_as_array()
     {
         $this->assertEquals([
+            'THURSDAY',
             'MONDAY',
             'TUESDAY',
             'WEDNESDAY',
-            'THURSDAY',
             'FRIDAY',
             'SATURDAY',
             'SUNDAY',
@@ -97,10 +97,10 @@ class WeekDayConflictingEnumTest extends TestCase
     public function can_represent_its_indices_as_array()
     {
         $this->assertEquals([
+            4,
             10,
             20,
             30,
-            40,
             50,
             60,
             70,

@@ -4,7 +4,10 @@ namespace Spatie\Enum\Tests\Enums;
 
 use Spatie\Enum\Enum;
 
-abstract class WeekDayConflictingEnum extends Enum
+/**
+ * @method static self thursday()
+ */
+class WeekDayConflictingEnum extends Enum
 {
     const MAP_INDEX = [
         'monday' => 1,
@@ -67,21 +70,6 @@ abstract class WeekDayConflictingEnum extends Enum
             public function getValue(): string
             {
                 return 'mercredi';
-            }
-        };
-    }
-
-    public static function thursday(): WeekDayConflictingEnum
-    {
-        return new class() extends WeekDayConflictingEnum {
-            public function getIndex(): int
-            {
-                return 40;
-            }
-
-            public function getValue(): string
-            {
-                return 'jeudi';
             }
         };
     }
