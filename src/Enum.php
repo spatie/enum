@@ -224,8 +224,8 @@ abstract class Enum implements Enumerable, JsonSerializable
         }
 
         foreach (self::$cache[$class] as $name => $enum) {
-            self::$cache[$class][$name]['value'] = strval(static::getValueMap()[$name] ?? static::make($name)->getValue());
-            self::$cache[$class][$name]['index'] = intval(static::getIndexMap()[$name] ?? static::make($name)->getIndex());
+            self::$cache[$class][$name]['value'] = static::getMappedValue($name) ?? static::make($name)->getValue();
+            self::$cache[$class][$name]['index'] = static::getMappedIndex($name) ?? static::make($name)->getIndex();
         }
 
         $duplicatedValues = array_filter(array_count_values(static::getValues()), function (int $count) {
@@ -348,21 +348,21 @@ abstract class Enum implements Enumerable, JsonSerializable
         unset(self::$cache[static::class]);
     }
 
-    protected static function getIndexMap(): array
+    protected static function getMappedIndex(string $name): ?int
     {
         if (! defined(static::class.'::MAP_INDEX')) {
-            return [];
+            return null;
         }
 
-        return constant(static::class.'::MAP_INDEX');
+        return constant(static::class.'::MAP_INDEX')[$name] ?? null;
     }
 
-    protected static function getValueMap(): array
+    protected static function getMappedValue(string $name): ?string
     {
         if (! defined(static::class.'::MAP_VALUE')) {
-            return [];
+            return null;
         }
 
-        return constant(static::class.'::MAP_VALUE');
+        return constant(static::class.'::MAP_VALUE')[$name] ?? null;
     }
 }
