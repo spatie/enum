@@ -31,6 +31,17 @@ abstract class Enum implements Enumerable, JsonSerializable
     /** @var string */
     protected $name;
 
+    /**
+     * This construct is not part of the public API and COULD change in a minor release.
+     * You SHOULD NOT use it by your own - instead you SHOULD use the make() method.
+     *
+     * @internal
+     * @see \Spatie\Enum\Enum::make()
+     *
+     * @param string|null $name
+     * @param string|null $value
+     * @param int|null $index
+     */
     public function __construct(?string $name = null, ?string $value = null, ?int $index = null)
     {
         if (is_null($name) && is_null($value) && is_null($index)) {
