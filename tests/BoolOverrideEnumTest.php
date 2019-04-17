@@ -2,8 +2,8 @@
 
 namespace Spatie\Enum\OldTests;
 
-use Spatie\Enum\Tests\Enums\BoolOverrideEnum;
 use PHPUnit\Framework\TestCase;
+use Spatie\Enum\Tests\Enums\BoolOverrideEnum;
 
 class BoolOverrideEnumTest extends TestCase
 {

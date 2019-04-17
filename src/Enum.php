@@ -283,7 +283,7 @@ abstract class Enum implements Enumerable, JsonSerializable
     protected static function resolveFromStaticMethods(ReflectionClass $reflection): array
     {
         $selfReflection = new ReflectionClass(self::class);
-        $selfMethods = array_map(function(ReflectionMethod $method) {
+        $selfMethods = array_map(function (ReflectionMethod $method) {
             return $method->getName();
         }, $selfReflection->getMethods(ReflectionMethod::IS_STATIC | ReflectionMethod::IS_PUBLIC));
 
