@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.1.0 - 2019-04-17
+
+- add enum map index and value `Enum::MAP_INDEX` and `Enum::MAP_VALUE` [#25](https://github.com/spatie/enum/pull/25)
+
 ## 2.0.1 - 2019-04-08
 
 - Improved static analysis support for `::make`
