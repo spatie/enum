@@ -24,6 +24,7 @@ A full major rework of the `Enum` class - we try to list all changes, for more d
 - Rename `\Spatie\Enum\Enum::equals()` to `\Spatie\Enum\Enum::isEqual()`
 - Rename `\Spatie\Enum\Enum::isOneOf()` to `\Spatie\Enum\Enum::isAny()`
 - Change `\Spatie\Enum\Enum->__construct()` signature and responsibility - only take index & value and validate them
+- Change `\Spatie\Enum\Enum::toArray()` return value instead of an array of `value => name` it returns `value => index`
 - Drop recursive `\Spatie\Enum\Enum::make()` support from inside of an unstatic method
 - Drop `\Spatie\Enum\Enum::$map` in favor of `\Spatie\Enum\Enum->getIndex()`and `\Spatie\Enum\Enum->getValue()`
 - Update all methods have strict type checks: `index: int` and `value: string`
