@@ -19,9 +19,6 @@ abstract class Enum implements Enumerable, JsonSerializable
     /** @var array[] */
     protected static $cache = [];
 
-    /** @var array[] */
-    protected static $maps = [];
-
     /** @var int */
     protected $index;
 
@@ -368,17 +365,13 @@ abstract class Enum implements Enumerable, JsonSerializable
             return null;
         }
 
-        if (! isset(self::$maps[static::class]['index'])) {
-            $map = [];
+        $map = [];
 
-            foreach (constant(static::class.'::MAP_INDEX') as $key => $index) {
-                $map[strtoupper($key)] = $index;
-            }
-
-            self::$maps[static::class]['index'] = $map;
+        foreach (constant(static::class.'::MAP_INDEX') as $key => $index) {
+            $map[strtoupper($key)] = $index;
         }
 
-        return self::$maps[static::class]['index'][$name] ?? null;
+        return $map[$name] ?? null;
     }
 
     protected static function getMappedValue(string $name): ?string
@@ -387,16 +380,12 @@ abstract class Enum implements Enumerable, JsonSerializable
             return null;
         }
 
-        if (! isset(self::$maps[static::class]['value'])) {
-            $map = [];
+        $map = [];
 
-            foreach (constant(static::class.'::MAP_VALUE') as $key => $index) {
-                $map[strtoupper($key)] = $index;
-            }
-
-            self::$maps[static::class]['value'] = $map;
+        foreach (constant(static::class.'::MAP_VALUE') as $key => $index) {
+            $map[strtoupper($key)] = $index;
         }
 
-        return self::$maps[static::class]['value'][$name] ?? null;
+        return $map[$name] ?? null;
     }
 }
