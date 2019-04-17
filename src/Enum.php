@@ -185,9 +185,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function toArray(): array
     {
-        $resolved = static::resolve();
-
-        return array_combine(array_column($resolved, 'value'), array_column($resolved, 'index'));
+        return array_combine(static::getValues(), static::getIndices());
     }
 
     protected static function isValidIndex(int $index): bool
