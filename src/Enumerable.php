@@ -40,6 +40,20 @@ interface Enumerable
     public static function getValues(): array;
 
     /**
+     * Get the current name.
+     *
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
+     * Get all names as array.
+     *
+     * @return string[]
+     */
+    public static function getNames(): array;
+
+    /**
      * Check if the current instance is equal with one of the given values.
      *
      * @param string[]|int[]|\Spatie\Enum\Enumerable[] $values

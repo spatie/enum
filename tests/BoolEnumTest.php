@@ -8,6 +8,7 @@ use ArgumentCountError;
 use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Tests\Enums\BoolEnum;
+use Spatie\Enum\Exceptions\InvalidNameException;
 use Spatie\Enum\Exceptions\InvalidIndexException;
 use Spatie\Enum\Exceptions\InvalidValueException;
 
@@ -23,6 +24,7 @@ class BoolEnumTest extends TestCase
         $this->assertTrue(boolval($true->getIndex()));
         $this->assertSame('true', $true->getValue());
         $this->assertEquals('true', $true);
+        $this->assertSame('TRUE', $true->getName());
     }
 
     /** @test */
@@ -35,6 +37,7 @@ class BoolEnumTest extends TestCase
         $this->assertTrue(boolval($true->getIndex()));
         $this->assertSame('true', $true->getValue());
         $this->assertEquals('true', $true);
+        $this->assertSame('TRUE', $true->getName());
     }
 
     /** @test */
@@ -47,6 +50,7 @@ class BoolEnumTest extends TestCase
         $this->assertFalse(boolval($false->getIndex()));
         $this->assertSame('false', $false->getValue());
         $this->assertEquals('false', $false);
+        $this->assertSame('FALSE', $false->getName());
     }
 
     /** @test */
@@ -59,6 +63,7 @@ class BoolEnumTest extends TestCase
         $this->assertFalse(boolval($false->getIndex()));
         $this->assertSame('false', $false->getValue());
         $this->assertEquals('false', $false);
+        $this->assertSame('FALSE', $false->getName());
     }
 
     /** @test */
@@ -103,6 +108,15 @@ class BoolEnumTest extends TestCase
     }
 
     /** @test */
+    public function can_represent_its_names_as_array()
+    {
+        $this->assertEquals([
+            'FALSE',
+            'TRUE',
+        ], BoolEnum::getNames());
+    }
+
+    /** @test */
     public function can_represent_its_values_as_array()
     {
         $this->assertEquals([
@@ -130,12 +144,21 @@ class BoolEnumTest extends TestCase
     }
 
     /** @test */
+    public function can_not_create_new_instance_without_name()
+    {
+        $this->expectException(InvalidNameException::class);
+        $this->expectExceptionMessage('The name for an enum must be a string but NULL given');
+
+        new BoolEnum(null, 'true', 1);
+    }
+
+    /** @test */
     public function can_not_create_new_instance_without_value()
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionMessage('The value for an enum must be a string but NULL given');
 
-        new BoolEnum(null, 1);
+        new BoolEnum('TRUE', null, 1);
     }
 
     /** @test */
@@ -144,7 +167,16 @@ class BoolEnumTest extends TestCase
         $this->expectException(InvalidIndexException::class);
         $this->expectExceptionMessage('The index for an enum must be an int but NULL given');
 
-        new BoolEnum('true');
+        new BoolEnum('TRUE', 'true', null);
+    }
+
+    /** @test */
+    public function can_not_create_new_instance_with_invalid_name()
+    {
+        $this->expectException(InvalidNameException::class);
+        $this->expectExceptionMessage('The given name [FOOBAR] is not available in this enum Spatie\Enum\Tests\Enums\BoolEnum');
+
+        new BoolEnum('FOOBAR', 'true', 0);
     }
 
     /** @test */
@@ -153,7 +185,7 @@ class BoolEnumTest extends TestCase
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionMessage('The given value [foobar] is not available in this enum Spatie\Enum\Tests\Enums\BoolEnum');
 
-        new BoolEnum('foobar', 0);
+        new BoolEnum('TRUE', 'foobar', 0);
     }
 
     /** @test */
@@ -171,7 +203,7 @@ class BoolEnumTest extends TestCase
         $this->expectException(InvalidIndexException::class);
         $this->expectExceptionMessage('The given index [2] is not available in this enum Spatie\Enum\Tests\Enums\BoolEnum');
 
-        new BoolEnum('false', 2);
+        new BoolEnum('FALSE', 'false', 2);
     }
 
     /** @test */

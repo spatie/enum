@@ -3,53 +3,48 @@
 namespace Spatie\Enum\OldTests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Enum\Tests\Enums\WeekDayEnum;
-use Spatie\Enum\Exceptions\InvalidValueException;
+use Spatie\Enum\Tests\Enums\WeekDaySimpleEnum;
 
-class WeekDayEnumTest extends TestCase
+class WeekDaySimpleEnumTest extends TestCase
 {
     /** @test */
     public function can_create_instance_from_static_method()
     {
-        $monday = WeekDayEnum::monday();
+        $monday = WeekDaySimpleEnum::monday();
 
-        $this->assertInstanceOf(WeekDayEnum::class, $monday);
+        $this->assertInstanceOf(WeekDaySimpleEnum::class, $monday);
         $this->assertSame(1, $monday->getIndex());
         $this->assertSame('Montag', $monday->getValue());
-        $this->assertSame('MONDAY', $monday->getName());
     }
 
     /** @test */
     public function can_make_instance_from_value()
     {
-        $tuesday = WeekDayEnum::make('Dienstag');
+        $tuesday = WeekDaySimpleEnum::make('Dienstag');
 
-        $this->assertInstanceOf(WeekDayEnum::class, $tuesday);
+        $this->assertInstanceOf(WeekDaySimpleEnum::class, $tuesday);
         $this->assertSame(2, $tuesday->getIndex());
         $this->assertSame('Dienstag', $tuesday->getValue());
-        $this->assertSame('TUESDAY', $tuesday->getName());
     }
 
     /** @test */
     public function can_make_instance_from_name()
     {
-        $wednesday = WeekDayEnum::make('wednesday');
+        $wednesday = WeekDaySimpleEnum::make('wednesday');
 
-        $this->assertInstanceOf(WeekDayEnum::class, $wednesday);
+        $this->assertInstanceOf(WeekDaySimpleEnum::class, $wednesday);
         $this->assertSame(3, $wednesday->getIndex());
         $this->assertSame('Mittwoch', $wednesday->getValue());
-        $this->assertSame('WEDNESDAY', $wednesday->getName());
     }
 
     /** @test */
     public function can_make_instance_from_index()
     {
-        $thursday = WeekDayEnum::make(4);
+        $thursday = WeekDaySimpleEnum::make(4);
 
-        $this->assertInstanceOf(WeekDayEnum::class, $thursday);
+        $this->assertInstanceOf(WeekDaySimpleEnum::class, $thursday);
         $this->assertSame(4, $thursday->getIndex());
         $this->assertSame('Donnerstag', $thursday->getValue());
-        $this->assertSame('THURSDAY', $thursday->getName());
     }
 
     /** @test */
@@ -63,7 +58,7 @@ class WeekDayEnumTest extends TestCase
             'Freitag' => 5,
             'Samstag' => 6,
             'Sonntag' => 7,
-        ], WeekDayEnum::toArray());
+        ], WeekDaySimpleEnum::toArray());
     }
 
     /** @test */
@@ -77,7 +72,7 @@ class WeekDayEnumTest extends TestCase
             'FRIDAY',
             'SATURDAY',
             'SUNDAY',
-        ], WeekDayEnum::getNames());
+        ], WeekDaySimpleEnum::getNames());
     }
 
     /** @test */
@@ -91,7 +86,7 @@ class WeekDayEnumTest extends TestCase
             'Freitag',
             'Samstag',
             'Sonntag',
-        ], WeekDayEnum::getValues());
+        ], WeekDaySimpleEnum::getValues());
     }
 
     /** @test */
@@ -105,22 +100,6 @@ class WeekDayEnumTest extends TestCase
             5,
             6,
             7,
-        ], WeekDayEnum::getIndices());
-    }
-
-    /** @test */
-    public function can_not_resolve_from_anonymous_class_without_surrounding_method()
-    {
-        $this->expectException(InvalidValueException::class);
-
-        canNotResolveFromAnonymousClassWithoutSurroundingMethod();
-    }
-}
-
-if (! function_exists('canNotResolveFromAnonymousClassWithoutSurroundingMethod')) {
-    function canNotResolveFromAnonymousClassWithoutSurroundingMethod()
-    {
-        return new class() extends WeekDayEnum {
-        };
+        ], WeekDaySimpleEnum::getIndices());
     }
 }

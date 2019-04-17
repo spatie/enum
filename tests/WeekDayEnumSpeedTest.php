@@ -22,7 +22,6 @@ class WeekDayEnumSpeedTest extends TestCase
         $cached = $stopwatch->stop('cached');
 
         $this->assertLessThan($uncached->getDuration(), $cached->getDuration());
-        $this->assertLessThan(1, $cached->getDuration());
     }
 
     /** @test */
