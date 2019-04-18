@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.1.1 - 2019-04-18
+
+- fix overriden existing public static methods like `Enum::toArray()` [#29](https://github.com/spatie/enum/pull/29)
+
 ## 2.1.0 - 2019-04-17
 
 - add enum map index and value `Enum::MAP_INDEX` and `Enum::MAP_VALUE` [#25](https://github.com/spatie/enum/pull/25)
