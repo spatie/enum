@@ -185,9 +185,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     public static function toArray(): array
     {
-        $resolved = static::resolve();
-
-        return array_combine(array_column($resolved, 'value'), array_column($resolved, 'index'));
+        return array_combine(static::getValues(), static::getIndices());
     }
 
     protected static function isValidIndex(int $index): bool
@@ -284,9 +282,17 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function resolveFromStaticMethods(ReflectionClass $reflection): array
     {
+        $selfReflection = new ReflectionClass(self::class);
+        $selfMethods = array_map(function (ReflectionMethod $method) {
+            return $method->getName();
+        }, $selfReflection->getMethods(ReflectionMethod::IS_STATIC | ReflectionMethod::IS_PUBLIC));
+
         $values = [];
-        foreach ($reflection->getMethods(ReflectionMethod::IS_STATIC) as $method) {
-            if ($method->getDeclaringClass()->getName() === self::class) {
+        foreach ($reflection->getMethods(ReflectionMethod::IS_STATIC | ReflectionMethod::IS_PUBLIC) as $method) {
+            if (
+                $method->getDeclaringClass()->getName() === self::class
+                || in_array($method->getName(), $selfMethods)
+            ) {
                 continue;
             }
 
