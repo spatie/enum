@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.1.2 - 2019-05-07
+
+- fix calling public non-static methods [#32](https://github.com/spatie/enum/pull/32)
+
 ## 2.1.1 - 2019-04-18
 
 - fix overriden existing public static methods like `Enum::toArray()` [#29](https://github.com/spatie/enum/pull/29)
