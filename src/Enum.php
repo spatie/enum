@@ -291,6 +291,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         foreach ($reflection->getMethods(ReflectionMethod::IS_STATIC | ReflectionMethod::IS_PUBLIC) as $method) {
             if (
                 $method->getDeclaringClass()->getName() === self::class
+                || ! ($method->isPublic() && $method->isStatic())
                 || in_array($method->getName(), $selfMethods)
             ) {
                 continue;

@@ -13,4 +13,8 @@ use Spatie\Enum\Enum;
  */
 final class BoolEnum extends Enum
 {
+    public function testMethod()
+    {
+        return true;
+    }
 }
