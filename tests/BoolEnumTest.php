@@ -286,4 +286,10 @@ class BoolEnumTest extends TestCase
 
         BoolEnum::isFalse(2);
     }
+
+    /** @test */
+    public function can_call_public_nonstatic_method()
+    {
+        $this->assertTrue(BoolEnum::true()->testMethod());
+    }
 }
