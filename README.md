@@ -4,6 +4,7 @@
 [![Build Status](https://img.shields.io/travis/spatie/enum/master.svg?style=flat-square)](https://travis-ci.org/spatie/enum)
 [![StyleCI](https://github.styleci.io/repos/169538841/shield?branch=master)](https://github.styleci.io/repos/169538841)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/enum.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/enum)
+[![Code Coverage](https://img.shields.io/coveralls/github/spatie/enum.svg?style=flat-square)](https://coveralls.io/github/spatie/enum)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/enum)
 
 This package offers strongly typed enums in PHP. We don't use a simple "value" representation, so you're always working with the enum object. This allows for proper autocompletion and refactoring in IDEs.
