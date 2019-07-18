@@ -25,5 +25,5 @@ $monday = WeekDayEnum::make(1);
 ## Get all
 
 ```php
-WeekDayEnum::all(); // returns an array of `WeekDayEnum` instances
+WeekDayEnum::getAll(); // returns an array of `WeekDayEnum` instances
 ```

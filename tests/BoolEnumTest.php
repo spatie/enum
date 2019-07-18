@@ -17,7 +17,7 @@ class BoolEnumTest extends TestCase
     /** @test */
     public function it_can_get_all_instances()
     {
-        $enums = BoolEnum::all();
+        $enums = BoolEnum::getAll();
 
         $this->assertCount(2, $enums);
 
