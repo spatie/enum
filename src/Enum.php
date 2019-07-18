@@ -193,9 +193,9 @@ abstract class Enum implements Enumerable, JsonSerializable
      */
     public static function getAll(): array
     {
-        return array_map(function(string $name) {
-            return static::$name();
-        }, static::getNames());
+        return array_map(function(string $value) {
+            return static::make($value);
+        }, static::getValues());
     }
 
     protected static function isValidIndex(int $index): bool
