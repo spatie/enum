@@ -2,17 +2,21 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.2.0 - 2019-07-18
+
+- Add `\Spatie\Enum\Enum::getAll()` method [#33](https://github.com/spatie/enum/pull/33)
+
 ## 2.1.2 - 2019-05-07
 
-- fix calling public non-static methods [#32](https://github.com/spatie/enum/pull/32)
+- Fix calling public non-static methods [#32](https://github.com/spatie/enum/pull/32)
 
 ## 2.1.1 - 2019-04-18
 
-- fix overriden existing public static methods like `Enum::toArray()` [#29](https://github.com/spatie/enum/pull/29)
+- Fix overriden existing public static methods like `Enum::toArray()` [#29](https://github.com/spatie/enum/pull/29)
 
 ## 2.1.0 - 2019-04-17
 
-- add enum map index and value `Enum::MAP_INDEX` and `Enum::MAP_VALUE` [#25](https://github.com/spatie/enum/pull/25)
+- Add enum map index and value `Enum::MAP_INDEX` and `Enum::MAP_VALUE` [#25](https://github.com/spatie/enum/pull/25)
 
 ## 2.0.1 - 2019-04-08
 
