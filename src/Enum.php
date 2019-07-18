@@ -188,6 +188,9 @@ abstract class Enum implements Enumerable, JsonSerializable
         return array_combine(static::getValues(), static::getIndices());
     }
 
+    /**
+     * @return Enumerable[]
+     */
     public static function getAll(): array
     {
         return array_map(function(string $name) {
