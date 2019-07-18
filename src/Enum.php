@@ -189,7 +189,7 @@ abstract class Enum implements Enumerable, JsonSerializable
     }
 
     /**
-     * @return Enumerable[]
+     * @return \Spatie\Enum\Enumerable[]
      */
     public static function getAll(): array
     {
