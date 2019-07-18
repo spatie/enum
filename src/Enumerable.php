@@ -40,6 +40,13 @@ interface Enumerable
     public static function getValues(): array;
 
     /**
+     * Get all enumerables as array
+     *
+     * @return \Spatie\Enum\Enumerable[]
+     */
+    public static function getAll(): array;
+
+    /**
      * Get the current name.
      *
      * @return string
