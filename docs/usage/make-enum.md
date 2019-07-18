@@ -21,3 +21,9 @@ $monday = WeekDayEnum::make('Montag');
 ```php
 $monday = WeekDayEnum::make(1);
 ```
+
+## Get all
+
+```php
+WeekDayEnum::all(); // returns an array of `WeekDayEnum` instances
+```

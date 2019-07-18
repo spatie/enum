@@ -26,6 +26,7 @@
         "ext-json": "*"
     },
     "require-dev": {
+        "larapack/dd": "^1.1",
         "phpunit/phpunit": "^8.0",
         "symfony/stopwatch": "^4.2"
     },

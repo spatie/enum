@@ -15,6 +15,21 @@ use Spatie\Enum\Exceptions\InvalidValueException;
 class BoolEnumTest extends TestCase
 {
     /** @test */
+    public function it_can_get_all_instances()
+    {
+        $enums = BoolEnum::all();
+
+        $this->assertCount(2, $enums);
+
+        foreach($enums as $enum) {
+            $this->assertInstanceOf(BoolEnum::class, $enum);
+        }
+
+        $this->assertEquals('false', $enums[0]->getValue());
+        $this->assertEquals('true', $enums[1]->getValue());
+    }
+
+    /** @test */
     public function can_create_true_instance_from_doc_tag_name()
     {
         $true = BoolEnum::true();
