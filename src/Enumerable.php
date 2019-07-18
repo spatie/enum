@@ -40,7 +40,7 @@ interface Enumerable
     public static function getValues(): array;
 
     /**
-     * Get all enumerables as array
+     * Get all enumerables as array.
      *
      * @return \Spatie\Enum\Enumerable[]
      */

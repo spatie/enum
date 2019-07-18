@@ -21,7 +21,7 @@ class BoolEnumTest extends TestCase
 
         $this->assertCount(2, $enums);
 
-        foreach($enums as $enum) {
+        foreach ($enums as $enum) {
             $this->assertInstanceOf(BoolEnum::class, $enum);
         }
 
