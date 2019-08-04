@@ -115,6 +115,27 @@ class WeekDayEnumTest extends TestCase
 
         canNotResolveFromAnonymousClassWithoutSurroundingMethod();
     }
+
+    /** @test */
+    public function can_check_if_index_is_valid()
+    {
+        $this->assertTrue(WeekDayEnum::isValidIndex(4));
+        $this->assertFalse(WeekDayEnum::isValidIndex(13));
+    }
+
+    /** @test */
+    public function can_check_if_name_is_valid()
+    {
+        $this->assertTrue(WeekDayEnum::isValidName('monday'));
+        $this->assertFalse(WeekDayEnum::isValidName('foobar'));
+    }
+
+    /** @test */
+    public function can_check_if_value_is_valid()
+    {
+        $this->assertTrue(WeekDayEnum::isValidValue('Freitag'));
+        $this->assertFalse(WeekDayEnum::isValidValue('FooBar'));
+    }
 }
 
 if (! function_exists('canNotResolveFromAnonymousClassWithoutSurroundingMethod')) {
