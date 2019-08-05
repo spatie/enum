@@ -2,6 +2,11 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.3.0 - 2019-08-05
+
+- Make `\Spatie\Enum\Enumerable::isValidIndex/Name/Value()` methods public [#36](https://github.com/spatie/enum/pull/36)
+  > Please note that this could be breaking for custom implementations of the `\Spatie\Enum\Enumerable` interface.
+
 ## 2.2.0 - 2019-07-18
 
 - Add `\Spatie\Enum\Enum::getAll()` method [#33](https://github.com/spatie/enum/pull/33)
