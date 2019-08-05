@@ -198,17 +198,17 @@ abstract class Enum implements Enumerable, JsonSerializable
         }, static::getIndices());
     }
 
-    protected static function isValidIndex(int $index): bool
+    public static function isValidIndex(int $index): bool
     {
         return in_array($index, static::getIndices(), true);
     }
 
-    protected static function isValidName(string $value): bool
+    public static function isValidName(string $value): bool
     {
         return in_array(strtoupper($value), static::getNames(), true);
     }
 
-    protected static function isValidValue(string $value): bool
+    public static function isValidValue(string $value): bool
     {
         return in_array($value, static::getValues(), true);
     }

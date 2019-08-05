@@ -94,4 +94,31 @@ interface Enumerable
      * @return array
      */
     public static function toArray(): array;
+
+    /**
+     * Check if the given index is a valid one.
+     *
+     * @param int $index
+     *
+     * @return bool
+     */
+    public static function isValidIndex(int $index): bool;
+
+    /**
+     * Check if the given name is a valid one.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public static function isValidName(string $name): bool;
+
+    /**
+     * Check if the given value is a valid one.
+     *
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function isValidValue(string $value): bool;
 }
