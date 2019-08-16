@@ -8,7 +8,7 @@ use Spatie\Enum\Tests\Enums\BoolOverrideEnum;
 class BoolOverrideEnumTest extends TestCase
 {
     /** @test */
-    public function can_represent_itself_as_array()
+    public function can_override_internal_methods()
     {
         $this->assertEquals([
             'false' => 'FALSE',
