@@ -12,7 +12,7 @@ use Spatie\Enum\Enum;
  * @method static bool isFalse(int|string $value = null)
  * @method static bool isTrue(int|string $value = null)
  */
-final class BoolOverrideInternalEnum extends Enum
+final class BoolOverrideResolveFromStaticMethodsEnum extends Enum
 {
     public function testMethod()
     {

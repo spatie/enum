@@ -3,9 +3,9 @@
 namespace Spatie\Enum\OldTests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Enum\Tests\Enums\BoolOverrideInternalEnum;
+use Spatie\Enum\Tests\Enums\BoolOverrideResolveFromStaticMethodsEnum;
 
-class BoolOverrideInternalEnumTest extends TestCase
+class BoolOverrideResolveFromStaticMethodsEnumTest extends TestCase
 {
     /** @test */
     public function can_represent_itself_as_array()
@@ -13,6 +13,6 @@ class BoolOverrideInternalEnumTest extends TestCase
         $this->assertEquals([
             'false' => 0,
             'true' => 1,
-        ], BoolOverrideInternalEnum::toArray());
+        ], BoolOverrideResolveFromStaticMethodsEnum::toArray());
     }
 }

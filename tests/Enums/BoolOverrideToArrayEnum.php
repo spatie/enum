@@ -11,7 +11,7 @@ use Spatie\Enum\Enum;
  * @method static bool isFalse(int|string $value = null)
  * @method static bool isTrue(int|string $value = null)
  */
-final class BoolOverrideEnum extends Enum
+final class BoolOverrideToArrayEnum extends Enum
 {
     public static function toArray(): array
     {
