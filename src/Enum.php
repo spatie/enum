@@ -227,11 +227,11 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         $reflection = new ReflectionClass(static::class);
 
-        foreach (self::resolveFromDocBlocks($reflection) as $value) {
+        foreach (static::resolveFromDocBlocks($reflection) as $value) {
             $values[] = $value;
         }
 
-        foreach (self::resolveFromStaticMethods($reflection) as $value) {
+        foreach (static::resolveFromStaticMethods($reflection) as $value) {
             $values[] = $value;
         }
 
