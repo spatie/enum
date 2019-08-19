@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.3.1 - 2019-08-19
+
+- Fix `protected` medthod calls to allow overrides [#37](https://github.com/spatie/enum/pull/37)
+
 ## 2.3.0 - 2019-08-05
 
 - Make `\Spatie\Enum\Enumerable::isValidIndex/Name/Value()` methods public [#36](https://github.com/spatie/enum/pull/36)
