@@ -45,9 +45,11 @@ class MonthEnumTest extends TestCase
     {
         $this->assertTrue(MonthEnum::make(4)->isEqual(4));
         $this->assertFalse(MonthEnum::make(4)->isEqual(5));
+        $this->assertFalse(MonthEnum::make(4)->isEqual(-1));
 
         $this->assertTrue(MonthEnum::make(4)->isEqual('april'));
         $this->assertFalse(MonthEnum::make(4)->isEqual('may'));
+        $this->assertFalse(MonthEnum::make(4)->isEqual('invalid'));
 
         $this->assertTrue(MonthEnum::make(4)->isEqual(MonthEnum::april()));
         $this->assertFalse(MonthEnum::make(4)->isEqual(MonthEnum::may()));
