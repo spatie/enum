@@ -141,6 +141,8 @@ abstract class Enum implements Enumerable, JsonSerializable
                 $value = static::make($value);
             } catch (InvalidValueException $error) {
                 return false;
+            } catch (InvalidIndexException $error) {
+                return false;
             }
         }
 
