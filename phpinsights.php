@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
-use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
-use ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff;
 use ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff;
 use ObjectCalisthenics\Sniffs\Metrics\MethodPerClassLimitSniff;
+use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
-use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff;
-use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowEmptySniff;
-use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\DisallowArrayTypeHintSyntaxSniff;
+use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
+use ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowEmptySniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
+use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowArrayTypeHintSyntaxSniff;
 
 return [
 
@@ -47,7 +47,6 @@ return [
     'exclude' => [
         //  'path/to/directory-or-file'
     ],
-
 
     'add' => [
         //  ExampleMetric::class => [
