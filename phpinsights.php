@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff;
 use ObjectCalisthenics\Sniffs\Metrics\MethodPerClassLimitSniff;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
