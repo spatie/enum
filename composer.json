@@ -3,7 +3,8 @@
     "description": "PHP Enums",
     "keywords": [
         "spatie",
-        "enum"
+        "enum",
+        "enumerable"
     ],
     "homepage": "https://github.com/spatie/enum",
     "license": "MIT",
@@ -30,6 +31,9 @@
         "phpunit/phpunit": "^8.0",
         "symfony/stopwatch": "^4.2"
     },
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "Spatie\\Enum\\": "src"
@@ -43,9 +47,5 @@
     "scripts": {
         "test": "vendor/bin/phpunit --colors=always",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
-    },
-    "config": {
-        "sort-packages": true
     }
 }
