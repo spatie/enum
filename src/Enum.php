@@ -62,7 +62,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         $this->index = $index;
     }
 
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments): bool
     {
         if (static::startsWith($name, 'is')) {
             return $this->isEqual(substr($name, 2));
@@ -71,7 +71,13 @@ abstract class Enum implements Enumerable, JsonSerializable
         throw new BadMethodCallException('Call to undefined method '.static::class.'->'.$name.'()');
     }
 
-    public static function __callStatic($name, $arguments)
+    /**
+     * @param string $name
+     * @param mixed[] $arguments
+     *
+     * @return \Spatie\Enum\Enumerable|bool
+     */
+    public static function __callStatic(string $name, array $arguments)
     {
         if (static::startsWith($name, 'is')) {
             if (! isset($arguments[0])) {
@@ -147,7 +153,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         return false;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): string
     {
         return $this->getValue();
     }
@@ -193,7 +199,7 @@ abstract class Enum implements Enumerable, JsonSerializable
      */
     public static function getAll(): array
     {
-        return array_map(function (int $index) {
+        return array_map(static function (int $index): Enumerable {
             return static::make($index);
         }, static::getIndices());
     }
@@ -245,12 +251,12 @@ abstract class Enum implements Enumerable, JsonSerializable
             ];
         }
 
-        foreach (self::$cache[$class] as $name => $enum) {
+        foreach (array_keys(self::$cache[$class]) as $name) {
             self::$cache[$class][$name]['value'] = static::make($name)->getValue();
             self::$cache[$class][$name]['index'] = static::make($name)->getIndex();
         }
 
-        $duplicatedValues = array_filter(array_count_values(static::getValues()), function (int $count) {
+        $duplicatedValues = array_filter(array_count_values(static::getValues()), static function (int $count): bool {
             return $count > 1;
         });
 
@@ -259,7 +265,7 @@ abstract class Enum implements Enumerable, JsonSerializable
             throw new DuplicatedValueException(array_keys($duplicatedValues), static::class);
         }
 
-        $duplicatedIndices = array_filter(array_count_values(static::getIndices()), function (int $count) {
+        $duplicatedIndices = array_filter(array_count_values(static::getIndices()), static function (int $count): bool {
             return $count > 1;
         });
 
@@ -293,7 +299,7 @@ abstract class Enum implements Enumerable, JsonSerializable
     protected static function resolveFromStaticMethods(ReflectionClass $reflection): array
     {
         $selfReflection = new ReflectionClass(self::class);
-        $selfMethods = array_map(function (ReflectionMethod $method) {
+        $selfMethods = array_map(static function (ReflectionMethod $method): string {
             return $method->getName();
         }, $selfReflection->getMethods(ReflectionMethod::IS_STATIC | ReflectionMethod::IS_PUBLIC));
 
@@ -315,7 +321,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected function resolveByStaticCall(): array
     {
-        if (strpos(get_class($this), 'class@anonymous') !== 0) {
+        if (strpos(static::class, 'class@anonymous') !== 0) {
             throw new InvalidValueException(null, static::class);
         }
 
@@ -366,12 +372,12 @@ abstract class Enum implements Enumerable, JsonSerializable
         return [$name, $index, $value];
     }
 
-    protected static function startsWith(string $haystack, string $needle)
+    protected static function startsWith(string $haystack, string $needle): bool
     {
         return strlen($haystack) > 2 && strpos($haystack, $needle) === 0;
     }
 
-    protected static function clearCache()
+    protected static function clearCache(): void
     {
         unset(self::$cache[static::class]);
     }
