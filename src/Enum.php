@@ -143,7 +143,13 @@ abstract class Enum implements Enumerable, JsonSerializable
     public function isEqual($value): bool
     {
         if (is_int($value) || is_string($value)) {
-            $value = static::make($value);
+            try {
+                $value = static::make($value);
+            } catch (InvalidValueException $error) {
+                return false;
+            } catch (InvalidIndexException $error) {
+                return false;
+            }
         }
 
         if ($value instanceof $this) {
