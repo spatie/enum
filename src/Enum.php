@@ -62,10 +62,14 @@ abstract class Enum implements Enumerable, JsonSerializable
         $this->index = $index;
     }
 
-    public function __call(string $name, array $arguments): bool
+    public function __call(string $name, array $arguments)
     {
         if (static::startsWith($name, 'is')) {
             return $this->isEqual(substr($name, 2));
+        }
+
+        if (static::isValidName($name)) {
+            return static::make($name);
         }
 
         throw new BadMethodCallException('Call to undefined method '.static::class.'->'.$name.'()');
