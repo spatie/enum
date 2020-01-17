@@ -2,7 +2,7 @@
 
 All notable changes to `enum` will be documented in this file
 
-## 2.3.2 - 2020-01-17
+## 2.3.4 - 2020-01-17
 
 - Fix for static method call passed to `__call` within the context of an object
 
