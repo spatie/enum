@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.3.2 - 2020-01-17
+
+- Fix for static method call passed to `__call` within the context of an object
+
 ## 2.3.1 - 2019-08-19
 
 - Fix `protected` method calls to allow overrides [#37](https://github.com/spatie/enum/pull/37)
