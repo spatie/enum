@@ -72,7 +72,7 @@ interface Enumerable
     /**
      * Check if the current instance and the given value are equal.
      *
-     * @param string|int|\Spatie\Enum\Enumerable $value
+     * @param string|int|\Spatie\Enum\Enumerable|null $value
      *
      * @return bool
      */
