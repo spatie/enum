@@ -27,7 +27,6 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "nunomaduro/phpinsights": "^1.12",
         "phpunit/phpunit": "^8.0"
     },
     "config": {
