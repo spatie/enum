@@ -15,7 +15,6 @@ class EnumMethodTest extends TestCase
     }
 }
 
-
 /**
  * @method static self FOO()
  * @method static self BAR()
@@ -25,7 +24,7 @@ class MyEnum extends Enum
     public function isFoo(): bool
     {
         return $this->isAny([
-            self::FOO()
+            self::FOO(),
         ]);
     }
 }
