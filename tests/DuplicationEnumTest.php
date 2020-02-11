@@ -3,10 +3,10 @@
 namespace Spatie\Enum\OldTests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Enum\Tests\Enums\DuplicatedIndexEnum;
-use Spatie\Enum\Tests\Enums\DuplicatedValueEnum;
 use Spatie\Enum\Exceptions\DuplicatedIndexException;
 use Spatie\Enum\Exceptions\DuplicatedValueException;
+use Spatie\Enum\Tests\Enums\DuplicatedIndexEnum;
+use Spatie\Enum\Tests\Enums\DuplicatedValueEnum;
 
 class DuplicationEnumTest extends TestCase
 {

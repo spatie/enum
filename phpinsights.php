@@ -1,18 +1,18 @@
 <?php
 
+use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
+use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
+use ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff;
 use ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff;
 use ObjectCalisthenics\Sniffs\Metrics\MethodPerClassLimitSniff;
-use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
-use SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
-use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
-use ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff;
-use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowEmptySniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
+use SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowEmptySniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowArrayTypeHintSyntaxSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
 
 return [
 

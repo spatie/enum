@@ -2,17 +2,17 @@
 
 namespace Spatie\Enum;
 
-use TypeError;
-use ReflectionClass;
-use JsonSerializable;
-use ReflectionMethod;
 use ArgumentCountError;
 use BadMethodCallException;
-use Spatie\Enum\Exceptions\InvalidNameException;
-use Spatie\Enum\Exceptions\InvalidIndexException;
-use Spatie\Enum\Exceptions\InvalidValueException;
+use JsonSerializable;
+use ReflectionClass;
+use ReflectionMethod;
 use Spatie\Enum\Exceptions\DuplicatedIndexException;
 use Spatie\Enum\Exceptions\DuplicatedValueException;
+use Spatie\Enum\Exceptions\InvalidIndexException;
+use Spatie\Enum\Exceptions\InvalidNameException;
+use Spatie\Enum\Exceptions\InvalidValueException;
+use TypeError;
 
 abstract class Enum implements Enumerable, JsonSerializable
 {
