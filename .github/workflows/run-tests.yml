@@ -30,14 +30,17 @@ jobs:
               uses: shivammathur/setup-php@v1
               with:
                   php-version: ${{ matrix.php }}
-                  extensions: json
+                  extensions: json, dom, curl, libxml, mbstring
                   coverage: none
 
             - name: Install dependencies
               run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
+            - name: Configure matchers
+              uses: mheap/phpunit-matcher-action@master
+
             - name: Execute tests
-              run: vendor/bin/phpunit
+              run: vendor/bin/phpunit --teamcity
 
             - name: Send Slack notification
               uses: 8398a7/action-slack@v2
