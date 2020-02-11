@@ -63,7 +63,7 @@ interface Enumerable
     /**
      * Check if the current instance is equal with one of the given values.
      *
-     * @param string[]|int[]|\Spatie\Enum\Enumerable[] $values
+     * @param string[]|int[]|\Spatie\Enum\Enumerable[]|mixed[] $values
      *
      * @return bool
      */
