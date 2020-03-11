@@ -43,6 +43,19 @@ class BoolEnumTest extends TestCase
     }
 
     /** @test */
+    public function can_create_true_instance_from_strange_name()
+    {
+        $true = BoolEnum::make('TrUe');
+
+        $this->assertInstanceOf(BoolEnum::class, $true);
+        $this->assertSame(1, $true->getIndex());
+        $this->assertTrue(boolval($true->getIndex()));
+        $this->assertSame('true', $true->getValue());
+        $this->assertEquals('true', $true);
+        $this->assertSame('TRUE', $true->getName());
+    }
+
+    /** @test */
     public function can_create_true_instance_from_index()
     {
         $true = BoolEnum::make(1);

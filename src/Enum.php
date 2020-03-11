@@ -377,7 +377,9 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function resolveByName(string $name): array
     {
-        ['value' => $value, 'index' => $index] = static::resolve()[strtoupper($name)];
+        $name = strtoupper($name);
+
+        ['value' => $value, 'index' => $index] = static::resolve()[$name];
 
         return [$name, $index, $value];
     }
