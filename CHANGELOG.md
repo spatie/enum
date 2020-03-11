@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.3.6 - 2020-03-11
+
+- Fix the name if it's matched but isn't the same [#50](https://github.com/spatie/enum/pull/50)
+
 ## 2.3.5 - 2020-02-11
 
 - Fix for `isEqual()` and `isAny()` method doc-tags to accept `mixed` values 
