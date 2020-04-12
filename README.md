@@ -75,7 +75,7 @@ $class->setStatus(StatusEnum::draft());
 
 ![](./docs/refactor.gif)
 
-### Creating an enum from a value
+### Create a new instance of the enum by passed in value or index.
 
 ```php
 $status = StatusEnum::make('draft');
