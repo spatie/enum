@@ -198,7 +198,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         return new static($name, $value, $index);
     }
-
+    
     /**
      * @param int $index
      *
@@ -211,7 +211,7 @@ abstract class Enum implements Enumerable, JsonSerializable
         }
 
         [$name, $index, $value] = static::resolveByIndex($value);
-        
+
         return new static($name, $value, $index);
     }
     
@@ -223,13 +223,13 @@ abstract class Enum implements Enumerable, JsonSerializable
     public static function makeByValue(string $value): Enumerable
     {
         [$name, $index, $value] = static::resolveByString($value);
-        
+
         if (is_string($name) && method_exists(static::class, $name)) {
             return forward_static_call(static::class.'::'.$name);
-        }        
+        }
 
         return new static($name, $value, $index);
-    }    
+    }
     
     public static function toArray(): array
     {
