@@ -198,7 +198,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         return new static($name, $value, $index);
     }
-    
+
     /**
      * @param int $index
      *
@@ -206,15 +206,15 @@ abstract class Enum implements Enumerable, JsonSerializable
      */
     public static function makeByIndex(int $index): Enumerable
     {
-        if (! static::isValidIndex($value)) {
-            throw new InvalidIndexException($value, static::class);
+        if (! static::isValidIndex($index)) {
+            throw new InvalidIndexException($index, static::class);
         }
 
-        [$name, $index, $value] = static::resolveByIndex($value);
+        [$name, $index, $value] = static::resolveByIndex($index);
 
         return new static($name, $value, $index);
     }
-    
+
     /**
      * @param string $value
      *
@@ -230,7 +230,7 @@ abstract class Enum implements Enumerable, JsonSerializable
 
         return new static($name, $value, $index);
     }
-    
+
     public static function toArray(): array
     {
         return array_combine(static::getValues(), static::getIndices());
