@@ -52,7 +52,7 @@ abstract class Enum
         return new static($name);
     }
 
-    public function isAny(Enum ...$others): bool
+    public function equalsAny(Enum ...$others): bool
     {
         foreach ($others as $other) {
             if ($this->equals($other)) {
