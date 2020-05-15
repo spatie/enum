@@ -52,21 +52,18 @@ abstract class Enum
         return new static($name);
     }
 
-    public function equalsAny(Enum ...$others): bool
+    public function equals(Enum ...$others): bool
     {
         foreach ($others as $other) {
-            if ($this->equals($other)) {
+            if (
+                get_class($this) === get_class($other)
+                && $this->value === $other->value
+            ) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    public function equals(Enum $other): bool
-    {
-        return get_class($this) === get_class($other)
-            && $this->value === $other->value;
     }
 
     protected static function labels(): array
