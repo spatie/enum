@@ -32,14 +32,14 @@ class EnumTest extends TestCase
     }
 
     /** @test */
-    public function test_is_any()
+    public function test_equals_multiple()
     {
-        $this->assertTrue(MyEnum::A()->equalsAny(
+        $this->assertTrue(MyEnum::A()->equals(
             MyEnum::A(),
             MyEnum::B(),
         ));
 
-        $this->assertFalse(MyEnum::A()->equalsAny(
+        $this->assertFalse(MyEnum::A()->equals(
             MyEnum::B(),
         ));
     }
