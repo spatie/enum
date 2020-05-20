@@ -5,7 +5,7 @@
 [![Code Coverage](https://img.shields.io/coveralls/github/spatie/enum.svg?style=flat-square)](https://coveralls.io/github/spatie/enum)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/enum)
 
-This package offers strongly typed enums in PHP. We don't use scalar simple "value" representation, so you're always working with the enum object. This allows for proper static analysis and refactoring in IDEs.
+This package offers strongly typed enums in PHP. In this package, enums are always objects, never constant values on their own. This allows for proper static analysis and refactoring in IDEs.
 
 Here's how enums are created with this package:
 
@@ -153,7 +153,7 @@ Enums can be compared using the `equals` method:
 $status->equals(StatusEnum::draft());
 ```
 
-You can pass the `equals` method several enums, it will return `true` if the current enum equals one of the given values.
+You can pass several enums to the `equals` method, it will return `true` if the current enum equals one of the given values.
 
 ```php
 $status->equals(StatusEnum::draft(), StatusEnum::archived());
