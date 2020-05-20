@@ -11,7 +11,7 @@ use ReflectionClass;
  */
 abstract class Enum
 {
-    /** @var mixed */
+    /** @var string|int */
     protected $value;
 
     protected string $label;
@@ -30,7 +30,7 @@ abstract class Enum
     }
 
     /**
-     * @param mixed $value
+     * @param string|int $value
      */
     public function __construct($value)
     {
