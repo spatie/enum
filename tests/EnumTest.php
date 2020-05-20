@@ -43,17 +43,6 @@ class EnumTest extends TestCase
             MyEnum::B(),
         ));
     }
-
-    /** @test */
-    public function test_to_array()
-    {
-        $array = MyEnum::toArray();
-
-        $this->assertEquals(
-            ['A' => 'A', 'B' => 'B'],
-            $array
-        );
-    }
 }
 
 /**
