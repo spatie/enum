@@ -4,7 +4,7 @@ namespace Spatie\Enum;
 
 class EnumDefinition
 {
-    /** @var mixed */
+    /** @var string|int */
     public $value;
 
     public string $label;
@@ -13,7 +13,7 @@ class EnumDefinition
 
     /**
      * @param string $methodName
-     * @param mixed $value
+     * @param string|int $value
      * @param string $label
      */
     public function __construct(string $methodName, $value, string $label)
