@@ -62,6 +62,15 @@ abstract class Enum
         return new static($name);
     }
 
+    public function __call($name, $arguments)
+    {
+        if (strpos($name, 'is') === 0) {
+            $other = new static(lcfirst(str_replace('is', '', $name)));
+
+            return $this->equals($other);
+        }
+    }
+
     public function equals(Enum ...$others): bool
     {
         foreach ($others as $other) {
