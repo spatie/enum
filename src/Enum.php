@@ -20,10 +20,13 @@ abstract class Enum
 
     public static function toArray(): array
     {
-        return array_map(
-            fn (EnumDefinition $definition) => $definition->label,
-            static::resolveDefinition()
-        );
+        $array = [];
+
+        foreach (static::resolveDefinition() as $definition) {
+            $array[$definition->value] = $definition->label;
+        }
+
+        return $array;
     }
 
     /**
