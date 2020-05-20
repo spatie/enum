@@ -95,7 +95,7 @@ abstract class Enum
         return [];
     }
 
-    private function findDefinition(string $input): ?EnumDefinition
+    private function findDefinition($input): ?EnumDefinition
     {
         foreach (static::resolveDefinition() as $definition) {
             if ($definition->equals($input)) {
