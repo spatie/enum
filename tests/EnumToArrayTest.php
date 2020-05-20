@@ -51,7 +51,6 @@ class EnumAsArray extends Enum
     }
 }
 
-
 /**
  * @method static self A()
  * @method static self B()
