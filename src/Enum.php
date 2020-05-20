@@ -11,7 +11,8 @@ use ReflectionClass;
  */
 abstract class Enum
 {
-    protected string $value;
+    /** @var mixed */
+    protected $value;
 
     protected string $label;
 
@@ -22,18 +23,21 @@ abstract class Enum
         return static::resolveDefinition();
     }
 
-    public function __construct(string $value)
+    /**
+     * @param mixed $value
+     */
+    public function __construct($value)
     {
-        $definition = static::resolveDefinition();
+        $definition = $this->findDefinition($value);
 
-        if (! isset($definition[$value])) {
+        if ($definition === null) {
             $enumClass = static::class;
 
             throw new BadMethodCallException("There's no value {$value} defined for enum {$enumClass}, consider adding it in the docblock definition.");
         }
 
-        $this->value = $value;
-        $this->label = $definition[$value];
+        $this->value = $definition->value;
+        $this->label = $definition->label;
     }
 
     public function __get($name)
@@ -66,11 +70,30 @@ abstract class Enum
         return false;
     }
 
+    protected static function values(): array
+    {
+        return [];
+    }
+
     protected static function labels(): array
     {
         return [];
     }
 
+    private function findDefinition(string $input): ?EnumDefinition
+    {
+        foreach (static::resolveDefinition() as $definition) {
+            if ($definition->equals($input)) {
+                return $definition;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return \Spatie\Enum\EnumDefinition[]|null
+     */
     private static function resolveDefinition(): array
     {
         $className = static::class;
@@ -87,10 +110,16 @@ abstract class Enum
 
         $definition = [];
 
-        $labels = static::labels();
+        $valueMap = static::values();
 
-        foreach ($matches[1] as $value) {
-            $definition[$value] = $labels[$value] ?? $value;
+        $labelMap = static::labels();
+
+        foreach ($matches[1] as $methodName) {
+            $definition[$methodName] = new EnumDefinition(
+                $methodName,
+                $valueMap[$methodName] ?? $methodName,
+                $labelMap[$methodName] ?? $methodName,
+            );
         }
 
         return static::$definitionCache[$className] ??= $definition;
