@@ -11,9 +11,14 @@ class EnumDefinition
 
     private string $methodName;
 
-    public function __construct(string $methodName, string $value, string $label)
+    /**
+     * @param string $methodName
+     * @param mixed $value
+     * @param string $label
+     */
+    public function __construct(string $methodName, $value, string $label)
     {
-        $this->methodName = $methodName;
+        $this->methodName = strtolower($methodName);
         $this->value = $value;
         $this->label = $label;
     }
@@ -21,6 +26,6 @@ class EnumDefinition
     public function equals($input): bool
     {
         return $this->value === $input
-            || $this->methodName === $input;
+            || $this->methodName === strtolower($input);
     }
 }
