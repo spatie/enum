@@ -4,6 +4,8 @@ namespace Spatie\Enum;
 
 use BadMethodCallException;
 use ReflectionClass;
+use Spatie\Enum\Exceptions\DuplicateLabelsException;
+use Spatie\Enum\Exceptions\DuplicateValuesException;
 
 /**
  * @property-read string value
@@ -127,7 +129,15 @@ abstract class Enum
 
         $valueMap = static::values();
 
+        if (self::arrayHasDuplicates($valueMap)) {
+            throw new DuplicateValuesException(static::class);
+        }
+
         $labelMap = static::labels();
+
+        if (self::arrayHasDuplicates($labelMap)) {
+            throw new DuplicateLabelsException(static::class);
+        }
 
         foreach ($matches[1] as $methodName) {
             $definition[$methodName] = new EnumDefinition(
@@ -138,5 +148,10 @@ abstract class Enum
         }
 
         return static::$definitionCache[$className] ??= $definition;
+    }
+
+    private static function arrayHasDuplicates(array $array): bool
+    {
+        return count($array) > count(array_unique($array));
     }
 }
