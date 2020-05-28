@@ -4,6 +4,7 @@ namespace Spatie\Enum\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
+use Spatie\Enum\Exceptions\DuplicateValuesException;
 
 class EnumValueTest extends TestCase
 {
@@ -20,6 +21,14 @@ class EnumValueTest extends TestCase
         $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('A')));
         $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues(1)));
     }
+
+    /** @test */
+    public function duplicate_labels_are_not_allowed()
+    {
+        $this->expectException(DuplicateValuesException::class);
+
+        EnumWithDuplicatedValues::A();
+    }
 }
 
 /**
@@ -32,6 +41,21 @@ class EnumWithValues extends Enum
     {
         return [
             'A' => 1,
+        ];
+    }
+}
+
+/**
+ * @method static self A()
+ * @method static self B()
+ */
+class EnumWithDuplicatedValues extends Enum
+{
+    protected static function values(): array
+    {
+        return [
+            'A' => 1,
+            'B' => 1,
         ];
     }
 }
