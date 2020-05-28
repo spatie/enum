@@ -34,6 +34,14 @@ abstract class Enum
     /**
      * @param string|int $value
      */
+    public static function make($value): Enum
+    {
+        return new static($value);
+    }
+
+    /**
+     * @param string|int $value
+     */
     public function __construct($value)
     {
         $definition = $this->findDefinition($value);
