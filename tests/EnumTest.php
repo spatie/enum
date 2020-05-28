@@ -43,6 +43,14 @@ class EnumTest extends TestCase
             MyEnum::B(),
         ));
     }
+
+    /** @test */
+    public function to_json()
+    {
+        $json = json_encode(MyEnum::A());
+
+        $this->assertEquals('"A"', $json);
+    }
 }
 
 /**
