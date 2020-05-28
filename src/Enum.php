@@ -149,11 +149,11 @@ abstract class Enum implements JsonSerializable
         }
 
         foreach ($matches[1] as $methodName) {
-            $definition[$methodName] = new EnumDefinition(
-                $methodName,
-                $valueMap[$methodName] ?? $methodName,
-                $labelMap[$methodName] ?? $methodName,
-            );
+            $value = $valueMap[$methodName] ?? $methodName;
+
+            $label = $labelMap[$methodName] ?? $methodName;
+
+            $definition[$methodName] = new EnumDefinition($methodName, $value, $label);
         }
 
         return static::$definitionCache[$className] ??= $definition;
