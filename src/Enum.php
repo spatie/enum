@@ -3,6 +3,7 @@
 namespace Spatie\Enum;
 
 use BadMethodCallException;
+use JsonSerializable;
 use ReflectionClass;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
@@ -11,7 +12,7 @@ use Spatie\Enum\Exceptions\DuplicateValuesException;
  * @property-read string value
  * @property-read string label
  */
-abstract class Enum
+abstract class Enum implements JsonSerializable
 {
     /** @var string|int */
     protected $value;
@@ -161,5 +162,10 @@ abstract class Enum
     private static function arrayHasDuplicates(array $array): bool
     {
         return count($array) > count(array_unique($array));
+    }
+
+    public function jsonSerialize(): string
+    {
+        return (string) $this->value;
     }
 }
