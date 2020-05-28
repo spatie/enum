@@ -25,7 +25,14 @@ class EnumDefinition
 
     public function equals($input): bool
     {
-        return $this->value === $input
-            || $this->methodName === strtolower($input);
+        if ($this->value === $input) {
+            return true;
+        }
+
+        if ($this->methodName === strtolower($input)) {
+            return true;
+        }
+
+        return false;
     }
 }
