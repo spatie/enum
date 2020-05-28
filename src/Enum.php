@@ -67,7 +67,7 @@ abstract class Enum
     public function __call($name, $arguments)
     {
         if (strpos($name, 'is') === 0) {
-            $other = new static(lcfirst(str_replace('is', '', $name)));
+            $other = new static(str_replace('is', '', $name));
 
             return $this->equals($other);
         }
