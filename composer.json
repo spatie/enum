@@ -17,7 +17,7 @@
         },
         {
             "name": "Tom Witkowski",
-            "email": "dev.gummibeer@gmail.com",
+            "email": "dev@gummibeer.de",
             "homepage": "https://gummibeer.de",
             "role": "Developer"
         }
@@ -46,5 +46,10 @@
     "scripts": {
         "test": "vendor/bin/phpunit --colors=always",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "support": {
+        "issues": "https://github.com/spatie/enum/issues",
+        "source": "https://github.com/spatie/enum",
+        "docs": "https://docs.spatie.be/enum"
     }
 }
