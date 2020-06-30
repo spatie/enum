@@ -83,6 +83,8 @@ abstract class Enum implements JsonSerializable
 
             return $this->equals($other);
         }
+
+        throw new BadMethodCallException('Call to undefined method '.static::class.'->'.$name.'()');
     }
 
     public function equals(Enum ...$others): bool
