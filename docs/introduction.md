@@ -7,9 +7,9 @@ This package offers strongly typed enums in PHP. We don't use a simple "value" r
 
 ## Word definition
 
-* **Name** is the uppercased method name - it is only used to make an enum.
-* **Value** is the string returned by `getValue()` - by default it's the name but you can customize it.
-* **Index** is the integer returned by `getIndex()` - by default it's the array key of the enum value it get's during resolve but you can customize it.
+-   **Name** is the uppercased method name - it is only used to make an enum.
+-   **Value** is the string returned by `getValue()` - by default it's the name but you can customize it.
+-   **Index** is the integer returned by `getIndex()` - by default it's the array key of the enum value it get's during resolve but you can customize it.
 
 ## Usage
 
@@ -71,7 +71,7 @@ class StatusEnum extends Enum
             }
         };
     }
-    
+
     public static function published(): StatusEnum
     {
         return new class() extends StatusEnum {
@@ -85,7 +85,7 @@ class StatusEnum extends Enum
             }
         };
     }
-    
+
     public static function archived(): StatusEnum
     {
         return new class() extends StatusEnum {
@@ -119,7 +119,7 @@ $status->isDraft(); // return a boolean
 StatusEnum::isDraft($status); // return a boolean
 ```
 
-Note that if you want auto completion on these `is` methods, you must add extra doc blocks on your enum classes. 
+Note that if you want auto completion on these `is` methods, you must add extra doc blocks on your enum classes.
 
 ### Enum specific methods
 
@@ -127,10 +127,10 @@ There might be a case where you want to have functionality depending on the conc
 
 There are several ways to do this:
 
-- Add a function in the enum class and using a switch statement or array mapping.
-- Use a separate class which contains this switch logic, something like enum extensions in C#.
-- Use enum specific methods, similar to Java. 
+-   Add a function in the enum class and using a switch statement or array mapping.
+-   Use a separate class which contains this switch logic, something like enum extensions in C#.
+-   Use enum specific methods, similar to Java.
 
-This package also supports these enum specific methods. 
+This package also supports these enum specific methods.
 
 By declaring the enum class itself as abstract, and using static constructors instead of doc comments, you're able to return an anonymous class per enum, each of them implementing the required methods.

@@ -7,6 +7,6 @@ weight: 3
 
 You can install this package via composer using:
 
-``` bash
+```bash
 composer require spatie/enum
 ```
