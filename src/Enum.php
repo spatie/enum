@@ -79,7 +79,7 @@ abstract class Enum implements JsonSerializable
     public function __call($name, $arguments)
     {
         if (strpos($name, 'is') === 0) {
-            $other = new static(str_replace('is', '', $name));
+            $other = new static(substr($name, 2));
 
             return $this->equals($other);
         }
