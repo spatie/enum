@@ -4,6 +4,7 @@ namespace Spatie\Enum;
 
 use BadMethodCallException;
 use JsonSerializable;
+use OutOfBoundsException;
 use ReflectionClass;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
@@ -66,6 +67,8 @@ abstract class Enum implements JsonSerializable
         if ($name === 'value') {
             return $this->value;
         }
+
+        throw new OutOfBoundsException('Access to undefined property '.static::class.'->$'.$name);
     }
 
     public static function __callStatic(string $name, array $arguments)
