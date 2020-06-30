@@ -1,6 +1,10 @@
 # PHP Enum
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/enum)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/enum.svg?style=for-the-badge)](https://packagist.org/packages/spatie/enum)
+[![License](https://img.shields.io/github/license/spatie/enum?style=for-the-badge)](https://github.com/spatie/enum/blob/master/LICENSE.md)
+![Postcardware](https://img.shields.io/badge/Postcardware-%F0%9F%92%8C-197593?style=for-the-badge)
+
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/spatie/enum?style=flat-square)](https://packagist.org/packages/spatie/enum)
 [![Build Status](https://img.shields.io/github/workflow/status/spatie/enum/run-tests?label=tests&style=flat-square)](https://github.com/spatie/enum/actions?query=workflow%3Arun-tests)
 [![StyleCI](https://github.styleci.io/repos/169538841/shield?branch=master)](https://github.styleci.io/repos/169538841)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/enum.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/enum)
