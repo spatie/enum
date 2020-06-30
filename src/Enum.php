@@ -123,7 +123,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @return \Spatie\Enum\EnumDefinition[]|null
+     * @return \Spatie\Enum\EnumDefinition[]
      */
     private static function resolveDefinition(): array
     {
