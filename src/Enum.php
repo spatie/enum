@@ -71,12 +71,12 @@ abstract class Enum implements JsonSerializable
         throw new OutOfBoundsException('Access to undefined property '.static::class.'->$'.$name);
     }
 
-    public static function __callStatic(string $name, array $arguments)
+    public static function __callStatic(string $name, array $arguments): Enum
     {
         return new static($name);
     }
 
-    public function __call($name, $arguments)
+    public function __call($name, $arguments): bool
     {
         if (strpos($name, 'is') === 0) {
             $other = new static(substr($name, 2));
