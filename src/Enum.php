@@ -349,9 +349,8 @@ abstract class Enum implements Enumerable, JsonSerializable
     protected static function resolveByIndex(int $index): array
     {
         $name = array_combine(static::getIndices(), static::getNames())[$index];
-        $value = array_search($index, static::toArray());
 
-        return [$name, $index, $value];
+        return static::resolveByName($name);
     }
 
     protected static function resolveByString(string $string): array
@@ -369,10 +368,9 @@ abstract class Enum implements Enumerable, JsonSerializable
 
     protected static function resolveByValue(string $value): array
     {
-        $index = static::toArray()[$value];
         $name = array_combine(static::getValues(), static::getNames())[$value];
 
-        return [$name, $index, $value];
+        return static::resolveByName($name);
     }
 
     protected static function resolveByName(string $name): array
