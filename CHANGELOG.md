@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.3.7 - 2020-06-30
+
+- Fix internal usage of `toArray()` to allow custom array representations [#58](https://github.com/spatie/enum/pull/58)
+
 ## 2.3.6 - 2020-03-11
 
 - Fix the name if it's matched but isn't the same [#50](https://github.com/spatie/enum/pull/50)
