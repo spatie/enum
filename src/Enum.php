@@ -10,7 +10,7 @@ use Spatie\Enum\Exceptions\DuplicateLabelsException;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
 
 /**
- * @property-read string value
+ * @property-read string|int value
  * @property-read string label
  */
 abstract class Enum implements JsonSerializable
