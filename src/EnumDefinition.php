@@ -2,7 +2,14 @@
 
 namespace Spatie\Enum;
 
-class EnumDefinition
+use ArrayAccess;
+use BadMethodCallException;
+use OutOfBoundsException;
+
+/**
+ * @internal
+ */
+final class EnumDefinition implements ArrayAccess
 {
     /** @var string|int */
     public $value;
@@ -34,5 +41,29 @@ class EnumDefinition
         }
 
         return false;
+    }
+
+    public function offsetGet($offset)
+    {
+        if(in_array($offset, ['value', 'label'])) {
+            return $this->{$offset};
+        }
+
+        throw new OutOfBoundsException();
+    }
+
+    public function offsetSet($offset, $value): void
+    {
+        throw new BadMethodCallException();
+    }
+
+    public function offsetExists($offset): bool
+    {
+        return in_array($offset, ['value', 'label']);
+    }
+
+    public function offsetUnset($offset)
+    {
+        throw new BadMethodCallException();
     }
 }

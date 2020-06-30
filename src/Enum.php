@@ -138,15 +138,7 @@ abstract class Enum implements JsonSerializable
 
         $valueMap = static::values();
 
-        if (self::arrayHasDuplicates($valueMap)) {
-            throw new DuplicateValuesException(static::class);
-        }
-
         $labelMap = static::labels();
-
-        if (self::arrayHasDuplicates($labelMap)) {
-            throw new DuplicateLabelsException(static::class);
-        }
 
         foreach ($matches[1] as $methodName) {
             $value = $valueMap[$methodName] ?? $methodName;
@@ -154,6 +146,14 @@ abstract class Enum implements JsonSerializable
             $label = $labelMap[$methodName] ?? $methodName;
 
             $definition[$methodName] = new EnumDefinition($methodName, $value, $label);
+        }
+
+        if (self::arrayHasDuplicates(array_column($definition, 'value'))) {
+            throw new DuplicateValuesException(static::class);
+        }
+
+        if (self::arrayHasDuplicates(array_column($definition, 'label'))) {
+            throw new DuplicateLabelsException(static::class);
         }
 
         return static::$definitionCache[$className] ??= $definition;
