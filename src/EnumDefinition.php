@@ -30,6 +30,11 @@ final class EnumDefinition implements ArrayAccess
         $this->label = $label;
     }
 
+    /**
+     * @param string|int $input
+     *
+     * @return bool
+     */
     public function equals($input): bool
     {
         if ($this->value === $input) {

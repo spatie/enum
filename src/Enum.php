@@ -35,6 +35,8 @@ abstract class Enum implements JsonSerializable
 
     /**
      * @param string|int $value
+     *
+     * @return \Spatie\Enum\Enum
      */
     public static function make($value): Enum
     {
@@ -111,6 +113,11 @@ abstract class Enum implements JsonSerializable
         return [];
     }
 
+    /**
+     * @param string|int $input
+     *
+     * @return \Spatie\Enum\EnumDefinition|null
+     */
     private function findDefinition($input): ?EnumDefinition
     {
         foreach (static::resolveDefinition() as $definition) {
