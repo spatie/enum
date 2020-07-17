@@ -83,7 +83,9 @@ abstract class Enum implements JsonSerializable
     {
         if (strpos($name, 'is') === 0) {
             try {
-                return $this->equals(new static(substr($name, 2)));
+                return $this->equals(
+                    new static(substr($name, 2))
+                );
             } catch(Exception $exception) {
                 return false;
             }
