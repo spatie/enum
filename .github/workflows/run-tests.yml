@@ -39,11 +39,8 @@ jobs:
             - name: Install dependencies
               run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
-            - name: Configure matchers
-              uses: mheap/phpunit-matcher-action@master
-
             - name: Execute tests
-              run: vendor/bin/phpunit --teamcity
+              run: vendor/bin/phpunit
 
             - name: Send Slack notification
               uses: 8398a7/action-slack@v2
