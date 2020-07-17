@@ -26,6 +26,13 @@ class EnumIsTest extends TestCase
         $this->assertTrue(EnumToCompareWithValueMap::B()->isB());
         $this->assertFalse(EnumToCompareWithValueMap::B()->isA());
     }
+
+    /** @test */
+    public function test_is_with_invalid_values()
+    {
+        $this->assertFalse(EnumToCompare::A()->isC());
+        $this->assertFalse(EnumToCompare::B()->isC());
+    }
 }
 
 /**

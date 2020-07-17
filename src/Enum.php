@@ -3,6 +3,7 @@
 namespace Spatie\Enum;
 
 use BadMethodCallException;
+use Exception;
 use JsonSerializable;
 use OutOfBoundsException;
 use ReflectionClass;
@@ -81,9 +82,11 @@ abstract class Enum implements JsonSerializable
     public function __call(string $name, array $arguments): bool
     {
         if (strpos($name, 'is') === 0) {
-            $other = new static(substr($name, 2));
-
-            return $this->equals($other);
+            try {
+                return $this->equals(new static(substr($name, 2)));
+            } catch(Exception $exception) {
+                return false;
+            }
         }
 
         throw new BadMethodCallException('Call to undefined method '.static::class.'->'.$name.'()');
