@@ -88,7 +88,13 @@ abstract class Enum implements Enumerable, JsonSerializable
                 throw new ArgumentCountError('Calling '.static::class.'::'.$name.'() in static context requires one argument');
             }
 
-            return static::make($arguments[0])->$name();
+            try {
+                return static::make($arguments[0])->$name();
+            } catch (InvalidValueException $error) {
+                return false;
+            } catch (InvalidIndexException $error) {
+                return false;
+            }
         }
 
         if (static::isValidName($name) || static::isValidValue($name)) {
