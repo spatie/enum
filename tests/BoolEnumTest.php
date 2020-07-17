@@ -298,21 +298,15 @@ class BoolEnumTest extends TestCase
     }
 
     /** @test */
-    public function can_not_check_for_static_equality_with_invalid_value()
+    public function can_check_for_static_equality_with_invalid_value()
     {
-        $this->expectException(InvalidValueException::class);
-        $this->expectExceptionMessage('The given value [foobar] is not available in this enum Spatie\Enum\Tests\Enums\BoolEnum');
-
-        BoolEnum::isFalse('foobar');
+        $this->assertFalse(BoolEnum::isFalse('foobar'));
     }
 
     /** @test */
-    public function can_not_check_for_static_equality_with_invalid_index()
+    public function can_check_for_static_equality_with_invalid_index()
     {
-        $this->expectException(InvalidIndexException::class);
-        $this->expectExceptionMessage('The given index [2] is not available in this enum Spatie\Enum\Tests\Enums\BoolEnum');
-
-        BoolEnum::isFalse(2);
+        $this->assertFalse(BoolEnum::isFalse(2));
     }
 
     /** @test */
