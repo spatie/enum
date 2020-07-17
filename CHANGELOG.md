@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 2.3.8 - 2020-07-17
+
+- Fix for static `isXyz($value)` magic methods tto return `false` on invalid value - follow up fix to [v2.3.3](#233---2019-09-25) - [#62](https://github.com/spatie/enum/pull/62)
+
 ## 2.3.7 - 2020-06-30
 
 - Fix internal usage of `toArray()` to allow custom array representations [#58](https://github.com/spatie/enum/pull/58)
@@ -17,6 +21,10 @@ All notable changes to `enum` will be documented in this file
 ## 2.3.4 - 2020-01-17
 
 - Fix for static method call passed to `__call` within the context of an object
+
+## 2.3.3 - 2019-09-25
+
+- Allow passing invalid string values to `isEqual()` [#39](https://github.com/spatie/enum/pull/39)
 
 ## 2.3.1 - 2019-08-19
 
