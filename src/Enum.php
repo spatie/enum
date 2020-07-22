@@ -182,7 +182,7 @@ abstract class Enum implements JsonSerializable
         return (string) $this->value;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return (string) $this->value;
     }
