@@ -51,6 +51,14 @@ class EnumTest extends TestCase
 
         $this->assertEquals('"A"', $json);
     }
+
+    /** @test */
+    public function to_string()
+    {
+        $string = (string) MyEnum::A();
+
+        $this->assertEquals('A', $string);
+    }
 }
 
 /**

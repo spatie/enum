@@ -7,9 +7,11 @@ use JsonSerializable;
 use ReflectionClass;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
+use Spatie\Enum\Exceptions\UnknownEnumMethod;
+use Spatie\Enum\Exceptions\UnknownEnumProperty;
 
 /**
- * @property-read string value
+ * @property-read string|int value
  * @property-read string label
  */
 abstract class Enum implements JsonSerializable
@@ -34,8 +36,10 @@ abstract class Enum implements JsonSerializable
 
     /**
      * @param string|int $value
+     *
+     * @return static
      */
-    public static function make($value): Enum
+    public static function make($value)
     {
         return new static($value);
     }
@@ -66,6 +70,8 @@ abstract class Enum implements JsonSerializable
         if ($name === 'value') {
             return $this->value;
         }
+
+        throw UnknownEnumProperty::new(static::class, $name);
     }
 
     public static function __callStatic(string $name, array $arguments)
@@ -76,10 +82,12 @@ abstract class Enum implements JsonSerializable
     public function __call($name, $arguments)
     {
         if (strpos($name, 'is') === 0) {
-            $other = new static(str_replace('is', '', $name));
+            $other = new static(substr($name, 2));
 
             return $this->equals($other);
         }
+
+        throw UnknownEnumMethod::new(static::class, $name);
     }
 
     public function equals(Enum ...$others): bool
@@ -106,6 +114,11 @@ abstract class Enum implements JsonSerializable
         return [];
     }
 
+    /**
+     * @param string|int $input
+     *
+     * @return \Spatie\Enum\EnumDefinition|null
+     */
     private function findDefinition($input): ?EnumDefinition
     {
         foreach (static::resolveDefinition() as $definition) {
@@ -118,7 +131,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @return \Spatie\Enum\EnumDefinition[]|null
+     * @return \Spatie\Enum\EnumDefinition[]
      */
     private static function resolveDefinition(): array
     {
@@ -138,15 +151,7 @@ abstract class Enum implements JsonSerializable
 
         $valueMap = static::values();
 
-        if (self::arrayHasDuplicates($valueMap)) {
-            throw new DuplicateValuesException(static::class);
-        }
-
         $labelMap = static::labels();
-
-        if (self::arrayHasDuplicates($labelMap)) {
-            throw new DuplicateLabelsException(static::class);
-        }
 
         foreach ($matches[1] as $methodName) {
             $value = $valueMap[$methodName] ?? $methodName;
@@ -154,6 +159,14 @@ abstract class Enum implements JsonSerializable
             $label = $labelMap[$methodName] ?? $methodName;
 
             $definition[$methodName] = new EnumDefinition($methodName, $value, $label);
+        }
+
+        if (self::arrayHasDuplicates($valueMap)) {
+            throw new DuplicateValuesException(static::class);
+        }
+
+        if (self::arrayHasDuplicates($labelMap)) {
+            throw new DuplicateLabelsException(static::class);
         }
 
         return static::$definitionCache[$className] ??= $definition;
@@ -165,6 +178,11 @@ abstract class Enum implements JsonSerializable
     }
 
     public function jsonSerialize(): string
+    {
+        return (string) $this->value;
+    }
+
+    public function __toString(): string
     {
         return (string) $this->value;
     }
