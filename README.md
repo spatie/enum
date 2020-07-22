@@ -117,7 +117,7 @@ By default, the enum value is its method name. You can however override it, for 
  */
 class StatusEnum extends Enum
 {
-    protected static function labels(): array
+    protected static function values(): array
     {
         return [
             'draft' => 1,
