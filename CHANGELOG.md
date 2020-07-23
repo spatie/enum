@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.0.0 - 2020-07-22
+
+- A complete overhaul of the package, all details are discussed in [the PR](https://github.com/spatie/enum/pull/56)
+
 ## 2.3.8 - 2020-07-17
 
 - Fix for static `isXyz($value)` magic methods tto return `false` on invalid value - follow up fix to [v2.3.3](#233---2019-09-25) - [#62](https://github.com/spatie/enum/pull/62)
