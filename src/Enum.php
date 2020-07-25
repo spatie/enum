@@ -61,7 +61,14 @@ abstract class Enum implements JsonSerializable
         $this->label = $definition->label;
     }
 
-    public function __get($name)
+    /**
+     * @param string $name
+     *
+     * @return int|string
+     *
+     * @throws UnknownEnumProperty
+     */
+    public function __get(string $name)
     {
         if ($name === 'label') {
             return $this->label;
