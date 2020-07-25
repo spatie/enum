@@ -81,6 +81,12 @@ abstract class Enum implements JsonSerializable
         throw UnknownEnumProperty::new(static::class, $name);
     }
 
+    /**
+     * @param string $name
+     * @param array $arguments
+     *
+     * @return static
+     */
     public static function __callStatic(string $name, array $arguments)
     {
         return new static($name);
