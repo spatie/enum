@@ -2,7 +2,8 @@
 
 namespace Spatie\Enum;
 
-class EnumDefinition
+/**  @internal */
+final class EnumDefinition
 {
     /** @var string|int */
     public $value;
