@@ -2,7 +2,7 @@
 
 namespace Spatie\Enum;
 
-/**  @internal */
+/** @internal */
 final class EnumDefinition
 {
     /** @var string|int */
