@@ -92,7 +92,15 @@ abstract class Enum implements JsonSerializable
         return new static($name);
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param string $name
+     * @param array $arguments
+     *
+     * @return bool
+     *
+     * @throws UnknownEnumMethod
+     */
+    public function __call(string $name, array $arguments)
     {
         if (strpos($name, 'is') === 0) {
             $other = new static(substr($name, 2));
