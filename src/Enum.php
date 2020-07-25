@@ -39,7 +39,7 @@ abstract class Enum implements JsonSerializable
      *
      * @return static
      */
-    public static function make($value)
+    public static function make($value): Enum
     {
         return new static($value);
     }
