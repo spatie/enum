@@ -175,9 +175,9 @@ abstract class Enum implements JsonSerializable
         $labelMap = static::labels();
 
         foreach ($matches[1] as $methodName) {
-            $value = $valueMap[$methodName] ?? $methodName;
+            $value = $valueMap[$methodName] = $valueMap[$methodName] ?? $methodName;
 
-            $label = $labelMap[$methodName] ?? $methodName;
+            $label = $labelMap[$methodName] = $labelMap[$methodName] ?? $methodName;
 
             $definition[$methodName] = new EnumDefinition($methodName, $value, $label);
         }
