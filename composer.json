@@ -45,9 +45,9 @@
         }
     },
     "scripts": {
+        "psalm": "vendor/bin/psalm -c psalm.xml --show-info=true",
         "test": "vendor/bin/phpunit --colors=always",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "psalm": "vendor/bin/psalm -c psalm.xml --show-info=true"
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "support": {
         "issues": "https://github.com/spatie/enum/issues",
