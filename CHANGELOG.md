@@ -2,6 +2,13 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.1.0 - 2020-08-28
+
+[#64](https://github.com/spatie/enum/pull/64)
+- Add missing type-hints and doc-blocks
+- Fix unique values and labels
+- Flag `EnumDefinition` as internal
+
 ## 3.0.0 - 2020-07-22
 
 - A complete overhaul of the package, all details are discussed in [the PR](https://github.com/spatie/enum/pull/56)
