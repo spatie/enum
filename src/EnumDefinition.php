@@ -2,6 +2,7 @@
 
 namespace Spatie\Enum;
 
+/** @internal */
 class EnumDefinition
 {
     /** @var string|int */
@@ -23,13 +24,18 @@ class EnumDefinition
         $this->label = $label;
     }
 
+    /**
+     * @param string|int $input
+     *
+     * @return bool
+     */
     public function equals($input): bool
     {
         if ($this->value === $input) {
             return true;
         }
 
-        if ($this->methodName === strtolower($input)) {
+        if (is_string($input) && $this->methodName === strtolower($input)) {
             return true;
         }
 

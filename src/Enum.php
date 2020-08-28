@@ -39,7 +39,7 @@ abstract class Enum implements JsonSerializable
      *
      * @return static
      */
-    public static function make($value)
+    public static function make($value): Enum
     {
         return new static($value);
     }
@@ -61,7 +61,14 @@ abstract class Enum implements JsonSerializable
         $this->label = $definition->label;
     }
 
-    public function __get($name)
+    /**
+     * @param string $name
+     *
+     * @return int|string
+     *
+     * @throws UnknownEnumProperty
+     */
+    public function __get(string $name)
     {
         if ($name === 'label') {
             return $this->label;
@@ -74,12 +81,26 @@ abstract class Enum implements JsonSerializable
         throw UnknownEnumProperty::new(static::class, $name);
     }
 
+    /**
+     * @param string $name
+     * @param array $arguments
+     *
+     * @return static
+     */
     public static function __callStatic(string $name, array $arguments)
     {
         return new static($name);
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param string $name
+     * @param array $arguments
+     *
+     * @return bool
+     *
+     * @throws UnknownEnumMethod
+     */
+    public function __call(string $name, array $arguments)
     {
         if (strpos($name, 'is') === 0) {
             $other = new static(substr($name, 2));
@@ -154,9 +175,9 @@ abstract class Enum implements JsonSerializable
         $labelMap = static::labels();
 
         foreach ($matches[1] as $methodName) {
-            $value = $valueMap[$methodName] ?? $methodName;
+            $value = $valueMap[$methodName] = $valueMap[$methodName] ?? $methodName;
 
-            $label = $labelMap[$methodName] ?? $methodName;
+            $label = $labelMap[$methodName] = $labelMap[$methodName] ?? $methodName;
 
             $definition[$methodName] = new EnumDefinition($methodName, $value, $label);
         }
@@ -182,7 +203,7 @@ abstract class Enum implements JsonSerializable
         return (string) $this->value;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->value;
     }
