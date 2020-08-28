@@ -5,6 +5,7 @@ namespace Spatie\Enum\Tests;
 use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
+use TypeError;
 
 class EnumTest extends TestCase
 {
@@ -22,6 +23,14 @@ class EnumTest extends TestCase
         $this->expectException(BadMethodCallException::class);
 
         MyEnum::C();
+    }
+
+    /** @test */
+    public function invalid_value_type_throws_exception()
+    {
+        $this->expectException(TypeError::class);
+
+        MyEnum::make([]);
     }
 
     /** @test */

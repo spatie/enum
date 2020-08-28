@@ -9,6 +9,7 @@ use Spatie\Enum\Exceptions\DuplicateLabelsException;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
 use Spatie\Enum\Exceptions\UnknownEnumMethod;
 use Spatie\Enum\Exceptions\UnknownEnumProperty;
+use TypeError;
 
 /**
  * @property-read string|int value
@@ -51,6 +52,12 @@ abstract class Enum implements JsonSerializable
      */
     public function __construct($value)
     {
+        if (! (is_string($value) || is_int($value))) {
+            $enumClass = static::class;
+
+            throw new TypeError("Only string and integer are allowed values for enum {$enumClass}.");
+        }
+
         $definition = $this->findDefinition($value);
 
         if ($definition === null) {
