@@ -46,6 +46,8 @@ abstract class Enum implements JsonSerializable
 
     /**
      * @param string|int $value
+     *
+     * @internal
      */
     public function __construct($value)
     {
