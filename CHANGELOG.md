@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.1.1 - 2020-08-28
+
+- Throw `TypeError` if value passed to `Enum` construct is not `string` or `integer`
+
 ## 3.1.0 - 2020-08-28
 
 [#64](https://github.com/spatie/enum/pull/64)
