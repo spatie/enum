@@ -3,7 +3,7 @@
 namespace Spatie\Enum;
 
 /** @internal */
-final class EnumDefinition
+class EnumDefinition
 {
     /** @var string|int */
     public $value;
