@@ -29,6 +29,13 @@ class EnumValueTest extends TestCase
 
         EnumWithDuplicatedValues::A();
     }
+
+    /** @test */
+    public function json_serialize_returns_same_value_type()
+    {
+        $this->assertSame(1, EnumWithValues::A()->jsonSerialize());
+        $this->assertSame('B', EnumWithValues::B()->jsonSerialize());
+    }
 }
 
 /**
