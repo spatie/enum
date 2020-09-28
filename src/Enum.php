@@ -207,9 +207,12 @@ abstract class Enum implements JsonSerializable
         return count($array) > count(array_unique($array));
     }
 
-    public function jsonSerialize(): string
+    /**
+     * @return int|string
+     */
+    public function jsonSerialize()
     {
-        return (string) $this->value;
+        return $this->value;
     }
 
     public function __toString(): string
