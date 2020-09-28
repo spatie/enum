@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.1.2 - 2020-09-28
+
+- Don't cast value to string when serializing to JSON - [#68](https://github.com/spatie/enum/pull/68)
+
 ## 3.1.1 - 2020-08-28
 
 - Throw `TypeError` if value passed to `Enum` construct is not `string` or `integer`
