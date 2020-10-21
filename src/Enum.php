@@ -24,8 +24,13 @@ abstract class Enum implements JsonSerializable
 
     protected string $label;
 
+    /** @psalm-var array<string, array<string, \Spatie\Enum\EnumDefinition>>  */
     private static array $definitionCache = [];
 
+    /**
+     * @return string[]
+     * @psalm-return array<string|int, string>
+     */
     public static function toArray(): array
     {
         $array = [];
@@ -136,11 +141,19 @@ abstract class Enum implements JsonSerializable
         return false;
     }
 
+    /**
+     * @return string[]|int[]
+     * @psalm-return array<string, string|int>
+     */
     protected static function values(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     * @psalm-return array<string, string>
+     */
     protected static function labels(): array
     {
         return [];
