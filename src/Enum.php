@@ -100,7 +100,7 @@ abstract class Enum implements JsonSerializable
      */
     public static function __callStatic(string $name, array $arguments)
     {
-        return new static($name);
+        return static::make($name);
     }
 
     /**
@@ -114,7 +114,7 @@ abstract class Enum implements JsonSerializable
     public function __call(string $name, array $arguments)
     {
         if (strpos($name, 'is') === 0) {
-            $other = new static(substr($name, 2));
+            $other = static::make(substr($name, 2));
 
             return $this->equals($other);
         }
