@@ -191,7 +191,7 @@ EnumAssertions::assertSameEnumLabel(StatusEnum::draft(), 'draft'); // checks if 
 composer test
 ```
 
-### Changelog
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
