@@ -14,6 +14,8 @@ use TypeError;
 /**
  * @property-read string|int value
  * @property-read string label
+ *
+ * @psalm-consistent-constructor
  */
 abstract class Enum implements JsonSerializable
 {
