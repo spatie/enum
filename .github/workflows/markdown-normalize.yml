@@ -3,7 +3,7 @@ name: normalize markdown
 on:
   push:
     paths:
-      - '*.md'
+      - "*.md"
 
 jobs:
   normalize:
@@ -16,4 +16,4 @@ jobs:
       - name: Prettify markdown
         uses: creyD/prettier_action@v3.0
         with:
-            prettier_options: --write **/*.md
+          prettier_options: --write **/*.md
