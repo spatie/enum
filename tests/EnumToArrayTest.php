@@ -10,22 +10,38 @@ class EnumToArrayTest extends TestCase
     /** @test */
     public function test_to_array()
     {
-        $array = SimpleEnumAsArray::toArray();
-
-        $this->assertEquals(
+        $this->assertSame(
             ['A' => 'A', 'B' => 'B'],
-            $array
+            SimpleEnumAsArray::toArray()
+        );
+
+        $this->assertSame(
+            ['A', 'B'],
+            SimpleEnumAsArray::toValues()
+        );
+
+        $this->assertSame(
+            ['A', 'B'],
+            SimpleEnumAsArray::toLabels()
         );
     }
 
     /** @test */
     public function test_to_array_with_value_and_label_map()
     {
-        $array = EnumAsArray::toArray();
-
-        $this->assertEquals(
+        $this->assertSame(
             ['A' => 'a', 2 => 'B'],
-            $array
+            EnumAsArray::toArray()
+        );
+
+        $this->assertSame(
+            ['A', 2],
+            EnumAsArray::toValues()
+        );
+
+        $this->assertSame(
+            ['a', 'B'],
+            EnumAsArray::toLabels()
         );
     }
 }
