@@ -171,7 +171,21 @@ You can pass several enums to the `equals` method, it will return `true` if the 
 $status->equals(StatusEnum::draft(), StatusEnum::archived());
 ```
 
-### Testing
+### Phpunit
+
+This package provides a trait `Spatie\Enum\Phpunit\EnumAssertions` with some basic/common assertions if you have to test enums.
+
+```php
+use Spatie\Enum\Phpunit\EnumAssertions;
+
+EnumAssertions::assertIsEnum($post->status); // checks if actual extends Enum::class
+EnumAssertions::assertEqualsEnum(StatusEnum::draft(), 'draft'); // checks if actual (transformed to enum) equals expected
+EnumAssertions::assertSameEnum(StatusEnum::draft(), $post->status); // checks if actual is same as expected
+EnumAssertions::assertSameEnumValue(StatusEnum::draft(), 1); // checks if actual is same value as expected
+EnumAssertions::assertSameEnumLabel(StatusEnum::draft(), 'draft'); // checks if actual is same label as expected
+```
+
+## Testing
 
 ``` bash
 composer test
