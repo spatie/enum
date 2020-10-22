@@ -17,9 +17,15 @@ class FakerEnumProvider extends Base
      */
     public function randomEnum(string $enum): Enum
     {
-        $this->checkEnum($enum);
+        if (! is_subclass_of($enum, Enum::class)) {
+            throw new InvalidArgumentException(sprintf(
+                'You have to pass the FQCN of a "%s" class but you passed "%s".',
+                Enum::class,
+                $enum
+            ));
+        }
 
-        return $enum::make(static::randomElement(array_keys($enum::toArray())));
+        return $enum::make(static::randomElement($enum::toValues()));
     }
 
     /**
@@ -31,9 +37,15 @@ class FakerEnumProvider extends Base
      */
     public function randomEnumValue(string $enum)
     {
-        $this->checkEnum($enum);
+        if (! is_subclass_of($enum, Enum::class)) {
+            throw new InvalidArgumentException(sprintf(
+                'You have to pass the FQCN of a "%s" class but you passed "%s".',
+                Enum::class,
+                $enum
+            ));
+        }
 
-        return static::randomElement(array_keys($enum::toArray()));
+        return static::randomElement($enum::toValues());
     }
 
     /**
@@ -45,13 +57,6 @@ class FakerEnumProvider extends Base
      */
     public function randomEnumLabel(string $enum): string
     {
-        $this->checkEnum($enum);
-
-        return static::randomElement(array_values($enum::toArray()));
-    }
-
-    protected function checkEnum(string $enum): void
-    {
         if (! is_subclass_of($enum, Enum::class)) {
             throw new InvalidArgumentException(sprintf(
                 'You have to pass the FQCN of a "%s" class but you passed "%s".',
@@ -59,5 +64,7 @@ class FakerEnumProvider extends Base
                 $enum
             ));
         }
+
+        return static::randomElement($enum::toLabels());
     }
 }
