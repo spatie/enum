@@ -4,7 +4,7 @@ All notable changes to `enum` will be documented in this file
 
 ## 3.5.0 - 2020-10-22
 
-- add [Faker](https://github.com/fzaninotto/Faker) provider to generate random enum instances, values and labels `\Spatie\Enum\Faker\FakerEnumProvider`
+- add [Faker](https://github.com/fzaninotto/Faker) provider to generate random enum instances, values and labels `\Spatie\Enum\Faker\FakerEnumProvider` - [#74](https://github.com/spatie/enum/pull/74)
 
 ## 3.4.0 - 2020-10-22
 
