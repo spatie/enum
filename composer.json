@@ -29,7 +29,12 @@
     "require-dev": {
         "larapack/dd": "^1.1",
         "phpunit/phpunit": "^9.0",
+        "fzaninotto/faker": "^1.9.1",
         "vimeo/psalm": "^3.12"
+    },
+    "suggest": {
+        "phpunit/phpunit": "To use the enum assertions",
+        "fzaninotto/faker": "To use the enum faker provider"
     },
     "config": {
         "sort-packages": true

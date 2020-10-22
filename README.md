@@ -171,7 +171,7 @@ You can pass several enums to the `equals` method, it will return `true` if the 
 $status->equals(StatusEnum::draft(), StatusEnum::archived());
 ```
 
-### Phpunit
+### Phpunit Assertions
 
 This package provides a trait `Spatie\Enum\Phpunit\EnumAssertions` with some basic/common assertions if you have to test enums.
 
@@ -183,6 +183,24 @@ EnumAssertions::assertEqualsEnum(StatusEnum::draft(), 'draft'); // checks if act
 EnumAssertions::assertSameEnum(StatusEnum::draft(), $post->status); // checks if actual is same as expected
 EnumAssertions::assertSameEnumValue(StatusEnum::draft(), 1); // checks if actual is same value as expected
 EnumAssertions::assertSameEnumLabel(StatusEnum::draft(), 'draft'); // checks if actual is same label as expected
+```
+
+### Faker Provider
+
+Possibly you are using [faker](https://github.com/fzaninotto/Faker) and want to generate random enums.
+Because doing so with default faker is a lot of copy'n'paste we've got you covered with a faker provider `Spatie\Enum\Faker\FakerEnumProvider`.
+
+```php
+use Spatie\Enum\Faker\FakerEnumProvider;
+use Faker\Generator as Faker;
+
+/** @var Faker|FakerEnumProvider $faker */
+$faker = new Faker();
+$faker->addProvider(new FakerEnumProvider($faker));
+
+$enum = $faker->randomEnum(StatusEnum::class);
+$value = $faker->randomEnumValue(StatusEnum::class);
+$label = $faker->randomEnumLabel(StatusEnum::class);
 ```
 
 ## Testing
