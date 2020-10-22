@@ -24,9 +24,9 @@ jobs:
             experimental: true
           - php: 8.0
             experimental: true
-        exclude:
-          - os: windows-latest
-            experimental: true
+#        exclude:
+#          - os: windows-latest
+#            experimental: true
 
     name: P${{ matrix.php }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
