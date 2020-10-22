@@ -3,9 +3,9 @@
 namespace Spatie\Enum\Tests\Faker;
 
 use Faker\Generator as FakerGenerator;
+use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 use Spatie\Enum\Faker\FakerEnumProvider;
-use PHPUnit\Framework\TestCase;
 
 final class FakerEnumProviderTest extends TestCase
 {
@@ -69,4 +69,6 @@ final class FakerEnumProviderTest extends TestCase
  * @method static self A()
  * @method static self B()
  */
-class RandomizedEnum extends Enum {}
+class RandomizedEnum extends Enum
+{
+}

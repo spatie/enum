@@ -74,4 +74,6 @@ class EnumTest extends TestCase
  * @method static self A()
  * @method static self B()
  */
-class MyEnum extends Enum {}
+class MyEnum extends Enum
+{
+}
