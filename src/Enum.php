@@ -43,6 +43,22 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
+     * @return string[]|int[]
+     */
+    public static function toValues(): array
+    {
+        return array_keys(static::toArray());
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function toLabels(): array
+    {
+        return array_values(static::toArray());
+    }
+
+    /**
      * @param string|int $value
      *
      * @return static
