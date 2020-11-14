@@ -127,6 +127,8 @@ class StatusEnum extends Enum
 
 An enum value doesn't have to be a string, as you can see in the example.
 
+Note that you don't need to override all values. Rather, you only need to override the ones that you want to be different from the default.
+
 ### Enum labels
 
 Enums can be given a label, you can do this by overriding the `labels` method.
@@ -148,7 +150,9 @@ class StatusEnum extends Enum
 }
 ```
 
-You don't need to override all labels, the default label will be the enum's value. You can access an enum's label like so:
+Note that you don't need to override all labels, the default label will be the enum's value.
+
+You can access an enum's label like so:
 
 ```php
 $status->label;
