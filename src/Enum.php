@@ -12,8 +12,8 @@ use Spatie\Enum\Exceptions\UnknownEnumProperty;
 use TypeError;
 
 /**
- * @property-read string|int value
- * @property-read string label
+ * @property-read string|int $value
+ * @property-read string $label
  *
  * @psalm-consistent-constructor
  */
