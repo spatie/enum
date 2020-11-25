@@ -44,6 +44,15 @@ class EnumToArrayTest extends TestCase
             EnumAsArray::toLabels()
         );
     }
+
+    /** @test **/
+    public function test_all(): void
+    {
+        $all = SimpleEnumAsArray::all();
+
+        $this->assertTrue(SimpleEnumAsArray::A()->equals($all[0]));
+        $this->assertTrue(SimpleEnumAsArray::B()->equals($all[1]));
+    }
 }
 
 /**
