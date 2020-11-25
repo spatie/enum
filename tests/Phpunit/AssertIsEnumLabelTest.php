@@ -6,7 +6,6 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Phpunit\EnumAssertions;
 use Spatie\Enum\Tests\EnumWithLabels;
-use Spatie\Enum\Tests\MyEnum;
 
 class AssertIsEnumLabelTest extends TestCase
 {
