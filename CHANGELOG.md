@@ -2,13 +2,17 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.6.0 - 2020-11-26
+
+- Add `assertIsEnumValue()` and `assertIsEnumLabel()` to `\Spatie\Enum\Phpunit\EnumAssertions` - [#80](https://github.com/spatie/enum/pull/80)
+
 ## 3.5.1 - 2020-11-19
 
-- fix `\Spatie\Enum\Enum` php-doc `@property-read` annotations - [#78](https://github.com/spatie/enum/pull/78)
+- Fix `\Spatie\Enum\Enum` php-doc `@property-read` annotations - [#78](https://github.com/spatie/enum/pull/78)
 
 ## 3.5.0 - 2020-10-22
 
-- add [Faker](https://github.com/fzaninotto/Faker) provider to generate random enum instances, values and labels `\Spatie\Enum\Faker\FakerEnumProvider` - [#74](https://github.com/spatie/enum/pull/74)
+- Add [Faker](https://github.com/fzaninotto/Faker) provider to generate random enum instances, values and labels `\Spatie\Enum\Faker\FakerEnumProvider` - [#74](https://github.com/spatie/enum/pull/74)
 
 ## 3.4.0 - 2020-10-22
 
