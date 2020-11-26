@@ -45,7 +45,7 @@ class EnumToArrayTest extends TestCase
         );
     }
 
-    /** @test **/
+    /** @test */
     public function test_all(): void
     {
         $all = SimpleEnumAsArray::all();
