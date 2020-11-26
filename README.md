@@ -182,6 +182,8 @@ This package provides a trait `Spatie\Enum\Phpunit\EnumAssertions` with some bas
 use Spatie\Enum\Phpunit\EnumAssertions;
 
 EnumAssertions::assertIsEnum($post->status); // checks if actual extends Enum::class
+EnumAssertions::assertIsEnumValue(StatusEnum::class, 'draft'); // checks if actual is a value of given enum
+EnumAssertions::assertIsEnumLabel(StatusEnum::class, 'draft'); // checks if actual is a label of given enum
 EnumAssertions::assertEqualsEnum(StatusEnum::draft(), 'draft'); // checks if actual (transformed to enum) equals expected
 EnumAssertions::assertSameEnum(StatusEnum::draft(), $post->status); // checks if actual is same as expected
 EnumAssertions::assertSameEnumValue(StatusEnum::draft(), 1); // checks if actual is same value as expected

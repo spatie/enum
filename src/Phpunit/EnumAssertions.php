@@ -3,6 +3,7 @@
 namespace Spatie\Enum\Phpunit;
 
 use BadMethodCallException;
+use InvalidArgumentException;
 use PHPUnit\Framework\Assert as PHPUnit;
 use Spatie\Enum\Enum;
 use TypeError;
@@ -18,6 +19,44 @@ trait EnumAssertions
         PHPUnit::assertInstanceOf(
             Enum::class,
             $actual,
+            $message ?? ''
+        );
+    }
+
+    /**
+     * @param string $enum
+     * @psalm-param class-string<\Spatie\Enum\Enum> $enum
+     * @param string|mixed $actual
+     * @param string|null $message
+     */
+    public static function assertIsEnumValue(string $enum, $actual, ?string $message = null): void
+    {
+        if (! is_subclass_of($enum, Enum::class)) {
+            throw new InvalidArgumentException(sprintf('The `$enum` argument has to be a FQCN to an `%s` class', Enum::class));
+        }
+
+        PHPUnit::assertContains(
+            $actual,
+            forward_static_call([$enum, 'toValues']),
+            $message ?? ''
+        );
+    }
+
+    /**
+     * @param string $enum
+     * @psalm-param class-string<\Spatie\Enum\Enum> $enum
+     * @param string|mixed $actual
+     * @param string|null $message
+     */
+    public static function assertIsEnumLabel(string $enum, $actual, ?string $message = null): void
+    {
+        if (! is_subclass_of($enum, Enum::class)) {
+            throw new InvalidArgumentException(sprintf('The `$enum` argument has to be a FQCN to an `%s` class', Enum::class));
+        }
+
+        PHPUnit::assertContains(
+            $actual,
+            forward_static_call([$enum, 'toLabels']),
             $message ?? ''
         );
     }
