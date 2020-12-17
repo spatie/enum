@@ -82,10 +82,6 @@ class EnumTest extends TestCase
  * @method static self A()
  * @method static self B()
  */
-<<<<<<< HEAD
-class MyEnum extends Enum
-{
-=======
 class MyEnum extends Enum {}
 
 /**
@@ -98,5 +94,4 @@ class EnumWithEnum extends Enum
     {
         return EnumWithEnum::B();
     }
->>>>>>> Fix issue with enums not callable within enum classes
 }
