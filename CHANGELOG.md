@@ -2,7 +2,7 @@
 
 All notable changes to `enum` will be documented in this file
 
-## 3.6.1 - 2020-12-17
+## 3.6.2 - 2020-12-17
 
 - Fix issue with enums not callable within enum classes (#82)
 
