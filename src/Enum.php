@@ -128,7 +128,7 @@ abstract class Enum implements JsonSerializable
      * @param string $name
      * @param array $arguments
      *
-     * @return bool
+     * @return bool|mixed
      *
      * @throws UnknownEnumMethod
      */
@@ -140,7 +140,7 @@ abstract class Enum implements JsonSerializable
             return $this->equals($other);
         }
 
-        throw UnknownEnumMethod::new(static::class, $name);
+        return self::__callStatic($name, $arguments);
     }
 
     public function equals(Enum ...$others): bool

@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.6.1 - 2020-12-17
+
+- Fix issue with enums not callable within enum classes (#82)
+
 ## 3.6.0 - 2020-11-26
 
 - Add `assertIsEnumValue()` and `assertIsEnumLabel()` to `\Spatie\Enum\Phpunit\EnumAssertions` - [#80](https://github.com/spatie/enum/pull/80)

@@ -68,12 +68,35 @@ class EnumTest extends TestCase
 
         $this->assertEquals('A', $string);
     }
+
+    /** @test */
+    public function use_enum_construct_within_an_enum()
+    {
+        $enum = EnumWithEnum::A();
+
+        $this->assertTrue(EnumWithEnum::B()->equals($enum->test()));
+    }
 }
 
 /**
  * @method static self A()
  * @method static self B()
  */
+<<<<<<< HEAD
 class MyEnum extends Enum
 {
+=======
+class MyEnum extends Enum {}
+
+/**
+ * @method static self A()
+ * @method static self B()
+ */
+class EnumWithEnum extends Enum
+{
+    public function test()
+    {
+        return EnumWithEnum::B();
+    }
+>>>>>>> Fix issue with enums not callable within enum classes
 }
