@@ -202,11 +202,7 @@ abstract class Enum implements JsonSerializable
             return static::$definitionCache[$className];
         }
 
-        $reflectionClass = new ReflectionClass($className);
-
-        $docComment = $reflectionClass->getDocComment();
-
-        preg_match_all('/@method static self ([\w_]+)\(\)/', $docComment, $matches);
+        $matches = static::getDefinitionsFromClassDocs($className);
 
         $definition = [];
 
@@ -231,6 +227,17 @@ abstract class Enum implements JsonSerializable
         }
 
         return static::$definitionCache[$className] ??= $definition;
+    }
+
+    protected static function getDefinitionsFromClassDocs(string $className)
+    {
+        $reflectionClass = new ReflectionClass($className);
+
+        $docComment = $reflectionClass->getDocComment();
+
+        preg_match_all('/@method static self ([\w_]+)\(\)/', $docComment, $matches);
+
+        return $matches;
     }
 
     private static function arrayHasDuplicates(array $array): bool
