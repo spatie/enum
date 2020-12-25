@@ -204,7 +204,7 @@ abstract class Enum implements JsonSerializable
 
         $reflectionClass = new ReflectionClass($className);
 
-        $docComment = $reflectionClass->getDocComment();
+        $docComment = preg_replace('/\s+/', ' ', $reflectionClass->getDocComment());
 
         preg_match_all('/@method static self ([\w_]+)\(\)/', $docComment, $matches);
 

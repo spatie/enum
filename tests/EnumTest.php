@@ -76,6 +76,12 @@ class EnumTest extends TestCase
 
         $this->assertTrue(EnumWithEnum::B()->equals($enum->test()));
     }
+
+    /** @test */
+    public function enum_docblock_whitespaces() {
+        $this->assertInstanceOf(BadDockBlockEnum::class, BadDockBlockEnum::A());
+        $this->assertInstanceOf(BadDockBlockEnum::class, BadDockBlockEnum::B());
+    }
 }
 
 /**
@@ -96,4 +102,12 @@ class EnumWithEnum extends Enum
     {
         return EnumWithEnum::B();
     }
+}
+
+/**
+ * @method  static  self       A()
+ * @method  static    self       B()
+ */
+class BadDockBlockEnum extends Enum {
+
 }
