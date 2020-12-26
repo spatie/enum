@@ -2,6 +2,7 @@
 
 namespace Spatie\Enum\Tests;
 
+use Closure;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
@@ -31,6 +32,13 @@ class EnumLabelTest extends TestCase
 
         EnumWithDuplicateLabels::A();
     }
+
+    /** @test */
+    public function it_can_automatically_map_labels()
+    {
+        $this->assertEquals('la', EnumWithAutomaticMappedLabels::A()->value);
+        $this->assertEquals('lb', EnumWithAutomaticMappedLabels::B()->value);
+    }
 }
 
 /**
@@ -59,5 +67,17 @@ class EnumWithDuplicateLabels extends Enum
             'A' => 'a',
             'B' => 'a',
         ];
+    }
+}
+
+/**
+ * @method static self A()
+ * @method static self B()
+ */
+class EnumWithAutomaticMappedLabels extends Enum
+{
+    protected static function values(): Closure
+    {
+        return fn (string $name) => 'l'.strtolower($name);
     }
 }
