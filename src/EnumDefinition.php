@@ -2,7 +2,11 @@
 
 namespace Spatie\Enum;
 
-/** @internal */
+/**
+ * @internal
+ * @psalm-internal Spatie\Enum
+ * @psalm-immutable
+ */
 class EnumDefinition
 {
     /** @var string|int */

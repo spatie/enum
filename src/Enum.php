@@ -14,17 +14,22 @@ use TypeError;
 /**
  * @property-read string|int $value
  * @property-read string $label
+ * @psalm-seal-properties
  *
  * @psalm-consistent-constructor
  */
 abstract class Enum implements JsonSerializable
 {
-    /** @var string|int */
+    /**
+     * @var string|int
+     * @readonly
+     */
     protected $value;
 
+    /** @readonly */
     protected string $label;
 
-    /** @psalm-var array<string, array<string, \Spatie\Enum\EnumDefinition>>  */
+    /** @psalm-var array<string, array<string, \Spatie\Enum\EnumDefinition>> */
     private static array $definitionCache = [];
 
     /**
