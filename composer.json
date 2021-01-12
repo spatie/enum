@@ -33,7 +33,7 @@
         "vimeo/psalm": "^4.3"
     },
     "suggest": {
-        "fzaninotto/faker": "To use the enum faker provider",
+        "fakerphp/faker": "To use the enum faker provider",
         "phpunit/phpunit": "To use the enum assertions"
     },
     "config": {
