@@ -192,7 +192,7 @@ EnumAssertions::assertSameEnumLabel(StatusEnum::draft(), 'draft'); // checks if 
 
 ### Faker Provider
 
-Possibly you are using [faker](https://github.com/fzaninotto/Faker) and want to generate random enums.
+Possibly you are using [faker](https://github.com/FakerPHP/Faker) and want to generate random enums.
 Because doing so with default faker is a lot of copy'n'paste we've got you covered with a faker provider `Spatie\Enum\Faker\FakerEnumProvider`.
 
 ```php

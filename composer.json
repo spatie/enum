@@ -27,13 +27,13 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.9.1",
+        "fakerphp/faker": "^1.9.1",
         "larapack/dd": "^1.1",
         "phpunit/phpunit": "^9.0",
-        "vimeo/psalm": "^3.12"
+        "vimeo/psalm": "^4.3"
     },
     "suggest": {
-        "fzaninotto/faker": "To use the enum faker provider",
+        "fakerphp/faker": "To use the enum faker provider",
         "phpunit/phpunit": "To use the enum assertions"
     },
     "config": {

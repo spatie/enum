@@ -18,6 +18,13 @@ class EnumTest extends TestCase
     }
 
     /** @test */
+    public function enums_can_be_constructed_with_whitespace()
+    {
+        $this->assertInstanceOf(BadDockBlockEnum::class, BadDockBlockEnum::A());
+        $this->assertInstanceOf(BadDockBlockEnum::class, BadDockBlockEnum::B());
+    }
+
+    /** @test */
     public function unknown_enum_method_triggers_exception()
     {
         $this->expectException(BadMethodCallException::class);
@@ -96,4 +103,12 @@ class EnumWithEnum extends Enum
     {
         return EnumWithEnum::B();
     }
+}
+
+/**
+ * @method  static  self       A()
+ * @method  static    self       B()
+ */
+class BadDockBlockEnum extends Enum
+{
 }
