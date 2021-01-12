@@ -2,9 +2,13 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.6.3 - 2021-01-12
+
+- Fix extra whitespaces in enum definition doc-blocks - [#86](https://github.com/spatie/enum/pull/86)
+
 ## 3.6.2 - 2020-12-17
 
-- Fix issue with enums not callable within enum classes (#82)
+- Fix issue with enums not callable within enum classes - [#82](https://github.com/spatie/enum/pull/82)
 
 ## 3.6.0 - 2020-11-26
 
