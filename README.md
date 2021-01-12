@@ -6,7 +6,6 @@
 
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/spatie/enum?style=flat-square)](https://packagist.org/packages/spatie/enum)
 [![Build Status](https://img.shields.io/github/workflow/status/spatie/enum/run-tests?label=tests&style=flat-square)](https://github.com/spatie/enum/actions?query=workflow%3Arun-tests)
-[![Code Coverage](https://img.shields.io/coveralls/github/spatie/enum.svg?style=flat-square)](https://coveralls.io/github/spatie/enum)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/enum)
 
 This package offers strongly typed enums in PHP. In this package, enums are always objects, never constant values on their own. This allows for proper static analysis and refactoring in IDEs.
@@ -128,6 +127,8 @@ class StatusEnum extends Enum
 
 An enum value doesn't have to be a string, as you can see in the example.
 
+Note that you don't need to override all values. Rather, you only need to override the ones that you want to be different from the default.
+
 ### Enum labels
 
 Enums can be given a label, you can do this by overriding the `labels` method.
@@ -149,7 +150,9 @@ class StatusEnum extends Enum
 }
 ```
 
-You don't need to override all labels, the default label will be the enum's value. You can access an enum's label like so:
+Note that you don't need to override all labels, the default label will be the enum's value.
+
+You can access an enum's label like so:
 
 ```php
 $status->label;
@@ -171,7 +174,7 @@ You can pass several enums to the `equals` method, it will return `true` if the 
 $status->equals(StatusEnum::draft(), StatusEnum::archived());
 ```
 
-### Phpunit
+### Phpunit Assertions
 
 This package provides a trait `Spatie\Enum\Phpunit\EnumAssertions` with some basic/common assertions if you have to test enums.
 
@@ -179,10 +182,30 @@ This package provides a trait `Spatie\Enum\Phpunit\EnumAssertions` with some bas
 use Spatie\Enum\Phpunit\EnumAssertions;
 
 EnumAssertions::assertIsEnum($post->status); // checks if actual extends Enum::class
+EnumAssertions::assertIsEnumValue(StatusEnum::class, 'draft'); // checks if actual is a value of given enum
+EnumAssertions::assertIsEnumLabel(StatusEnum::class, 'draft'); // checks if actual is a label of given enum
 EnumAssertions::assertEqualsEnum(StatusEnum::draft(), 'draft'); // checks if actual (transformed to enum) equals expected
 EnumAssertions::assertSameEnum(StatusEnum::draft(), $post->status); // checks if actual is same as expected
 EnumAssertions::assertSameEnumValue(StatusEnum::draft(), 1); // checks if actual is same value as expected
 EnumAssertions::assertSameEnumLabel(StatusEnum::draft(), 'draft'); // checks if actual is same label as expected
+```
+
+### Faker Provider
+
+Possibly you are using [faker](https://github.com/fzaninotto/Faker) and want to generate random enums.
+Because doing so with default faker is a lot of copy'n'paste we've got you covered with a faker provider `Spatie\Enum\Faker\FakerEnumProvider`.
+
+```php
+use Spatie\Enum\Faker\FakerEnumProvider;
+use Faker\Generator as Faker;
+
+/** @var Faker|FakerEnumProvider $faker */
+$faker = new Faker();
+$faker->addProvider(new FakerEnumProvider($faker));
+
+$enum = $faker->randomEnum(StatusEnum::class);
+$value = $faker->randomEnumValue(StatusEnum::class);
+$label = $faker->randomEnumLabel(StatusEnum::class);
 ```
 
 ## Testing

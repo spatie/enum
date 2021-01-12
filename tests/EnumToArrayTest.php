@@ -71,4 +71,6 @@ class EnumAsArray extends Enum
  * @method static self A()
  * @method static self B()
  */
-class SimpleEnumAsArray extends Enum {}
+class SimpleEnumAsArray extends Enum
+{
+}

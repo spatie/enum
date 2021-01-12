@@ -2,6 +2,26 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.6.3 - 2021-01-12
+
+- Fix extra whitespaces in enum definition doc-blocks - [#86](https://github.com/spatie/enum/pull/86)
+
+## 3.6.2 - 2020-12-17
+
+- Fix issue with enums not callable within enum classes - [#82](https://github.com/spatie/enum/pull/82)
+
+## 3.6.0 - 2020-11-26
+
+- Add `assertIsEnumValue()` and `assertIsEnumLabel()` to `\Spatie\Enum\Phpunit\EnumAssertions` - [#80](https://github.com/spatie/enum/pull/80)
+
+## 3.5.1 - 2020-11-19
+
+- Fix `\Spatie\Enum\Enum` php-doc `@property-read` annotations - [#78](https://github.com/spatie/enum/pull/78)
+
+## 3.5.0 - 2020-10-22
+
+- Add [Faker](https://github.com/fzaninotto/Faker) provider to generate random enum instances, values and labels `\Spatie\Enum\Faker\FakerEnumProvider` - [#74](https://github.com/spatie/enum/pull/74)
+
 ## 3.4.0 - 2020-10-22
 
 - Add `\Spatie\Enum\Enum::toValues()` and `\Spatie\Enum\Enum::toLabels()` methods - [#72](https://github.com/spatie/enum/pull/72)

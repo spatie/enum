@@ -35,6 +35,9 @@ jobs:
         with:
           path: ~/.composer/cache/files
           key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+              dependencies-php-${{ matrix.php }}-composer-
+              dependencies-php-
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
