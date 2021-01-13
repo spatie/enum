@@ -125,9 +125,28 @@ class StatusEnum extends Enum
 }
 ```
 
-An enum value doesn't have to be a string, as you can see in the example.
+An enum value doesn't have to be a `string`, as you can see in the example it can also be an `int`.
 
 Note that you don't need to override all values. Rather, you only need to override the ones that you want to be different from the default.
+
+If you have a logic that should be applied to all method names to get the value, like lowercase them, you can return a `Closure`.
+
+```php
+/**
+ * @method static self DRAFT()
+ * @method static self PUBLISHED()
+ * @method static self ARCHIVED()
+ */
+class StatusEnum extends Enum
+{
+    protected static function values(): Closure
+    {
+        return function(string $name): string|int {
+            return mb_strtolower($name);
+        };
+    }
+}
+```
 
 ### Enum labels
 
@@ -151,6 +170,8 @@ class StatusEnum extends Enum
 ```
 
 Note that you don't need to override all labels, the default label will be the enum's value.
+
+If you have a logic that should be applied to all method names to get the label, like lowercase them, you can return a `Closure` as in the value example.
 
 You can access an enum's label like so:
 
