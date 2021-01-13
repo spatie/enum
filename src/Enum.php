@@ -3,6 +3,7 @@
 namespace Spatie\Enum;
 
 use BadMethodCallException;
+use Closure;
 use JsonSerializable;
 use ReflectionClass;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
@@ -163,19 +164,19 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @return string[]|int[]
-     * @psalm-return array<string, string|int>
+     * @return string[]|int[]|Closure
+     * @psalm-return array<string, string|int> | Closure(string):(int|string)
      */
-    protected static function values(): array
+    protected static function values()
     {
         return [];
     }
 
     /**
-     * @return string[]
-     * @psalm-return array<string, string>
+     * @return string[]|Closure
+     * @psalm-return array<string, string> | Closure(string):string
      */
-    protected static function labels(): array
+    protected static function labels()
     {
         return [];
     }
@@ -217,7 +218,15 @@ abstract class Enum implements JsonSerializable
 
         $valueMap = static::values();
 
+        if ($valueMap instanceof Closure) {
+            $valueMap = array_map($valueMap, array_combine($matches[1], $matches[1]));
+        }
+
         $labelMap = static::labels();
+
+        if ($labelMap instanceof Closure) {
+            $labelMap = array_map($labelMap, array_combine($matches[1], $matches[1]));
+        }
 
         foreach ($matches[1] as $methodName) {
             $value = $valueMap[$methodName] = $valueMap[$methodName] ?? $methodName;

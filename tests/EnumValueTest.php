@@ -2,6 +2,7 @@
 
 namespace Spatie\Enum\Tests;
 
+use Closure;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
@@ -36,6 +37,13 @@ class EnumValueTest extends TestCase
         $this->assertSame(1, EnumWithValues::A()->jsonSerialize());
         $this->assertSame('B', EnumWithValues::B()->jsonSerialize());
     }
+
+    /** @test */
+    public function it_can_automatically_map_values()
+    {
+        $this->assertEquals('va', EnumWithAutomaticMappedValues::A()->value);
+        $this->assertEquals('vb', EnumWithAutomaticMappedValues::B()->value);
+    }
 }
 
 /**
@@ -64,5 +72,17 @@ class EnumWithDuplicatedValues extends Enum
             'A' => 1,
             'B' => 1,
         ];
+    }
+}
+
+/**
+ * @method static self A()
+ * @method static self B()
+ */
+class EnumWithAutomaticMappedValues extends Enum
+{
+    protected static function values(): Closure
+    {
+        return fn (string $name) => 'v'.strtolower($name);
     }
 }
