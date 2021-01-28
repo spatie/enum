@@ -11,6 +11,8 @@ use TypeError;
 trait EnumAssertions
 {
     /**
+     * Checks if actual extends Enum::class.
+     *
      * @param Enum|mixed $actual
      * @param string|null $message
      */
@@ -24,6 +26,8 @@ trait EnumAssertions
     }
 
     /**
+     * Checks if actual is a value of the given enum class name.
+     *
      * @param string $enum
      * @psalm-param class-string<\Spatie\Enum\Enum> $enum
      * @param string|mixed $actual
@@ -43,6 +47,8 @@ trait EnumAssertions
     }
 
     /**
+     * Checks if actual is a label of the given enum class name.
+     *
      * @param string $enum
      * @psalm-param class-string<\Spatie\Enum\Enum> $enum
      * @param string|mixed $actual
@@ -62,6 +68,8 @@ trait EnumAssertions
     }
 
     /**
+     * Checks if actual (after being transformed to enum) equals expected.
+     *
      * @param Enum $expected
      * @param Enum|string|int|mixed $actual
      * @param string|null $message
@@ -83,6 +91,8 @@ trait EnumAssertions
     }
 
     /**
+     * Checks if actual equals expected.
+     *
      * @param Enum $expected
      * @param Enum|mixed $actual
      * @param string|null $message
@@ -98,6 +108,8 @@ trait EnumAssertions
     }
 
     /**
+     * Checks if actual equals the value of expected.
+     *
      * @param Enum $expected
      * @param string|int|mixed $actual
      * @param string|null $message
@@ -112,6 +124,8 @@ trait EnumAssertions
     }
 
     /**
+     * Checks if actual equals the label of expected.
+     *
      * @param Enum $expected
      * @param string|mixed $actual
      * @param string|null $message
