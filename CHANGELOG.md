@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.7.1 - 2021-02-12
+
+- Add description to PHPUnit assertion methods - [#88](https://github.com/spatie/enum/pull/88)
+
 ## 3.7.0 - 2021-01-13
 
 - Add ability to use a `Closure` as value/label map - [#87](https://github.com/spatie/enum/pull/87)
