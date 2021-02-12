@@ -34,6 +34,8 @@ class EnumIsTest extends TestCase
  *
  * @method bool isA
  * @method bool isB
+ *
+ * @extends Enum<string>
  */
 class EnumToCompare extends Enum
 {
@@ -45,6 +47,8 @@ class EnumToCompare extends Enum
  *
  * @method bool isA
  * @method bool isB
+ *
+ * @extends Enum<int>
  */
 class EnumToCompareWithValueMap extends Enum
 {

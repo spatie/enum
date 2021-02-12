@@ -88,6 +88,8 @@ class EnumTest extends TestCase
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<string>
  */
 class MyEnum extends Enum
 {
@@ -96,6 +98,8 @@ class MyEnum extends Enum
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<string>
  */
 class EnumWithEnum extends Enum
 {

@@ -49,6 +49,8 @@ class EnumToArrayTest extends TestCase
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<int>
  */
 class EnumAsArray extends Enum
 {

@@ -49,6 +49,8 @@ class EnumValueTest extends TestCase
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<int>
  */
 class EnumWithValues extends Enum
 {
@@ -63,6 +65,8 @@ class EnumWithValues extends Enum
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<int>
  */
 class EnumWithDuplicatedValues extends Enum
 {
@@ -78,6 +82,8 @@ class EnumWithDuplicatedValues extends Enum
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<string>
  */
 class EnumWithAutomaticMappedValues extends Enum
 {

@@ -44,6 +44,8 @@ class EnumLabelTest extends TestCase
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<string>
  */
 class EnumWithLabels extends Enum
 {
@@ -58,6 +60,8 @@ class EnumWithLabels extends Enum
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<string>
  */
 class EnumWithDuplicateLabels extends Enum
 {
@@ -73,6 +77,8 @@ class EnumWithDuplicateLabels extends Enum
 /**
  * @method static self A()
  * @method static self B()
+ *
+ * @extends Enum<string>
  */
 class EnumWithAutomaticMappedLabels extends Enum
 {
