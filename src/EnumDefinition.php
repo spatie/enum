@@ -3,13 +3,15 @@
 namespace Spatie\Enum;
 
 /**
+ * @template TEnumValue of string|int
+ *
  * @internal
  * @psalm-internal Spatie\Enum
  * @psalm-immutable
  */
 class EnumDefinition
 {
-    /** @var string|int */
+    /** @var TEnumValue */
     public $value;
 
     public string $label;
@@ -18,7 +20,7 @@ class EnumDefinition
 
     /**
      * @param string $methodName
-     * @param string|int $value
+     * @param TEnumValue $value
      * @param string $label
      */
     public function __construct(string $methodName, $value, string $label)
@@ -29,7 +31,7 @@ class EnumDefinition
     }
 
     /**
-     * @param string|int $input
+     * @param TEnumValue|string $input
      *
      * @return bool
      */
