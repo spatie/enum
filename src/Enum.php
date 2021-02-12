@@ -24,7 +24,7 @@ use TypeError;
 abstract class Enum implements JsonSerializable
 {
     /**
-     * @var TEnumValue
+     * @var TEnumValue $value
      * @readonly
      */
     protected $value;
@@ -153,6 +153,10 @@ abstract class Enum implements JsonSerializable
         return self::__callStatic($name, $arguments);
     }
 
+    /**
+     * @param  Enum<TEnumValue>  ...$others
+     * @return bool
+     */
     public function equals(Enum ...$others): bool
     {
         foreach ($others as $other) {
@@ -257,7 +261,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @return int|string
+     * @return TEnumValue
      */
     public function jsonSerialize()
     {
