@@ -13,7 +13,9 @@ use Spatie\Enum\Exceptions\UnknownEnumProperty;
 use TypeError;
 
 /**
- * @property-read string|int $value
+ * @template TEnumValue of string|int
+ *
+ * @property-read TEnumValue $value
  * @property-read string $label
  * @psalm-seal-properties
  *
@@ -22,7 +24,7 @@ use TypeError;
 abstract class Enum implements JsonSerializable
 {
     /**
-     * @var string|int
+     * @var TEnumValue
      * @readonly
      */
     protected $value;
@@ -35,13 +37,14 @@ abstract class Enum implements JsonSerializable
 
     /**
      * @return string[]
-     * @psalm-return array<string|int, string>
+     * @psalm-return array<TEnumValue, string>
      */
     public static function toArray(): array
     {
         $array = [];
 
         foreach (static::resolveDefinition() as $definition) {
+            /** @var \Spatie\Enum\EnumDefinition<TEnumValue> $definition */
             $array[$definition->value] = $definition->label;
         }
 
@@ -49,7 +52,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @return string[]|int[]
+     * @return TEnumValue[]
      */
     public static function toValues(): array
     {
@@ -75,7 +78,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @param string|int $value
+     * @param TEnumValue|string $value
      *
      * @internal
      */
@@ -87,6 +90,7 @@ abstract class Enum implements JsonSerializable
             throw new TypeError("Only string and integer are allowed values for enum {$enumClass}.");
         }
 
+        /** @var \Spatie\Enum\EnumDefinition<TEnumValue>|null $definition */
         $definition = $this->findDefinition($value);
 
         if ($definition === null) {
@@ -102,7 +106,7 @@ abstract class Enum implements JsonSerializable
     /**
      * @param string $name
      *
-     * @return int|string
+     * @return TEnumValue|string
      *
      * @throws UnknownEnumProperty
      */
@@ -164,8 +168,8 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @return string[]|int[]|Closure
-     * @psalm-return array<string, string|int> | Closure(string):(int|string)
+     * @return TEnumValue[]|Closure
+     * @psalm-return array<string, TEnumValue> | Closure(string):(TEnumValue)
      */
     protected static function values()
     {
@@ -182,9 +186,9 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @param string|int $input
+     * @param TEnumValue|string $input
      *
-     * @return \Spatie\Enum\EnumDefinition|null
+     * @return \Spatie\Enum\EnumDefinition<TEnumValue>|null
      */
     private function findDefinition($input): ?EnumDefinition
     {
