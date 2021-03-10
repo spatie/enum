@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.7.2 - 2021-03-10
+
+- Fix problem with `@readonly` annotation and annotation parsing libraries - [#92](https://github.com/spatie/enum/pull/92)
+
 ## 3.7.1 - 2021-02-12
 
 - Add description to PHPUnit assertion methods - [#88](https://github.com/spatie/enum/pull/88)
