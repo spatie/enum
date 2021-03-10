@@ -23,11 +23,11 @@ abstract class Enum implements JsonSerializable
 {
     /**
      * @var string|int
-     * @readonly
+     * @psalm-readonly
      */
     protected $value;
 
-    /** @readonly */
+    /** @psalm-readonly */
     protected string $label;
 
     /** @psalm-var array<string, array<string, \Spatie\Enum\EnumDefinition>> */
