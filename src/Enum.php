@@ -30,7 +30,7 @@ abstract class Enum implements JsonSerializable
     /**
      * @return static[]
      */
-    public static function all(): array
+    public static function cases(): array
     {
         $instances = array_map(
             fn (EnumDefinition $definition): Enum => static::make($definition->value),

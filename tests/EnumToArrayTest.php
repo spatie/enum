@@ -46,9 +46,9 @@ class EnumToArrayTest extends TestCase
     }
 
     /** @test */
-    public function test_all(): void
+    public function test_cases(): void
     {
-        $all = SimpleEnumAsArray::all();
+        $all = SimpleEnumAsArray::cases();
 
         $this->assertTrue(SimpleEnumAsArray::A()->equals($all[0]));
         $this->assertTrue(SimpleEnumAsArray::B()->equals($all[1]));
