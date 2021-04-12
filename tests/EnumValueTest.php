@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
 
-class EnumLabelTest extends TestCase
+class EnumValueTest extends TestCase
 {
     /** @test */
     public function test_labels_in_to_array()
