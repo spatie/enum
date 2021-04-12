@@ -40,7 +40,7 @@ final class FakerEnumProviderTest extends TestCase
         $value = $this->faker->randomEnumValue(RandomizedEnum::class);
 
         $this->assertIsString($value);
-        $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($value));
+        $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::from($value));
         $this->assertTrue(in_array($value, RandomizedEnum::toValues(), true));
     }
 
@@ -53,7 +53,6 @@ final class FakerEnumProviderTest extends TestCase
         $label = $this->faker->randomEnumLabel(RandomizedEnum::class);
 
         $this->assertIsString($label);
-        $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($label));
         $this->assertTrue(in_array($label, RandomizedEnum::toLabels(), true));
     }
 
