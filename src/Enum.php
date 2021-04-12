@@ -101,6 +101,12 @@ abstract class Enum implements JsonSerializable
      */
     final public static function from($value): Enum
     {
+        if (! (is_string($value) || is_int($value))) {
+            $enumClass = static::class;
+
+            throw new TypeError("Only string and integer are allowed values for enum {$enumClass}.");
+        }
+
         if (!isset(self::$instances[static::class][$value])) {
             self::$instances[static::class][$value] = new static($value);
         }
