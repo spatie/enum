@@ -10,7 +10,7 @@ use Spatie\Enum\Exceptions\DuplicateLabelsException;
 class EnumValueTest extends TestCase
 {
     /** @test */
-    public function test_labels_in_to_array()
+    public function test_values_in_to_array()
     {
         $this->assertEquals([
             1,
@@ -19,10 +19,10 @@ class EnumValueTest extends TestCase
     }
 
     /** @test */
-    public function test_label_on_enum()
+    public function test_value_on_enum()
     {
-        $this->assertEquals('a', EnumWithValues::A->value());
-        $this->assertEquals('b', EnumWithValues::B->value());
+        $this->assertSame(1, EnumWithValues::A->value());
+        $this->assertSame(2, EnumWithValues::B->value());
     }
 }
 

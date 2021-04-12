@@ -21,8 +21,8 @@ class EnumLabelTest extends TestCase
     /** @test */
     public function test_label_on_enum()
     {
-        $this->assertEquals('a', EnumWithLabels::A->label());
-        $this->assertEquals('b', EnumWithLabels::B->label());
+        $this->assertSame('a', EnumWithLabels::A->label());
+        $this->assertSame('b', EnumWithLabels::B->label());
     }
 }
 

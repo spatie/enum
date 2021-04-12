@@ -37,7 +37,7 @@ class FakerEnumProvider extends Base
      *
      * @return string|int
      */
-    public function randomEnumValue(string $enum)
+    public function randomEnumValue(string $enum): string|int
     {
         if (! array_key_exists(BackedEnum::class, class_implements($enum))) {
             throw new InvalidArgumentException(sprintf(
@@ -47,7 +47,7 @@ class FakerEnumProvider extends Base
             ));
         }
 
-        return static::randomElement($enum::cases())->value;
+        return static::randomElement($enum::toValues());
     }
 
     /**
