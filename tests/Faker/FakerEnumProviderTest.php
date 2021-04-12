@@ -67,8 +67,8 @@ final class FakerEnumProviderTest extends TestCase
 
 enum RandomizedEnum: int
 {
-    use Spatie\Enum\Concerns\HasValue;
-    use Spatie\Enum\Concerns\HasLabel;
+    use \Spatie\Enum\Concerns\HasValue;
+    use \Spatie\Enum\Concerns\HasLabel;
 
     case A = 1;
     case B = 2;
