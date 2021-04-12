@@ -34,6 +34,19 @@ abstract class Enum implements JsonSerializable
     private static array $definitionCache = [];
 
     /**
+     * @return static[]
+     */
+    public static function cases(): array
+    {
+        $instances = array_map(
+            fn (EnumDefinition $definition): Enum => static::make($definition->value),
+            static::resolveDefinition()
+        );
+
+        return array_values($instances);
+    }
+
+    /**
      * @return string[]
      * @psalm-return array<string|int, string>
      */
