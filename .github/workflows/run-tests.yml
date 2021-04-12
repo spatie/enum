@@ -28,7 +28,7 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: json, dom, curl, libxml, mbstring
 
-      - run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+      - run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest --ignore-platform-reqs
 
       - run: vendor/bin/phpunit
 
