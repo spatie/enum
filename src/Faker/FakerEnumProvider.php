@@ -5,6 +5,8 @@ namespace Spatie\Enum\Faker;
 use Faker\Provider\Base;
 use InvalidArgumentException;
 use Spatie\Enum\Enum;
+use UnitEnum;
+use BackedEnum;
 
 class FakerEnumProvider extends Base
 {
@@ -13,19 +15,19 @@ class FakerEnumProvider extends Base
      *
      * @param string $enum
      *
-     * @return Enum
+     * @return \UnitEnum
      */
-    public function randomEnum(string $enum): Enum
+    public function randomEnum(string $enum): UnitEnum
     {
-        if (! is_subclass_of($enum, Enum::class)) {
+        if (! array_key_exists(UnitEnum::class, class_implements($enum))) {
             throw new InvalidArgumentException(sprintf(
                 'You have to pass the FQCN of a "%s" class but you passed "%s".',
-                Enum::class,
+                UnitEnum::class,
                 $enum
             ));
         }
 
-        return $enum::make(static::randomElement($enum::toValues()));
+        return static::randomElement($enum::cases());
     }
 
     /**
@@ -37,15 +39,15 @@ class FakerEnumProvider extends Base
      */
     public function randomEnumValue(string $enum)
     {
-        if (! is_subclass_of($enum, Enum::class)) {
+        if (! array_key_exists(BackedEnum::class, class_implements($enum))) {
             throw new InvalidArgumentException(sprintf(
                 'You have to pass the FQCN of a "%s" class but you passed "%s".',
-                Enum::class,
+                BackedEnum::class,
                 $enum
             ));
         }
 
-        return static::randomElement($enum::toValues());
+        return static::randomElement($enum::cases())->value;
     }
 
     /**
@@ -57,10 +59,10 @@ class FakerEnumProvider extends Base
      */
     public function randomEnumLabel(string $enum): string
     {
-        if (! is_subclass_of($enum, Enum::class)) {
+        if (! array_key_exists(UnitEnum::class, class_implements($enum))) {
             throw new InvalidArgumentException(sprintf(
                 'You have to pass the FQCN of a "%s" class but you passed "%s".',
-                Enum::class,
+                UnitEnum::class,
                 $enum
             ));
         }

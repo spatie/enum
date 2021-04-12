@@ -5,10 +5,10 @@ namespace Spatie\Enum\Concerns;
 trait Comparable
 {
     /**
-     * @param enum ...$others
+     * @param UnitEnum ...$others
      * @return bool
      */
-    public function equals(...$others): bool
+    public function equals(UnitEnum ...$others): bool
     {
         foreach ($others as $other) {
             if ($this === $other) {
