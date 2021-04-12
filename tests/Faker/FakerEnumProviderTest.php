@@ -65,10 +65,19 @@ final class FakerEnumProviderTest extends TestCase
     }
 }
 
-/**
- * @method static self A()
- * @method static self B()
- */
-class RandomizedEnum extends Enum
+enum RandomizedEnum: int
 {
+    use Spatie\Enum\Concerns\HasValue;
+    use Spatie\Enum\Concerns\HasLabel;
+
+    case A = 1;
+    case B = 2;
+
+    public function label(): string
+    {
+        return match($this) {
+            self::A => 'a',
+            self::B => 'b',
+        };
+    }
 }

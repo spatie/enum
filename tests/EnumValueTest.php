@@ -5,84 +5,31 @@ namespace Spatie\Enum\Tests;
 use Closure;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
-use Spatie\Enum\Exceptions\DuplicateValuesException;
+use Spatie\Enum\Exceptions\DuplicateLabelsException;
 
-class EnumValueTest extends TestCase
+class EnumLabelTest extends TestCase
 {
     /** @test */
-    public function test_value_on_enum()
+    public function test_labels_in_to_array()
     {
-        $this->assertEquals(1, EnumWithValues::A()->value);
-        $this->assertEquals('B', EnumWithValues::B()->value);
+        $this->assertEquals([
+            1,
+            2,
+        ], EnumWithValues::toValues());
     }
 
     /** @test */
-    public function construct_from_method_name()
+    public function test_label_on_enum()
     {
-        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('A')));
-        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues(1)));
-    }
-
-    /** @test */
-    public function duplicate_labels_are_not_allowed()
-    {
-        $this->expectException(DuplicateValuesException::class);
-
-        EnumWithDuplicatedValues::A();
-    }
-
-    /** @test */
-    public function json_serialize_returns_same_value_type()
-    {
-        $this->assertSame(1, EnumWithValues::A()->jsonSerialize());
-        $this->assertSame('B', EnumWithValues::B()->jsonSerialize());
-    }
-
-    /** @test */
-    public function it_can_automatically_map_values()
-    {
-        $this->assertEquals('va', EnumWithAutomaticMappedValues::A()->value);
-        $this->assertEquals('vb', EnumWithAutomaticMappedValues::B()->value);
+        $this->assertEquals('a', EnumWithValues::A->value());
+        $this->assertEquals('b', EnumWithValues::B->value());
     }
 }
 
-/**
- * @method static self A()
- * @method static self B()
- */
-class EnumWithValues extends Enum
+enum EnumWithValues: int
 {
-    protected static function values(): array
-    {
-        return [
-            'A' => 1,
-        ];
-    }
-}
+    use \Spatie\Enum\Concerns\HasValue;
 
-/**
- * @method static self A()
- * @method static self B()
- */
-class EnumWithDuplicatedValues extends Enum
-{
-    protected static function values(): array
-    {
-        return [
-            'A' => 1,
-            'B' => 1,
-        ];
-    }
-}
-
-/**
- * @method static self A()
- * @method static self B()
- */
-class EnumWithAutomaticMappedValues extends Enum
-{
-    protected static function values(): Closure
-    {
-        return fn (string $name) => 'v'.strtolower($name);
-    }
+    case A = 1;
+    case B = 2;
 }

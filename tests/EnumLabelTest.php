@@ -13,71 +13,31 @@ class EnumLabelTest extends TestCase
     public function test_labels_in_to_array()
     {
         $this->assertEquals([
-            'A' => 'a',
-            'B' => 'B'
-        ], EnumWithLabels::toArray());
+            'a',
+            'b'
+        ], EnumWithLabels::toLabels());
     }
 
     /** @test */
     public function test_label_on_enum()
     {
-        $this->assertEquals('a', EnumWithLabels::A()->label);
-        $this->assertEquals('B', EnumWithLabels::B()->label);
-    }
-
-    /** @test */
-    public function duplicate_labels_are_not_allowed()
-    {
-        $this->expectException(DuplicateLabelsException::class);
-
-        EnumWithDuplicateLabels::A();
-    }
-
-    /** @test */
-    public function it_can_automatically_map_labels()
-    {
-        $this->assertEquals('la', EnumWithAutomaticMappedLabels::A()->value);
-        $this->assertEquals('lb', EnumWithAutomaticMappedLabels::B()->value);
+        $this->assertEquals('a', EnumWithLabels::A->label());
+        $this->assertEquals('b', EnumWithLabels::B->label());
     }
 }
 
-/**
- * @method static self A()
- * @method static self B()
- */
-class EnumWithLabels extends Enum
+enum EnumWithLabels
 {
-    protected static function labels(): array
-    {
-        return [
-            'A' => 'a',
-        ];
-    }
-}
+    use \Spatie\Enum\Concerns\HasLabel;
 
-/**
- * @method static self A()
- * @method static self B()
- */
-class EnumWithDuplicateLabels extends Enum
-{
-    protected static function labels(): array
-    {
-        return [
-            'A' => 'a',
-            'B' => 'a',
-        ];
-    }
-}
+    case A;
+    case B;
 
-/**
- * @method static self A()
- * @method static self B()
- */
-class EnumWithAutomaticMappedLabels extends Enum
-{
-    protected static function values(): Closure
+    public function label(): string
     {
-        return fn (string $name) => 'l'.strtolower($name);
+        return match($this) {
+            self::A => 'a',
+            self::B => 'b',
+        };
     }
 }
