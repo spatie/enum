@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.8.0 - 2021-04-12
+
+- Add `cases()` method to retrieve all instances of the enum - [#79](https://github.com/spatie/enum/pull/79)
+
 ## 3.7.2 - 2021-03-10
 
 - Fix problem with `@readonly` annotation and annotation parsing libraries - [#92](https://github.com/spatie/enum/pull/92)
