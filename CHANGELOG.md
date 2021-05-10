@@ -2,6 +2,12 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.9.0 - 2021-05-10
+
+- Add `from()` and `tryFrom()` methods to get closer to PHP8.1 native enums - [#94](https://github.com/spatie/enum/pull/94)
+- Deprecate `make()` in favor of `from()` method - [#94](https://github.com/spatie/enum/pull/94)
+- Add flyweight pattern to return the same enum instance for every call - [#94](https://github.com/spatie/enum/pull/94)
+
 ## 3.8.0 - 2021-04-12
 
 - Add `cases()` method to retrieve all instances of the enum - [#79](https://github.com/spatie/enum/pull/79)
