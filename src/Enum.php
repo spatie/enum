@@ -30,13 +30,10 @@ abstract class Enum implements JsonSerializable
     /** @psalm-readonly */
     protected string $label;
 
-    /** @psalm-var array<string, array<string, \Spatie\Enum\EnumDefinition>> */
+    /** @psalm-var array<class-string, array<string, \Spatie\Enum\EnumDefinition>> */
     private static array $definitionCache = [];
 
-    /**
-     * This holds references to all enums created, at most 1 enum per class / value combination is created
-     * @psalm-var array<class-string, <int|string, Enum>>
-     */
+    /** @psalm-var array<class-string, array<int|string, \Spatie\Enum\Enum>> */
     private static array $instances = [];
 
     /**
