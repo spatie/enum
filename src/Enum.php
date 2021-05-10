@@ -107,10 +107,13 @@ abstract class Enum implements JsonSerializable
             throw new TypeError("Only string and integer are allowed values for enum {$enumClass}.");
         }
 
-        if (!isset(self::$instances[static::class][$value])) {
-            self::$instances[static::class][$value] = new static($value);
+        $enum = new static($value);
+
+        if (!isset(self::$instances[static::class][$enum->value])) {
+            self::$instances[static::class][$enum->value] = $enum;
         }
-        return self::$instances[static::class][$value];
+
+        return self::$instances[static::class][$enum->value];
     }
 
     /**

@@ -27,7 +27,9 @@ class EnumTest extends TestCase
     /** @test */
     public function enum_can_be_strict_compared()
     {
-        $this->assertSame(MyEnum::A(), MyEnum::A());
+        $this->assertSame(MyEnum::A(), MyEnum::from('A'));
+        $this->assertSame(MyEnum::A(), MyEnum::from('a'));
+        $this->assertTrue(MyEnum::A() === MyEnum::from('a'));
     }
 
     /** @test */
