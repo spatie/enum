@@ -34,12 +34,18 @@ abstract class Enum implements JsonSerializable
     private static array $definitionCache = [];
 
     /**
+     * This holds references to all enums created, at most 1 enum per class / value combination is created
+     * @psalm-var array<class-string, <int|string, Enum>>
+     */
+    private static array $instances = [];
+
+    /**
      * @return static[]
      */
     public static function cases(): array
     {
         $instances = array_map(
-            fn (EnumDefinition $definition): Enum => static::make($definition->value),
+            fn (EnumDefinition $definition): Enum => static::from($definition->value),
             static::resolveDefinition()
         );
 
@@ -81,10 +87,44 @@ abstract class Enum implements JsonSerializable
      * @param string|int $value
      *
      * @return static
+     * @deprecated Use `from()` instead
      */
     public static function make($value): Enum
     {
-        return new static($value);
+        return static::from($value);
+    }
+
+    /**
+     * @param string|int $value
+     *
+     * @return static
+     */
+    final public static function from($value): Enum
+    {
+        if (! (is_string($value) || is_int($value))) {
+            $enumClass = static::class;
+
+            throw new TypeError("Only string and integer are allowed values for enum {$enumClass}.");
+        }
+
+        if (!isset(self::$instances[static::class][$value])) {
+            self::$instances[static::class][$value] = new static($value);
+        }
+        return self::$instances[static::class][$value];
+    }
+
+    /**
+     * @param string|int $value
+     *
+     * @return static
+     */
+    final public static function tryFrom($value): ?Enum
+    {
+        try {
+            return static::from($value);
+        } catch (BadMethodCallException $dummy) {
+            return null;
+        }
     }
 
     /**

@@ -25,6 +25,12 @@ class EnumTest extends TestCase
     }
 
     /** @test */
+    public function enum_can_be_strict_compared()
+    {
+        $this->assertSame(MyEnum::A(), MyEnum::A());
+    }
+
+    /** @test */
     public function unknown_enum_method_triggers_exception()
     {
         $this->expectException(BadMethodCallException::class);
