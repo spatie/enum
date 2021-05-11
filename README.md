@@ -89,10 +89,18 @@ $class->setStatus(StatusEnum::draft());
 ### Creating an enum from a value
 
 ```php
-$status = new StatusEnum('draft');
+$status = StatusEnum::from('draft');
 ```
 
-When an enum value doesn't exist, you'll get an error. The only time you want to construct an enum from a value is when unserializing them from eg. a database.
+When an enum value doesn't exist, you'll get a `BadMethodCallException`. If you would prefer not catching an exception, you can use:
+
+```php
+$status = StatusEnum::tryFrom('draft');
+```
+
+When an enum value doesn't exist in this case, `$status` will be `null`.
+
+The only time you want to construct an enum from a value is when unserializing them from eg. a database.
 
 If you want to get the value of an enum to store it, you can do this:
 
