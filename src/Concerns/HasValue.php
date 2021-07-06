@@ -12,10 +12,10 @@ trait HasValue
     /**
      * @return string[]|int[]
      */
-    public static function toValues(): array
+    public static function values(): array
     {
         return array_map(
-            fn(self $enum) => $enum->value(),
+            static fn(self $enum): int|string => $enum->value(),
             static::cases()
         );
     }

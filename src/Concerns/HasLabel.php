@@ -9,10 +9,10 @@ trait HasLabel
     /**
      * @return string[]
      */
-    public static function toLabels(): array
+    public static function labels(): array
     {
         return array_map(
-            fn(self $enum) => $enum->label(),
+            static fn(self $enum): string => $enum->label(),
             static::cases()
         );
     }
