@@ -41,7 +41,7 @@ final class FakerEnumProviderTest extends TestCase
 
         $this->assertIsInt($value);
         $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::from($value));
-        $this->assertTrue(in_array($value, RandomizedEnum::toValues(), true));
+        $this->assertTrue(in_array($value, RandomizedEnum::values(), true));
     }
 
     /**
