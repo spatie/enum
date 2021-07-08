@@ -53,7 +53,7 @@ final class FakerEnumProviderTest extends TestCase
         $label = $this->faker->randomEnumLabel(RandomizedEnum::class);
 
         $this->assertIsString($label);
-        $this->assertTrue(in_array($label, RandomizedEnum::toLabels(), true));
+        $this->assertTrue(in_array($label, RandomizedEnum::labels(), true));
     }
 
     public function repeatHundredTimes(): iterable

@@ -15,7 +15,7 @@ class EnumValueTest extends TestCase
         $this->assertEquals([
             1,
             2,
-        ], EnumWithValues::toValues());
+        ], EnumWithValues::values());
     }
 
     /** @test */

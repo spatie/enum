@@ -15,7 +15,7 @@ class EnumLabelTest extends TestCase
         $this->assertEquals([
             'a',
             'b'
-        ], EnumWithLabels::toLabels());
+        ], EnumWithLabels::labels());
     }
 
     /** @test */
