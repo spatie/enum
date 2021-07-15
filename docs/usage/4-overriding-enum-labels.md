@@ -30,7 +30,7 @@ $status->label;
 
 Note that `label` is a read-only property, it cannot be changed.
 
-You may also return a closure to derive the enum value from the method name.
+You may also return a closure to derive the enum label from the method name.
 
 ```php
 /**
