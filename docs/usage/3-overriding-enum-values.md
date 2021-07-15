@@ -25,3 +25,19 @@ class StatusEnum extends Enum
 ```
 
 An enum value doesn't have to be a string, as you can see in the example.
+
+You may also return a closure to derive the enum value from the method name.
+
+```php
+/**
+ * @method static self issue()
+ * @method static self pullRequest()
+ */
+class EventEnum extends Enum
+{
+    protected static function values(): Closure
+    {
+        return fn (string $name) => snake_case($name);
+    }
+}
+```
