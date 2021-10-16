@@ -39,6 +39,10 @@ class EnumDefinition
             return true;
         }
 
+        if ($this->label === $input) {
+            return true;
+        }
+
         if (is_string($input) && $this->methodName === strtolower($input)) {
             return true;
         }
