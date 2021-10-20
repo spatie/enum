@@ -13,14 +13,21 @@ class EnumValueTest extends TestCase
     public function test_value_on_enum()
     {
         $this->assertEquals(1, EnumWithValues::A()->value);
-        $this->assertEquals('B', EnumWithValues::B()->value);
+        $this->assertEquals(2, EnumWithValues::B()->value);
     }
 
     /** @test */
-    public function construct_from_method_name()
+    public function construct_from_all_possible_values()
     {
         $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('A')));
+        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('a')));
+        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('1')));
         $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues(1)));
+
+        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('B')));
+        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('b')));
+        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('2')));
+        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues(2)));
     }
 
     /** @test */
@@ -35,7 +42,7 @@ class EnumValueTest extends TestCase
     public function json_serialize_returns_same_value_type()
     {
         $this->assertSame(1, EnumWithValues::A()->jsonSerialize());
-        $this->assertSame('B', EnumWithValues::B()->jsonSerialize());
+        $this->assertSame(2, EnumWithValues::B()->jsonSerialize());
     }
 
     /** @test */
@@ -56,6 +63,7 @@ class EnumWithValues extends Enum
     {
         return [
             'A' => 1,
+            'B' => 2,
         ];
     }
 }

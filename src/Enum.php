@@ -98,12 +98,6 @@ abstract class Enum implements JsonSerializable
      */
     final public static function from($value): Enum
     {
-        if (! (is_string($value) || is_int($value))) {
-            $enumClass = static::class;
-
-            throw new TypeError("Only string and integer are allowed values for enum {$enumClass}.");
-        }
-
         $enum = new static($value);
 
         if (!isset(self::$instances[static::class][$enum->value])) {
@@ -116,7 +110,7 @@ abstract class Enum implements JsonSerializable
     /**
      * @param string|int $value
      *
-     * @return static
+     * @return static|null
      */
     final public static function tryFrom($value): ?Enum
     {
@@ -180,7 +174,7 @@ abstract class Enum implements JsonSerializable
      */
     public static function __callStatic(string $name, array $arguments)
     {
-        return static::make($name);
+        return static::from($name);
     }
 
     /**
@@ -194,7 +188,7 @@ abstract class Enum implements JsonSerializable
     public function __call(string $name, array $arguments)
     {
         if (strpos($name, 'is') === 0) {
-            $other = static::make(substr($name, 2));
+            $other = static::from(substr($name, 2));
 
             return $this->equals($other);
         }

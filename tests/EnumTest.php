@@ -45,7 +45,7 @@ class EnumTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        MyEnum::make([]);
+        MyEnum::from([]);
     }
 
     /** @test */
