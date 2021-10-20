@@ -110,7 +110,7 @@ abstract class Enum implements JsonSerializable
     /**
      * @param string|int $value
      *
-     * @return static
+     * @return static|null
      */
     final public static function tryFrom($value): ?Enum
     {
