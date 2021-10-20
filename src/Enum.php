@@ -138,7 +138,7 @@ abstract class Enum implements JsonSerializable
      */
     public function __construct($value)
     {
-        if(is_object($value) && method_exists($value, '__toString')) {
+        if (is_object($value) && method_exists($value, '__toString')) {
             $value = (string)$value;
         }
 

@@ -2,10 +2,8 @@
 
 namespace Spatie\Enum\Tests;
 
-use Closure;
 use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
-use Spatie\Enum\Exceptions\DuplicateValuesException;
 use stdClass;
 use TypeError;
 
@@ -27,12 +25,18 @@ class EnumFromTest extends TestCase
     {
         $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from('GET')));
         $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from(new class {
-            public function __toString() { return 'GET'; }
+            public function __toString()
+            {
+                return 'GET';
+            }
         })));
         $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from(1)));
         $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from('1')));
         $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from(new class {
-            public function __toString() { return '1'; }
+            public function __toString()
+            {
+                return '1';
+            }
         })));
     }
 
