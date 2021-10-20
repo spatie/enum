@@ -108,7 +108,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @param string|int $value
+     * @param string|int|mixed $value
      *
      * @return static|null
      */
@@ -116,10 +116,18 @@ abstract class Enum implements JsonSerializable
     {
         try {
             return static::from($value);
-        } catch (BadMethodCallException $dummy) {
+        } catch (BadMethodCallException $exception) {
             return null;
-        } catch (TypeError $dummy) {
-            return null;
+        } catch (TypeError $exception) {
+            if (
+                $value === null
+                || is_scalar($value)
+                || (is_object($value) && method_exists($value, '__toString'))
+            ) {
+                return null;
+            }
+
+            throw $exception;
         }
     }
 
@@ -130,7 +138,11 @@ abstract class Enum implements JsonSerializable
      */
     public function __construct($value)
     {
-        if (! (is_string($value) || is_int($value))) {
+        if(is_object($value) && method_exists($value, '__toString')) {
+            $value = (string)$value;
+        }
+
+        if (! (is_int($value) || is_string($value))) {
             $enumClass = static::class;
 
             throw new TypeError("Only string and integer are allowed values for enum {$enumClass}.");
