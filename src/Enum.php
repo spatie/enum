@@ -185,7 +185,8 @@ abstract class Enum implements JsonSerializable
      *
      * @return bool
      */
-    public function __isset($name){
+    public function __isset(string $name): bool
+    {
         return $name === 'label' || $name === 'value';
     }
 
