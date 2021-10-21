@@ -181,7 +181,7 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return bool
      */
