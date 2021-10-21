@@ -181,6 +181,15 @@ abstract class Enum implements JsonSerializable
     }
 
     /**
+     * @param $name
+     *
+     * @return bool
+     */
+    public function __isset($name){
+        return $name === 'label' || $name === 'value';
+    }
+
+    /**
      * @param string $name
      * @param array $arguments
      *
