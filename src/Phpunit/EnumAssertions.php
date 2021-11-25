@@ -8,7 +8,7 @@ use PHPUnit\Framework\Assert as PHPUnit;
 use Spatie\Enum\Enum;
 use TypeError;
 
-trait EnumAssertions
+abstract class EnumAssertions
 {
     /**
      * Checks if actual extends Enum::class.
