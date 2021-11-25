@@ -1,4 +1,4 @@
-s# PHP Enum
+# PHP Enum
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/enum.svg?style=for-the-badge)](https://packagist.org/packages/spatie/enum)
 [![License](https://img.shields.io/github/license/spatie/enum?style=for-the-badge)](https://github.com/spatie/enum/blob/master/LICENSE.md)
