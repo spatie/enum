@@ -2,6 +2,10 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.11.1 - 2021-11-25
+
+- Change attribute for PHP 8.1 compatibility
+
 ## 3.11.0 - 2021-11-25
 
 - Added support for PHP 8.1
@@ -122,6 +126,7 @@ All notable changes to `enum` will be documented in this file
 - Make `\Spatie\Enum\Enumerable::isValidIndex/Name/Value()` methods public [#36](https://github.com/spatie/enum/pull/36)
 - > Please note that this could be breaking for custom implementations of the `\Spatie\Enum\Enumerable` interface.
 - 
+- 
 
 ## 2.2.0 - 2019-07-18
 
@@ -149,17 +154,17 @@ A full major rework of the `Enum` class - we try to list all changes, for more d
 
 - Add `\Spatie\Enum\Enumerable` interface
 - Add `\Spatie\Enum\Exceptions\DuplicatedIndexException`, `\Spatie\Enum\Exceptions\DuplicatedValueException`, `\Spatie\Enum\Exceptions\InvalidIndexException` and `\Spatie\Enum\Exceptions\InvalidValueException` exceptions
-- Add `\Spatie\Enum\Enum-&gt;getIndex()` method
+- Add `\Spatie\Enum\Enum-&amp;gt;getIndex()` method
 - Add `\Spatie\Enum\Enum::getIndices()` method
-- Add `\Spatie\Enum\Enum-&gt;getValue()` method
+- Add `\Spatie\Enum\Enum-&amp;gt;getValue()` method
 - Add `\Spatie\Enum\Enum::getValues()` method
 - Rename `\Spatie\Enum\Enum::from()` to `\Spatie\Enum\Enum::make()`
 - Rename `\Spatie\Enum\Enum::equals()` to `\Spatie\Enum\Enum::isEqual()`
 - Rename `\Spatie\Enum\Enum::isOneOf()` to `\Spatie\Enum\Enum::isAny()`
-- Change `\Spatie\Enum\Enum-&gt;__construct()` signature and responsibility - only take index & value and validate them
-- Change `\Spatie\Enum\Enum::toArray()` return value instead of an array of `value =&gt; name` it returns `value =&gt; index`
+- Change `\Spatie\Enum\Enum-&amp;gt;__construct()` signature and responsibility - only take index & value and validate them
+- Change `\Spatie\Enum\Enum::toArray()` return value instead of an array of `value =&amp;gt; name` it returns `value =&amp;gt; index`
 - Drop recursive `\Spatie\Enum\Enum::make()` support from inside of an unstatic method
-- Drop `\Spatie\Enum\Enum::$map` in favor of `\Spatie\Enum\Enum-&gt;getIndex()`and `\Spatie\Enum\Enum-&gt;getValue()`
+- Drop `\Spatie\Enum\Enum::$map` in favor of `\Spatie\Enum\Enum-&amp;gt;getIndex()`and `\Spatie\Enum\Enum-&amp;gt;getValue()`
 - Update all methods have strict type checks: `index: int` and `value: string`
 - Update all methods are compatible with all required types: index, value, name or instance of Enum
 
