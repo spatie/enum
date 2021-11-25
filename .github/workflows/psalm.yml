@@ -3,8 +3,8 @@ name: Psalm
 on:
   push:
     paths:
-      - "**.php"
-      - "psalm.xml"
+      - '**.php'
+      - 'psalm.xml.dist'
 
 jobs:
   psalm:
@@ -16,18 +16,18 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: '8.0'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
       - name: Cache composer dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
 
-      - name: Run composer require
-        run: composer require -n --prefer-dist
+      - name: Run composer install
+        run: composer install -n --prefer-dist
 
       - name: Run psalm
-        run: ./vendor/bin/psalm -c psalm.xml
+        run: ./vendor/bin/psalm --output-format=github
