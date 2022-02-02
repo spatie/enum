@@ -205,7 +205,7 @@ $status->equals(StatusEnum::draft(), StatusEnum::archived());
 
 ### Phpunit Assertions
 
-This package provides a trait `Spatie\Enum\Phpunit\EnumAssertions` with some basic/common assertions if you have to test enums.
+This package provides an abstract class `Spatie\Enum\Phpunit\EnumAssertions` with some basic/common assertions if you have to test enums.
 
 ```php
 use Spatie\Enum\Phpunit\EnumAssertions;
