@@ -6,6 +6,10 @@ All notable changes to `enum` will be documented in this file
 
 - Add support for `isset()` calls to enum `->value` und `->label` - [#109](https://github.com/spatie/enum/pull/109)
 
+## 3.12.0 - 2022-02-05
+
+- Add support for `isset()` calls to enum `->value` und `->label` - [#109](https://github.com/spatie/enum/pull/109)
+
 ## 3.11.1 - 2021-11-25
 
 - Change attribute for PHP 8.1 compatibility
@@ -129,6 +133,7 @@ All notable changes to `enum` will be documented in this file
 
 - Make `\Spatie\Enum\Enumerable::isValidIndex/Name/Value()` methods public [#36](https://github.com/spatie/enum/pull/36)
 - > Please note that this could be breaking for custom implementations of the `\Spatie\Enum\Enumerable` interface.
+- 
 - 
 - 
 
