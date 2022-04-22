@@ -2,6 +2,11 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 3.13.0 - 2022-04-22
+
+- Drop PHP 7.4 support
+- Add `Stringable` interface to enum class - [#116](https://github.com/spatie/enum/pull/116)
+
 ## 3.12.0 - 2022-02-05
 
 - Add support for `isset()` calls to enum `->value` und `->label` - [#109](https://github.com/spatie/enum/pull/109)
