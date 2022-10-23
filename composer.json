@@ -34,6 +34,7 @@
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "larapack/dd": "^1.1",
+        "pestphp/pest": "^1.22",
         "phpunit/phpunit": "^9.0",
         "vimeo/psalm": "^4.3"
     },
@@ -52,7 +53,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "scripts": {
         "psalm": "vendor/bin/psalm -c psalm.xml --show-info=true",
