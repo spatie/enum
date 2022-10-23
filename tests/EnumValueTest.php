@@ -7,51 +7,39 @@ use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
 
-class EnumValueTest extends TestCase
-{
-    /** @test */
-    public function test_value_on_enum()
-    {
-        $this->assertEquals(1, EnumWithValues::A()->value);
-        $this->assertEquals(2, EnumWithValues::B()->value);
-    }
+test('value on enum', function () {
+    $this->assertEquals(1, EnumWithValues::A()->value);
+    $this->assertEquals(2, EnumWithValues::B()->value);
+});
 
-    /** @test */
-    public function construct_from_all_possible_values()
-    {
-        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('A')));
-        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('a')));
-        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('1')));
-        $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues(1)));
+test('construct from all possible values', function () {
+    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('A')));
+    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('a')));
+    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('1')));
+    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues(1)));
 
-        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('B')));
-        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('b')));
-        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('2')));
-        $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues(2)));
-    }
+    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('B')));
+    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('b')));
+    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('2')));
+    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues(2)));
+});
 
-    /** @test */
-    public function duplicate_labels_are_not_allowed()
-    {
-        $this->expectException(DuplicateValuesException::class);
+test('duplicate labels are not allowed', function () {
+    $this->expectException(DuplicateValuesException::class);
 
-        EnumWithDuplicatedValues::A();
-    }
+    EnumWithDuplicatedValues::A();
+});
 
-    /** @test */
-    public function json_serialize_returns_same_value_type()
-    {
-        $this->assertSame(1, EnumWithValues::A()->jsonSerialize());
-        $this->assertSame(2, EnumWithValues::B()->jsonSerialize());
-    }
+test('json serialize returns same value type', function () {
+    $this->assertSame(1, EnumWithValues::A()->jsonSerialize());
+    $this->assertSame(2, EnumWithValues::B()->jsonSerialize());
+});
 
-    /** @test */
-    public function it_can_automatically_map_values()
-    {
-        $this->assertEquals('va', EnumWithAutomaticMappedValues::A()->value);
-        $this->assertEquals('vb', EnumWithAutomaticMappedValues::B()->value);
-    }
-}
+it('can automatically map values', function () {
+    $this->assertEquals('va', EnumWithAutomaticMappedValues::A()->value);
+    $this->assertEquals('vb', EnumWithAutomaticMappedValues::B()->value);
+});
+
 
 /**
  * @method static self A()
