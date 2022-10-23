@@ -44,7 +44,7 @@ test('try from will throw type error for array', function () {
     HttpMethod::tryFrom(['GET']);
 });
 
-test('try from will throw type erorr for object', function () {
+test('try from will throw type error for object', function () {
     $this->expectException(TypeError::class);
 
     HttpMethod::tryFrom(new stdClass);

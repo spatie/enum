@@ -9,41 +9,36 @@ use Spatie\Enum\Enum;
  * @test
  * @dataProvider repeatHundredTimes
  */
-it('can generate random enum instances', function () {
-    $enum = fakerGeneratorInit()->randomEnum(RandomizedEnum::class);
-    $this->assertInstanceOf(RandomizedEnum::class, $enum);
-});
+test('it runs 100 times', function ($iteration) {
+    it('can generate random enum instances', function () {
+        $enum = fakerGeneratorInit()->randomEnum(RandomizedEnum::class);
+        $this->assertInstanceOf(RandomizedEnum::class, $enum);
+    });
 
-/**
- * @test
- * @dataProvider repeatHundredTimes
- */
-it('can generate random enum values', function () {
-   $value = fakerGeneratorInit()->randomEnumValue(RandomizedEnum::class);
+    /**
+     * @test
+     * @dataProvider repeatHundredTimes
+     */
+    it('can generate random enum values', function () {
+        $value = fakerGeneratorInit()->randomEnumValue(RandomizedEnum::class);
 
-   $this->assertIsString($value);
-   $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($value));
-   $this->assertTrue(in_array($value, RandomizedEnum::toValues(), true));
-});
+        $this->assertIsString($value);
+        $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($value));
+        $this->assertTrue(in_array($value, RandomizedEnum::toValues(), true));
+    });
 
-/**
- * @test
- * @dataProvider repeatHundredTimes
- */
-it('can generate random enum labels', function() {
-    $label = fakerGeneratorInit()->randomEnumLabel(RandomizedEnum::class);
+    /**
+     * @test
+     * @dataProvider repeatHundredTimes
+     */
+    it('can generate random enum labels', function() {
+        $label = fakerGeneratorInit()->randomEnumLabel(RandomizedEnum::class);
 
-    $this->assertIsString($label);
-    $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($label));
-    $this->assertTrue(in_array($label, RandomizedEnum::toLabels(), true));
-});
-//
-//function repeatHundredTimes(): iterable
-//{
-//    for ($i = 0; $i < 100; $i++) {
-//        yield [];
-//    }
-//}
+        $this->assertIsString($label);
+        $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($label));
+        $this->assertTrue(in_array($label, RandomizedEnum::toLabels(), true));
+    });
+})->with(range(1,100));
 
 /**
  * @method static self A()
