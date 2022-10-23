@@ -4,11 +4,6 @@ namespace Spatie\Enum\Tests\Faker;
 
 use Spatie\Enum\Enum;
 
-beforeEach(function() {
-    for ($i = 0; $i < 100; $i++) {
-        yield [];
-    }
-});
 
 /**
  * @test
