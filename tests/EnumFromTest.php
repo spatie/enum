@@ -7,7 +7,7 @@ use stdClass;
 use TypeError;
 
 
-test('from will throw type error for unallowed value types', function($value) {
+it('will throw type error for unallowed value types', function($value) {
     $this->expectException(TypeError::class);
 
     HttpMethod::from($value);

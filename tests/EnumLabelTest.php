@@ -7,7 +7,7 @@ use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
 
 
-test('labels into array', function() {
+it('can turn labels into array', function() {
     expect([
         'A' => 'a',
         'B' => 'B'

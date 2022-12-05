@@ -12,7 +12,7 @@ test('value on enum', function () {
     expect(2)->toEqual(EnumWithValues::B()->value);
 });
 
-test('construct from all possible values', function () {
+it('can construct from all possible values', function () {
     expect(EnumWithValues::A()->equals(new EnumWithValues('A')))->toBeTrue();
     expect(EnumWithValues::A()->equals(new EnumWithValues('a')))->toBeTrue();
     expect(EnumWithValues::A()->equals(new EnumWithValues('1')))->toBeTrue();

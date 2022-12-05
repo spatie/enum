@@ -6,30 +6,30 @@ use BadMethodCallException;
 use Spatie\Enum\Enum;
 use TypeError;
 
-test('enums can be constructed', function () {
+it('can construct enums', function () {
     $enum = MyEnum::A();
 
     expect($enum)->toBeInstanceOf(MyEnum::class);
 });
 
-test('enums can be constructed with whitespace', function () {
+it('can construct enums with whitespace', function () {
 
     expect(BadDockBlockEnum::A())->toBeInstanceOf(BadDockBlockEnum::class);
     expect(BadDockBlockEnum::B())->toBeInstanceOf(BadDockBlockEnum::class);
 });
 
-test('enums can be strict compared', function () {
+it('can strict compare enums', function () {
 
     expect(MyEnum::A())->toBe(MyEnum::from('A'));
     expect(MyEnum::A())->toBe(MyEnum::from('a'));
     expect(MyEnum::A() === MyEnum::from('a'))->toBeTrue();
 });
 
-test('unknown enum method triggers exception', function () {
+it('triggers exception for unknown enum method', function () {
     expect(fn() => MyEnum::C())->toThrow(BadMethodCallException::class);
 });
 
-test('invalid value type throws exception', function () {
+it('throws exception for invalid value type', function () {
 
     expect(fn() => MyEnum::from([]))->toThrow(TypeError::class);
 });
@@ -50,19 +50,19 @@ test('equals multiple', function () {
     ))->toBeFalse();
 });
 
-test('to json', function () {
+it('can turn enum to json', function () {
     $json = json_encode(MyEnum::A());
 
     expect('"A"')->toEqual($json);
 });
 
-test('to string', function () {
+it('can turn enum to string', function () {
     $string = (string) MyEnum::A();
 
     expect('A')->toEqual($string);
 });
 
-test('use enum construct within an enum', function () {
+it('can use enum construct within an enum', function () {
     $enum = EnumWithEnum::A();
 
     expect(EnumWithEnum::B()->equals($enum->test()))->toBeTrue();
