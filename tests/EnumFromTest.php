@@ -7,11 +7,9 @@ use stdClass;
 use TypeError;
 
 
-it('will throw type error for unallowed value types', function($value) {
-    $this->expectException(TypeError::class);
-
-    HttpMethod::from($value);
-})->with(["1", "2"])->skip();
+test('from will throw type error for unallowed value types', function($value) {
+    expect(fn() => HttpMethod::from($value))->toThrow(TypeError::class);
+})->with([false, true, 1.4, [['GET']], [new stdClass]]);
 
 test('from resolves all allowed value types', function() {
     expect(HttpMethod::GET()->equals(HttpMethod::from('GET')))->toBeTrue();
