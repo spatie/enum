@@ -11,7 +11,8 @@ use Spatie\Enum\Enum;
  */
 it('can generate random enum instances', function () {
     $enum = fakerGeneratorInit()->randomEnum(RandomizedEnum::class);
-    $this->assertInstanceOf(RandomizedEnum::class, $enum);
+
+    expect($enum)->toBeInstanceOf(RandomizedEnum::class);
 });
 
 /**
@@ -21,9 +22,9 @@ it('can generate random enum instances', function () {
 it('can generate random enum values', function () {
     $value = fakerGeneratorInit()->randomEnumValue(RandomizedEnum::class);
 
-    $this->assertIsString($value);
-    $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($value));
-    $this->assertTrue(in_array($value, RandomizedEnum::toValues(), true));
+    expect($value)->toBeString();
+    expect(RandomizedEnum::make($value))->toBeInstanceOf(RandomizedEnum::class);
+    expect(in_array($value, RandomizedEnum::toValues(), true))->toBeTrue();
 });
 
 /**
@@ -33,9 +34,9 @@ it('can generate random enum values', function () {
 it('can generate random enum labels', function() {
     $label = fakerGeneratorInit()->randomEnumLabel(RandomizedEnum::class);
 
-    $this->assertIsString($label);
-    $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($label));
-    $this->assertTrue(in_array($label, RandomizedEnum::toLabels(), true));
+    expect($label)->toBeString();
+    expect(RandomizedEnum::make($label))->toBeInstanceOf(RandomizedEnum::class);
+    expect(in_array($label, RandomizedEnum::toLabels(), true))->toBeTrue();
 });
 
 /**

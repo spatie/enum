@@ -8,36 +8,35 @@ use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
 
 test('value on enum', function () {
-    $this->assertEquals(1, EnumWithValues::A()->value);
-    $this->assertEquals(2, EnumWithValues::B()->value);
+    expect(1)->toEqual(EnumWithValues::A()->value);
+    expect(2)->toEqual(EnumWithValues::B()->value);
 });
 
 test('construct from all possible values', function () {
-    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('A')));
-    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('a')));
-    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues('1')));
-    $this->assertTrue(EnumWithValues::A()->equals(new EnumWithValues(1)));
+    expect(EnumWithValues::A()->equals(new EnumWithValues('A')))->toBeTrue();
+    expect(EnumWithValues::A()->equals(new EnumWithValues('a')))->toBeTrue();
+    expect(EnumWithValues::A()->equals(new EnumWithValues('1')))->toBeTrue();
+    expect(EnumWithValues::A()->equals(new EnumWithValues(1)))->toBeTrue();
 
-    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('B')));
-    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('b')));
-    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues('2')));
-    $this->assertTrue(EnumWithValues::B()->equals(new EnumWithValues(2)));
+    expect(EnumWithValues::B()->equals(new EnumWithValues('B')))->toBeTrue();
+    expect(EnumWithValues::B()->equals(new EnumWithValues('b')))->toBeTrue();
+    expect(EnumWithValues::B()->equals(new EnumWithValues('2')))->toBeTrue();
+    expect(EnumWithValues::B()->equals(new EnumWithValues(2)))->toBeTrue();
 });
 
 test('duplicate labels are not allowed', function () {
-    $this->expectException(DuplicateValuesException::class);
 
-    EnumWithDuplicatedValues::A();
+    expect(fn() => EnumWithDuplicatedValues::A())->toThrow(DuplicateValuesException::class);
 });
 
 test('json serialize returns same value type', function () {
-    $this->assertSame(1, EnumWithValues::A()->jsonSerialize());
-    $this->assertSame(2, EnumWithValues::B()->jsonSerialize());
+    expect(1)->toBe(EnumWithValues::A()->jsonSerialize());
+    expect(2)->toBe(EnumWithValues::B()->jsonSerialize());
 });
 
 it('can automatically map values', function () {
-    $this->assertEquals('va', EnumWithAutomaticMappedValues::A()->value);
-    $this->assertEquals('vb', EnumWithAutomaticMappedValues::B()->value);
+    expect('va')->toEqual(EnumWithAutomaticMappedValues::A()->value);
+    expect('vb')->toEqual(EnumWithAutomaticMappedValues::B()->value);
 });
 
 

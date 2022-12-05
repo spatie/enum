@@ -8,26 +8,25 @@ use Spatie\Enum\Exceptions\DuplicateLabelsException;
 
 
 test('labels into array', function() {
-    $this->assertEquals([
+    expect([
         'A' => 'a',
         'B' => 'B'
-    ], EnumWithLabels::toArray());
+    ])->toEqual(EnumWithLabels::toArray());
 });
 
 test('label on enum', function () {
-    $this->assertEquals('a', EnumWithLabels::A()->label);
-    $this->assertEquals('B', EnumWithLabels::B()->label);
+    expect('a')->toEqual(EnumWithLabels::A()->label);
+    expect('B')->toEqual(EnumWithLabels::B()->label);
 });
 
 test('duplicate labels are not allowed', function () {
-    $this->expectException(DuplicateLabelsException::class);
 
-    EnumWithDuplicateLabels::A();
+    expect(fn() => EnumWithDuplicateLabels::A())->toThrow(DuplicateLabelsException::class);
 });
 
 it('can automatically map labels', function () {
-    $this->assertEquals('la', EnumWithAutomaticMappedLabels::A()->value);
-    $this->assertEquals('lb', EnumWithAutomaticMappedLabels::B()->value);
+    expect('la')->toEqual(EnumWithAutomaticMappedLabels::A()->value);
+    expect('lb')->toEqual(EnumWithAutomaticMappedLabels::B()->value);
 });
 
 

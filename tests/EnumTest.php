@@ -9,64 +9,63 @@ use TypeError;
 test('enums can be constructed', function () {
     $enum = MyEnum::A();
 
-    $this->assertInstanceOf(MyEnum::class, $enum);
+    expect($enum)->toBeInstanceOf(MyEnum::class);
 });
 
 test('enums can be constructed with whitespace', function () {
-    $this->assertInstanceOf(BadDockBlockEnum::class, BadDockBlockEnum::A());
-    $this->assertInstanceOf(BadDockBlockEnum::class, BadDockBlockEnum::B());
+
+    expect(BadDockBlockEnum::A())->toBeInstanceOf(BadDockBlockEnum::class);
+    expect(BadDockBlockEnum::B())->toBeInstanceOf(BadDockBlockEnum::class);
 });
 
 test('enums can be strict compared', function () {
-    $this->assertSame(MyEnum::A(), MyEnum::from('A'));
-    $this->assertSame(MyEnum::A(), MyEnum::from('a'));
-    $this->assertTrue(MyEnum::A() === MyEnum::from('a'));
+
+    expect(MyEnum::A())->toBe(MyEnum::from('A'));
+    expect(MyEnum::A())->toBe(MyEnum::from('a'));
+    expect(MyEnum::A() === MyEnum::from('a'))->toBeTrue();
 });
 
 test('unknown enum method triggers exception', function () {
-    $this->expectException(BadMethodCallException::class);
-
-    MyEnum::C();
+    expect(fn() => MyEnum::C())->toThrow(BadMethodCallException::class);
 });
 
 test('invalid value type throws exception', function () {
-    $this->expectException(TypeError::class);
 
-    MyEnum::from([]);
+    expect(fn() => MyEnum::from([]))->toThrow(TypeError::class);
 });
 
 test('equals', function () {
-    $this->assertTrue(MyEnum::A()->equals(MyEnum::A()));
-    $this->assertFalse(MyEnum::A()->equals(MyEnum::B()));
+    expect(MyEnum::A()->equals(MyEnum::A()))->toBeTrue();
+    expect(MyEnum::A()->equals(MyEnum::B()))->toBeFalse();
 });
 
 test('equals multiple', function () {
-    $this->assertTrue(MyEnum::A()->equals(
+    expect(MyEnum::A()->equals(
         MyEnum::A(),
         MyEnum::B(),
-    ));
+    ))->toBeTrue();
 
-    $this->assertFalse(MyEnum::A()->equals(
+    expect(MyEnum::A()->equals(
         MyEnum::B(),
-    ));
+    ))->toBeFalse();
 });
 
 test('to json', function () {
     $json = json_encode(MyEnum::A());
 
-    $this->assertEquals('"A"', $json);
+    expect('"A"')->toEqual($json);
 });
 
 test('to string', function () {
     $string = (string) MyEnum::A();
 
-    $this->assertEquals('A', $string);
+    expect('A')->toEqual($string);
 });
 
 test('use enum construct within an enum', function () {
     $enum = EnumWithEnum::A();
 
-    $this->assertTrue(EnumWithEnum::B()->equals($enum->test()));
+    expect(EnumWithEnum::B()->equals($enum->test()))->toBeTrue();
 });
 
 

@@ -5,19 +5,19 @@ namespace Spatie\Enum\Tests;
 use Spatie\Enum\Enum;
 
 test('is', function () {
-    $this->assertTrue(EnumToCompare::A()->isA());
-    $this->assertFalse(EnumToCompare::A()->isB());
+    expect(EnumToCompare::A()->isA())->toBeTrue();
+    expect(EnumToCompare::A()->isB())->toBeFalse();
 
-    $this->assertTrue(EnumToCompare::B()->isB());
-    $this->assertFalse(EnumToCompare::B()->isA());
+    expect(EnumToCompare::B()->isB())->toBeTrue();
+    expect(EnumToCompare::B()->isA())->toBeFalse();
 });
 
 test('is with value map', function () {
-    $this->assertTrue(EnumToCompareWithValueMap::A()->isA());
-    $this->assertFalse(EnumToCompareWithValueMap::A()->isB());
+    expect(EnumToCompareWithValueMap::A()->isA())->toBeTrue();
+    expect(EnumToCompareWithValueMap::A()->isB())->toBeFalse();
 
-    $this->assertTrue(EnumToCompareWithValueMap::B()->isB());
-    $this->assertFalse(EnumToCompareWithValueMap::B()->isA());
+    expect(EnumToCompareWithValueMap::B()->isB())->toBeTrue();
+    expect(EnumToCompareWithValueMap::B()->isA())->toBeFalse();
 });
 
 

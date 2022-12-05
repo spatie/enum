@@ -5,44 +5,38 @@ namespace Spatie\Enum\Tests;
 use Spatie\Enum\Enum;
 
 test('to array', function () {
-    $this->assertSame(
-        ['A' => 'A', 'B' => 'B'],
-        SimpleEnumAsArray::toArray()
-    );
+    expect(
+        ['A' => 'A', 'B' => 'B']
+    )->toBe(SimpleEnumAsArray::toArray());
 
-    $this->assertSame(
-        ['A', 'B'],
-        SimpleEnumAsArray::toValues()
-    );
+    expect(
+        ['A', 'B']
+    )->toBe(SimpleEnumAsArray::toValues());
 
-    $this->assertSame(
-        ['A', 'B'],
-        SimpleEnumAsArray::toLabels()
-    );
+    expect(
+        ['A', 'B']
+    )->toBe(SimpleEnumAsArray::toLabels());
 });
 
 test('to array with value and label map', function () {
-    $this->assertSame(
-        ['A' => 'a', 2 => 'B'],
-        EnumAsArray::toArray()
-    );
+    expect(
+        ['A' => 'a', 2 => 'B']
+    )->toBe(EnumAsArray::toArray());
 
-    $this->assertSame(
-        ['A', 2],
-        EnumAsArray::toValues()
-    );
+    expect(
+        ['A', 2]
+    )->toBe(EnumAsArray::toValues());
 
-    $this->assertSame(
-        ['a', 'B'],
-        EnumAsArray::toLabels()
-    );
+    expect(
+        ['a', 'B']
+    )->toBe(EnumAsArray::toLabels());
 });
 
 test('cases', function () {
     $all = SimpleEnumAsArray::cases();
 
-    $this->assertTrue(SimpleEnumAsArray::A()->equals($all[0]));
-    $this->assertTrue(SimpleEnumAsArray::B()->equals($all[1]));
+    expect(SimpleEnumAsArray::A()->equals($all[0]))->toBeTrue();
+    expect(SimpleEnumAsArray::B()->equals($all[1]))->toBeTrue();
 });
 
 /**
