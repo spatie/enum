@@ -2,81 +2,53 @@
 
 namespace Spatie\Enum\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 use stdClass;
 use TypeError;
 
-class EnumFromTest extends TestCase
-{
-    /**
-     * @test
-     * @dataProvider unallowedTypes
-     */
-    public function from_will_throw_type_error_for_unallowed_value_types($value)
-    {
-        $this->expectException(TypeError::class);
 
-        HttpMethod::from($value);
-    }
+test('from will throw type error for unallowed value types', function($value) {
+    expect(fn() => HttpMethod::from($value))->toThrow(TypeError::class);
+})->with([false, true, 1.4, [['GET']], [new stdClass]]);
 
-    /** @test */
-    public function from_resolves_all_allowed_value_types()
-    {
-        $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from('GET')));
-        $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from(new class {
-            public function __toString()
-            {
-                return 'GET';
-            }
-        })));
-        $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from(1)));
-        $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from('1')));
-        $this->assertTrue(HttpMethod::GET()->equals(HttpMethod::from(new class {
-            public function __toString()
-            {
-                return '1';
-            }
-        })));
-    }
+test('from resolves all allowed value types', function() {
+    expect(HttpMethod::GET()->equals(HttpMethod::from('GET')))->toBeTrue();
 
-    /** @test */
-    public function try_from_will_result_in_null_values()
-    {
-        $this->assertNull(HttpMethod::tryFrom(''));
-        $this->assertNull(HttpMethod::tryFrom(false));
-        $this->assertNull(HttpMethod::tryFrom(true));
-        $this->assertNull(HttpMethod::tryFrom(1.0));
-        $this->assertNull(HttpMethod::tryFrom(1.4));
-    }
 
-    /** @test */
-    public function try_from_will_throw_type_error_for_array()
-    {
-        $this->expectException(TypeError::class);
+    expect(HttpMethod::GET()->equals(HttpMethod::from(new class {
+        public function __toString()
+        {
+            return 'GET';
+        }
+    })))->toBeTrue();
+    expect(HttpMethod::GET()->equals(HttpMethod::from(1)))->toBeTrue();
+    expect(HttpMethod::GET()->equals(HttpMethod::from('1')))->toBeTrue();
+    expect(HttpMethod::GET()->equals(HttpMethod::from(new class {
+        public function __toString()
+        {
+            return '1';
+        }
+    })))->toBeTrue();
+});
 
-        HttpMethod::tryFrom(['GET']);
-    }
+test('try from will result in null values', function () {
+    expect(HttpMethod::tryFrom(''))->toBeNull();
+    expect(HttpMethod::tryFrom(false))->toBeNull();
+    expect(HttpMethod::tryFrom(true))->toBeNull();
+    expect(HttpMethod::tryFrom(1.0))->toBeNull();
+    expect(HttpMethod::tryFrom(1.4))->toBeNull();
+});
 
-    /** @test */
-    public function try_from_will_throw_type_error_for_object()
-    {
-        $this->expectException(TypeError::class);
+test('try from will throw type error for array', function () {
 
-        HttpMethod::tryFrom(new stdClass);
-    }
+    expect(fn() => HttpMethod::tryFrom(['GET']))->toThrow(TypeError::class);
+});
 
-    public function unallowedTypes(): array
-    {
-        return [
-            [false],
-            [true],
-            [1.4],
-            [['GET']],
-            [new stdClass],
-        ];
-    }
-}
+test('try from will throw type error for object', function () {
+
+   expect(fn() => HttpMethod::tryFrom(new stdClass))->toThrow(TypeError::class);
+});
+
 
 /**
  * @method static self GET()

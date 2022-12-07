@@ -2,31 +2,24 @@
 
 namespace Spatie\Enum\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 
-class EnumIsTest extends TestCase
-{
-    /** @test */
-    public function test_is()
-    {
-        $this->assertTrue(EnumToCompare::A()->isA());
-        $this->assertFalse(EnumToCompare::A()->isB());
+test('is', function () {
+    expect(EnumToCompare::A()->isA())->toBeTrue();
+    expect(EnumToCompare::A()->isB())->toBeFalse();
 
-        $this->assertTrue(EnumToCompare::B()->isB());
-        $this->assertFalse(EnumToCompare::B()->isA());
-    }
+    expect(EnumToCompare::B()->isB())->toBeTrue();
+    expect(EnumToCompare::B()->isA())->toBeFalse();
+});
 
-    /** @test */
-    public function test_is_with_value_map()
-    {
-        $this->assertTrue(EnumToCompareWithValueMap::A()->isA());
-        $this->assertFalse(EnumToCompareWithValueMap::A()->isB());
+test('is with value map', function () {
+    expect(EnumToCompareWithValueMap::A()->isA())->toBeTrue();
+    expect(EnumToCompareWithValueMap::A()->isB())->toBeFalse();
 
-        $this->assertTrue(EnumToCompareWithValueMap::B()->isB());
-        $this->assertFalse(EnumToCompareWithValueMap::B()->isA());
-    }
-}
+    expect(EnumToCompareWithValueMap::B()->isB())->toBeTrue();
+    expect(EnumToCompareWithValueMap::B()->isA())->toBeFalse();
+});
+
 
 /**
  * @method static self A()

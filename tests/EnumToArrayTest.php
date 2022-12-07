@@ -2,58 +2,42 @@
 
 namespace Spatie\Enum\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 
-class EnumToArrayTest extends TestCase
-{
-    /** @test */
-    public function test_to_array()
-    {
-        $this->assertSame(
-            ['A' => 'A', 'B' => 'B'],
-            SimpleEnumAsArray::toArray()
-        );
+test('to array', function () {
+    expect(
+        ['A' => 'A', 'B' => 'B']
+    )->toBe(SimpleEnumAsArray::toArray());
 
-        $this->assertSame(
-            ['A', 'B'],
-            SimpleEnumAsArray::toValues()
-        );
+    expect(
+        ['A', 'B']
+    )->toBe(SimpleEnumAsArray::toValues());
 
-        $this->assertSame(
-            ['A', 'B'],
-            SimpleEnumAsArray::toLabels()
-        );
-    }
+    expect(
+        ['A', 'B']
+    )->toBe(SimpleEnumAsArray::toLabels());
+});
 
-    /** @test */
-    public function test_to_array_with_value_and_label_map()
-    {
-        $this->assertSame(
-            ['A' => 'a', 2 => 'B'],
-            EnumAsArray::toArray()
-        );
+test('to array with value and label map', function () {
+    expect(
+        ['A' => 'a', 2 => 'B']
+    )->toBe(EnumAsArray::toArray());
 
-        $this->assertSame(
-            ['A', 2],
-            EnumAsArray::toValues()
-        );
+    expect(
+        ['A', 2]
+    )->toBe(EnumAsArray::toValues());
 
-        $this->assertSame(
-            ['a', 'B'],
-            EnumAsArray::toLabels()
-        );
-    }
+    expect(
+        ['a', 'B']
+    )->toBe(EnumAsArray::toLabels());
+});
 
-    /** @test */
-    public function test_cases(): void
-    {
-        $all = SimpleEnumAsArray::cases();
+test('cases', function () {
+    $all = SimpleEnumAsArray::cases();
 
-        $this->assertTrue(SimpleEnumAsArray::A()->equals($all[0]));
-        $this->assertTrue(SimpleEnumAsArray::B()->equals($all[1]));
-    }
-}
+    expect(SimpleEnumAsArray::A()->equals($all[0]))->toBeTrue();
+    expect(SimpleEnumAsArray::B()->equals($all[1]))->toBeTrue();
+});
 
 /**
  * @method static self A()

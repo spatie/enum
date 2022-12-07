@@ -2,68 +2,42 @@
 
 namespace Spatie\Enum\Tests\Faker;
 
-use Faker\Generator as FakerGenerator;
-use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
-use Spatie\Enum\Faker\FakerEnumProvider;
 
-final class FakerEnumProviderTest extends TestCase
-{
-    /** @var FakerGenerator|FakerEnumProvider */
-    protected FakerGenerator $faker;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+/**
+ * @test
+ * @dataProvider repeatHundredTimes
+ */
+it('can generate random enum instances', function () {
+    $enum = fakerGeneratorInit()->randomEnum(RandomizedEnum::class);
 
-        $this->faker = new FakerGenerator();
-        $this->faker->addProvider(new FakerEnumProvider($this->faker));
-    }
+    expect($enum)->toBeInstanceOf(RandomizedEnum::class);
+})->group('generator');
 
-    /**
-     * @test
-     * @dataProvider repeatHundredTimes
-     */
-    public function it_can_generate_random_enum_instances(): void
-    {
-        $enum = $this->faker->randomEnum(RandomizedEnum::class);
+/**
+ * @test
+ * @dataProvider repeatHundredTimes
+ */
+it('can generate random enum values', function () {
+    $value = fakerGeneratorInit()->randomEnumValue(RandomizedEnum::class);
 
-        $this->assertInstanceOf(RandomizedEnum::class, $enum);
-    }
+    expect($value)->toBeString();
+    expect(RandomizedEnum::make($value))->toBeInstanceOf(RandomizedEnum::class);
+    expect(in_array($value, RandomizedEnum::toValues(), true))->toBeTrue();
+})->group('generator');
 
-    /**
-     * @test
-     * @dataProvider repeatHundredTimes
-     */
-    public function it_can_generate_random_enum_values(): void
-    {
-        $value = $this->faker->randomEnumValue(RandomizedEnum::class);
+/**
+ * @test
+ * @dataProvider repeatHundredTimes
+ */
+it('can generate random enum labels', function() {
+    $label = fakerGeneratorInit()->randomEnumLabel(RandomizedEnum::class);
 
-        $this->assertIsString($value);
-        $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($value));
-        $this->assertTrue(in_array($value, RandomizedEnum::toValues(), true));
-    }
-
-    /**
-     * @test
-     * @dataProvider repeatHundredTimes
-     */
-    public function it_can_generate_random_enum_labels(): void
-    {
-        $label = $this->faker->randomEnumLabel(RandomizedEnum::class);
-
-        $this->assertIsString($label);
-        $this->assertInstanceOf(RandomizedEnum::class, RandomizedEnum::make($label));
-        $this->assertTrue(in_array($label, RandomizedEnum::toLabels(), true));
-    }
-
-    public function repeatHundredTimes(): iterable
-    {
-        for ($i = 0; $i < 100; $i++) {
-            yield [];
-        }
-    }
-}
+    expect($label)->toBeString();
+    expect(RandomizedEnum::make($label))->toBeInstanceOf(RandomizedEnum::class);
+    expect(in_array($label, RandomizedEnum::toLabels(), true))->toBeTrue();
+})->group('generator');
 
 /**
  * @method static self A()
