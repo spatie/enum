@@ -6,8 +6,7 @@ use Closure;
 use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateLabelsException;
 
-
-it('can turn labels into array', function() {
+it('can turn labels into array', function () {
     expect([
         'A' => 'a',
         'B' => 'B'
@@ -20,8 +19,7 @@ test('label on enum', function () {
 });
 
 test('duplicate labels are not allowed', function () {
-
-    expect(fn() => EnumWithDuplicateLabels::A())->toThrow(DuplicateLabelsException::class);
+    expect(fn () => EnumWithDuplicateLabels::A())->toThrow(DuplicateLabelsException::class);
 });
 
 it('can automatically map labels', function () {

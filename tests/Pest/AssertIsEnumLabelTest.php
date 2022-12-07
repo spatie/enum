@@ -15,4 +15,3 @@ it('fails', function () {
 
     EnumAssertions::assertIsEnumLabel(EnumWithLabels::class, 'A');
 });
-

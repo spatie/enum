@@ -10,4 +10,3 @@ function fakerGeneratorInit(): FakerGenerator
 
     return $faker;
 }
-

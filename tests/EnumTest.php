@@ -13,25 +13,22 @@ it('can construct enums', function () {
 });
 
 it('can construct enums with whitespace', function () {
-
     expect(BadDockBlockEnum::A())->toBeInstanceOf(BadDockBlockEnum::class);
     expect(BadDockBlockEnum::B())->toBeInstanceOf(BadDockBlockEnum::class);
 });
 
 it('can strict compare enums', function () {
-
     expect(MyEnum::A())->toBe(MyEnum::from('A'));
     expect(MyEnum::A())->toBe(MyEnum::from('a'));
     expect(MyEnum::A() === MyEnum::from('a'))->toBeTrue();
 });
 
 it('triggers exception for unknown enum method', function () {
-    expect(fn() => MyEnum::C())->toThrow(BadMethodCallException::class);
+    expect(fn () => MyEnum::C())->toThrow(BadMethodCallException::class);
 });
 
 it('throws exception for invalid value type', function () {
-
-    expect(fn() => MyEnum::from([]))->toThrow(TypeError::class);
+    expect(fn () => MyEnum::from([]))->toThrow(TypeError::class);
 });
 
 test('equals', function () {

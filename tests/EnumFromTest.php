@@ -6,12 +6,11 @@ use Spatie\Enum\Enum;
 use stdClass;
 use TypeError;
 
-
-test('from will throw type error for unallowed value types', function($value) {
-    expect(fn() => HttpMethod::from($value))->toThrow(TypeError::class);
+test('from will throw type error for unallowed value types', function ($value) {
+    expect(fn () => HttpMethod::from($value))->toThrow(TypeError::class);
 })->with([false, true, 1.4, [['GET']], [new stdClass]]);
 
-test('from resolves all allowed value types', function() {
+test('from resolves all allowed value types', function () {
     expect(HttpMethod::GET()->equals(HttpMethod::from('GET')))->toBeTrue();
 
 
@@ -40,13 +39,11 @@ test('try from will result in null values', function () {
 });
 
 test('try from will throw type error for array', function () {
-
-    expect(fn() => HttpMethod::tryFrom(['GET']))->toThrow(TypeError::class);
+    expect(fn () => HttpMethod::tryFrom(['GET']))->toThrow(TypeError::class);
 });
 
 test('try from will throw type error for object', function () {
-
-   expect(fn() => HttpMethod::tryFrom(new stdClass))->toThrow(TypeError::class);
+    expect(fn () => HttpMethod::tryFrom(new stdClass))->toThrow(TypeError::class);
 });
 
 

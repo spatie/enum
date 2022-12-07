@@ -3,7 +3,6 @@
 namespace Spatie\Enum\Tests;
 
 use Closure;
-use PHPUnit\Framework\TestCase;
 use Spatie\Enum\Enum;
 use Spatie\Enum\Exceptions\DuplicateValuesException;
 
@@ -25,8 +24,7 @@ it('can construct from all possible values', function () {
 });
 
 test('duplicate labels are not allowed', function () {
-
-    expect(fn() => EnumWithDuplicatedValues::A())->toThrow(DuplicateValuesException::class);
+    expect(fn () => EnumWithDuplicatedValues::A())->toThrow(DuplicateValuesException::class);
 });
 
 test('json serialize returns same value type', function () {

@@ -15,4 +15,3 @@ it('fails', function () {
 
     EnumAssertions::assertIsEnum(MyEnum::A()->value);
 });
-

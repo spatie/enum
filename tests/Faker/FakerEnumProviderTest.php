@@ -4,7 +4,6 @@ namespace Spatie\Enum\Tests\Faker;
 
 use Spatie\Enum\Enum;
 
-
 /**
  * @test
  * @dataProvider repeatHundredTimes
@@ -31,7 +30,7 @@ it('can generate random enum values', function () {
  * @test
  * @dataProvider repeatHundredTimes
  */
-it('can generate random enum labels', function() {
+it('can generate random enum labels', function () {
     $label = fakerGeneratorInit()->randomEnumLabel(RandomizedEnum::class);
 
     expect($label)->toBeString();
