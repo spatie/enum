@@ -30,6 +30,7 @@ abstract class Enum implements JsonSerializable, Stringable
 
     /** @psalm-readonly */
     protected string $label;
+    protected string $methodName;
 
     /** @psalm-var array<class-string, array<string, \Spatie\Enum\EnumDefinition>> */
     private static array $definitionCache = [];
@@ -159,6 +160,7 @@ abstract class Enum implements JsonSerializable, Stringable
 
         $this->value = $definition->value;
         $this->label = $definition->label;
+        $this->methodName = $definition->methodName;
     }
 
     /**

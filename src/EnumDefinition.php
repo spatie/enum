@@ -14,7 +14,7 @@ class EnumDefinition
 
     public string $label;
 
-    private string $methodName;
+    public string $methodName;
 
     /**
      * @param string $methodName
