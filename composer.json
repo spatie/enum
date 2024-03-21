@@ -29,7 +29,6 @@
     },
     "require": {
         "php": ">=8.0",
-        "laravel/framework": "^11.0",
         "ext-json": "*"
     },
     "require-dev": {
