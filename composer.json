@@ -32,10 +32,10 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
+        "fakerphp/faker": "^v1.23.1",
         "larapack/dd": "^1.1",
-        "pestphp/pest": "^v2.34",
-        "phpunit/phpunit": "^10.0",
+        "pestphp/pest": "^v2.34.4",
+        "phpunit/phpunit": "^11.0",
         "vimeo/psalm": "^5.23"
     },
     "suggest": {
