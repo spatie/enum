@@ -28,15 +28,16 @@
         "docs": "https://docs.spatie.be/enum"
     },
     "require": {
-        "php": "^8.0",
+        "php": ">=8.0",
+        "laravel/framework": "^11.0",
         "ext-json": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "larapack/dd": "^1.1",
-        "pestphp/pest": "^1.22",
-        "phpunit/phpunit": "^9.0",
-        "vimeo/psalm": "^4.3"
+        "pestphp/pest": "^v2.34",
+        "phpunit/phpunit": "^10.0",
+        "vimeo/psalm": "^5.23"
     },
     "suggest": {
         "fakerphp/faker": "To use the enum faker provider",

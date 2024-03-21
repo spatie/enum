@@ -2,6 +2,12 @@
 
 All notable changes to `enum` will be documented in this file
 
+## 4.0.0 - 2024-03-22
+
+- Drop PHP 8.0 support
+- Add PHP 8.2 support
+- Laravel 11 support
+
 ## 3.13.0 - 2022-04-22
 
 - Drop PHP 7.4 support
