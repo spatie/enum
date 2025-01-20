@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/enum)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/spatie/enum/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/spatie/enum/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/spatie/enum/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/spatie/enum/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/spatie/enum/php-cs-fixer.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/spatie/enum/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/enum.svg?style=flat-square)](https://packagist.org/packages/spatie/enum)
 
 > :warning: With the introduction of **Enums** in PHP 8.1, this package is now considered obsolete. For new projects, we recommend using **native enums** instead of this package. Learn more about native enums here: https://stitcher.io/blog/php-enums
