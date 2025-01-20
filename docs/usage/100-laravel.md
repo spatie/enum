@@ -9,8 +9,8 @@ The most important difference is the extended `Spatie\Enum\Laravel\Enum` base cl
 
 In short the wrapper adds the following features:
 
-* Model Attribute casting
-* Request Validation Rule
-* Request Data Transformation
-* Artisan Make Command
-* Faker Provider
+- Model Attribute casting
+- Request Validation Rule
+- Request Data Transformation
+- Artisan Make Command
+- Faker Provider

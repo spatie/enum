@@ -82,9 +82,9 @@ public function setStatus(StatusEnum $status)
 $class->setStatus(StatusEnum::draft());
 ```
 
-| Autocompletion  | Refactoring |
-| ------------- | ------------- |
-| ![](./docs/autocomplete.gif)  | ![](./docs/refactor.gif)  |
+| Autocompletion               | Refactoring              |
+| ---------------------------- | ------------------------ |
+| ![](./docs/autocomplete.gif) | ![](./docs/refactor.gif) |
 
 ### Creating an enum from a value
 
@@ -239,7 +239,7 @@ $label = $faker->randomEnumLabel(StatusEnum::class);
 
 ## Testing
 
-``` bash
+```bash
 composer test
 ```
 

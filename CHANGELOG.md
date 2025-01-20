@@ -138,9 +138,9 @@ All notable changes to `enum` will be documented in this file
 
 - Make `\Spatie\Enum\Enumerable::isValidIndex/Name/Value()` methods public [#36](https://github.com/spatie/enum/pull/36)
 - > Please note that this could be breaking for custom implementations of the `\Spatie\Enum\Enumerable` interface.
-- 
-- 
-- 
+-
+-
+-
 
 ## 2.2.0 - 2019-07-18
 
@@ -184,7 +184,7 @@ A full major rework of the `Enum` class - we try to list all changes, for more d
 
 ## 1.1.0 - 2019-03-18
 
-- Add support for is* checks
+- Add support for is\* checks
 
 ## 1.0.2 - 2019-03-18
 
