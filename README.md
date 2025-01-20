@@ -7,7 +7,7 @@
 
 > :warning: With the introduction of **Enums** in PHP 8.1, this package is now considered obsolete. For new projects, we recommend using **native enums** instead of this package. Learn more about native enums here: https://stitcher.io/blog/php-enums
 
-----
+---
 
 This package offers strongly typed enums in PHP. In this package, enums are always objects, never constant values on their own. This allows for proper static analysis and refactoring in IDEs.
 
