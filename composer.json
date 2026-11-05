@@ -53,10 +53,10 @@
         }
     },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "sort-packages": true
     },
     "scripts": {
         "psalm": "vendor/bin/psalm -c psalm.xml --show-info=true",
