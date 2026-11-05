@@ -32,11 +32,11 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
+        "fakerphp/faker": "^1.24.1",
         "larapack/dd": "^1.1",
-        "pestphp/pest": "^1.22",
-        "phpunit/phpunit": "^9.0",
-        "vimeo/psalm": "^4.3"
+        "pestphp/pest": "^5.3.5",
+        "phpunit/phpunit": "^13.4.5",
+        "vimeo/psalm": "^7.0.3"
     },
     "suggest": {
         "fakerphp/faker": "To use the enum faker provider",
@@ -53,10 +53,10 @@
         }
     },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "sort-packages": true
     },
     "scripts": {
         "psalm": "vendor/bin/psalm -c psalm.xml --show-info=true",
