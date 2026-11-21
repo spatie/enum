@@ -11,8 +11,13 @@
 >
     <projectFiles>
         <directory name="src" />
+        <directory name="tests" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+
+    <plugins>
+        <pluginClass class="AliesDev\PsalmPluginPest\Plugin" />
+    </plugins>
 </psalm>
