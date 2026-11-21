@@ -25,8 +25,8 @@ test('is with value map', function () {
  * @method static self A()
  * @method static self B()
  *
- * @method bool isA
- * @method bool isB
+ * @method bool isA()
+ * @method bool isB()
  */
 class EnumToCompare extends Enum
 {
@@ -36,8 +36,8 @@ class EnumToCompare extends Enum
  * @method static self A()
  * @method static self B()
  *
- * @method bool isA
- * @method bool isB
+ * @method bool isA()
+ * @method bool isB()
  */
 class EnumToCompareWithValueMap extends Enum
 {

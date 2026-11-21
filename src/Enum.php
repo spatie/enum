@@ -93,7 +93,7 @@ abstract class Enum implements JsonSerializable, Stringable
     }
 
     /**
-     * @param string|int $value
+     * @param string|int|Stringable $value
      *
      * @return static
      */

@@ -24,10 +24,12 @@ it('can strict compare enums', function () {
 });
 
 it('triggers exception for unknown enum method', function () {
+    /** @psalm-suppress UndefinedMagicMethod the method is unknown on purpose */
     expect(fn () => MyEnum::C())->toThrow(BadMethodCallException::class);
 });
 
 it('throws exception for invalid value type', function () {
+    /** @psalm-suppress InvalidArgument the value type is invalid on purpose */
     expect(fn () => MyEnum::from([]))->toThrow(TypeError::class);
 });
 
